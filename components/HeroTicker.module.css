@@ -1,0 +1,12 @@
+.ticker { position: relative; width: 100%; background: rgba(255, 255, 255, .88); color: #202a3b; border-top: 1px solid rgba(220, 226, 236, .9); border-bottom: 1px solid rgba(220, 226, 236, .9); box-shadow: 0 4px 20px rgba(27, 41, 65, .035); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+.fullBleed { width: 100vw; margin-left: calc(50% - 50vw); }
+.viewport { overflow: hidden; padding-right: 42px; }
+.track { display: flex; width: max-content; animation: scroll 38s linear infinite; }
+.group { display: flex; align-items: center; justify-content: space-around; min-width: 100vw; flex-shrink: 0; }
+.group > span { display: flex; align-items: center; gap: 38px; padding-right: 38px; height: 42px; font-size: 12px; font-weight: 600; letter-spacing: .015em; white-space: nowrap; }
+.group i { width: 3px; height: 3px; background: #8d99aa; border-radius: 50%; }
+.toggle { position: absolute; inset: 0 0 0 auto; display: grid; place-items: center; width: 42px; background: rgba(255, 255, 255, .94); border-left: 1px solid #dce2ec; color: #354258; }
+.toggle:focus-visible { outline: 2px solid #6055e8; outline-offset: -4px; }
+.ticker[data-paused='true'] .track, .ticker:hover .track { animation-play-state: paused; }
+@keyframes scroll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .viewport { padding-right: 0; } .track { width: 100%; animation: none; } .group { min-width: 0; width: 100%; flex-wrap: wrap; justify-content: center; padding: 8px 12px; gap: 6px 22px; } .group > span { height: auto; padding: 0; gap: 0; font-size: 11px; } .group i, .group + .group, .toggle { display: none; } }

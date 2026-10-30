@@ -1,0 +1,256 @@
+[
+  {
+    "id": "proj-devion-ecommerce",
+    "slug": "devion-ecommerce",
+    "title": "Devion - E Commerce",
+    "clientName": "Devion Mobility (Concept Project)",
+    "category": "Web Design",
+    "summary": "Simple, functional, and beautiful digital design. Complete responsive Next.js e-commerce platform.",
+    "isConcept": true,
+    "businessNeed": "A modern EV startup needed an engaging digital showcase to present vehicle specifications and take online pre-orders with zero friction.",
+    "deliveredScope": [
+      "Responsive electric vehicle showcase with 3D model viewer",
+      "Interactive battery range and savings calculator",
+      "Lead reservation workflow connected to PostgreSQL database",
+      "Coordinated social campaign launch graphics"
+    ],
+    "resultsSummary": "Illustrative Concept: Sub-second page load times with interactive configuration tools.",
+    "coverImage": "/images/projects/dribbble-devion.png",
+    "galleryImages": [
+      {
+        "id": "m-dev-1",
+        "projectId": "proj-devion-ecommerce",
+        "storageObjectKey": "dribbble-devion.png",
+        "url": "/images/projects/dribbble-devion.png",
+        "altText": "Devion e-commerce website design",
+        "displayOrder": 1
+      }
+    ],
+    "status": "published",
+    "displayOrder": 1,
+    "publishedAt": "2026-10-24T10:00:00Z"
+  },
+  {
+    "id": "proj-velio-ai",
+    "slug": "velio-ai-chatbot",
+    "title": "Velio _ AI Chat Bot",
+    "clientName": "Velio Labs (Concept Project)",
+    "category": "UI/UX Design",
+    "summary": "Velo is a smart chat app for easy conversations anywhere.",
+    "isConcept": true,
+    "businessNeed": "An AI conversational agent needed a minimalist, immersive dark UI design with fluid micro-interactions and cross-device accessibility.",
+    "deliveredScope": [
+      "Custom mobile app design system and UI components",
+      "Interactive conversational interface prototype",
+      "Dark mode visual identity with high contrast accessibility",
+      "Product landing page with live interactive chat widget"
+    ],
+    "resultsSummary": "Illustrative Concept: Fluid dark interface with intuitive multi-modal prompt inputs.",
+    "coverImage": "/images/projects/dribbble-velio.png",
+    "galleryImages": [
+      {
+        "id": "m-vel-1",
+        "projectId": "proj-velio-ai",
+        "storageObjectKey": "dribbble-velio.png",
+        "url": "/images/projects/dribbble-velio.png",
+        "altText": "Velio AI chat interface mockup",
+        "displayOrder": 1
+      }
+    ],
+    "status": "published",
+    "displayOrder": 2,
+    "publishedAt": "2026-10-23T10:00:00Z"
+  },
+  {
+    "id": "proj-eatzy-delivery",
+    "slug": "eatzy-food-delivery",
+    "title": "Eatzy - Food Delivery App",
+    "clientName": "Eatzy Global (Concept Project)",
+    "category": "Mobile Apps",
+    "summary": "Fresh food, fast delivery—everything with Eatzy.",
+    "isConcept": true,
+    "businessNeed": "An on-demand food delivery brand needed an appetizing interface with live driver tracking and frictionless one-tap reordering.",
+    "deliveredScope": [
+      "Complete mobile UX for browse, customize, checkout, and live GPS map tracking",
+      "Coordinated Instagram reels showing signature restaurant dishes",
+      "Merchant onboarding portal with menu management",
+      "Promotional discount coupon engine"
+    ],
+    "resultsSummary": "Illustrative Concept: 3-step checkout flow optimized for high conversion.",
+    "coverImage": "/images/projects/dribbble-eatzy.png",
+    "galleryImages": [
+      {
+        "id": "m-eat-1",
+        "projectId": "proj-eatzy-delivery",
+        "storageObjectKey": "dribbble-eatzy.png",
+        "url": "/images/projects/dribbble-eatzy.png",
+        "altText": "Eatzy food delivery app screens",
+        "displayOrder": 1
+      }
+    ],
+    "status": "published",
+    "displayOrder": 3,
+    "publishedAt": "2026-10-22T10:00:00Z"
+  },
+  {
+    "id": "proj-aura-fintech",
+    "slug": "aura-fintech-launch",
+    "title": "Aura Capital: Web Platform & Launch Campaign",
+    "clientName": "Aura Capital (Concept Project)",
+    "category": "Combined Projects",
+    "summary": "A coordinated web platform and multi-channel launch campaign for an early-stage fintech startup, uniting brand presence with lead generation.",
+    "isConcept": true,
+    "businessNeed": "Early-stage fintech companies need immediate credibility, clear value communication for founders, and a seamless flow from social content to investor/client inquiries.",
+    "deliveredScope": [
+      "Responsive 6-page marketing website with custom interactive savings calculator",
+      "Supabase database capturing qualified investor and founder inquiries",
+      "Complete social brand kit for LinkedIn and Instagram",
+      "12 coordinated launch graphics and 4 explainer video shorts",
+      "Server-side validation and automated team email notification workflow"
+    ],
+    "resultsSummary": "Illustrative Concept: Validated complete user journey from LinkedIn carousels to the custom website enquiry form with automated lead triage.",
+    "coverImage": "/images/projects/aura-cover.svg",
+    "galleryImages": [
+      {
+        "id": "m-1",
+        "projectId": "proj-aura-fintech",
+        "storageObjectKey": "aura-web-preview.svg",
+        "url": "/images/projects/aura-web.svg",
+        "altText": "Aura Capital desktop website responsive preview showing financial dashboard mockups",
+        "displayOrder": 1
+      },
+      {
+        "id": "m-2",
+        "projectId": "proj-aura-fintech",
+        "storageObjectKey": "aura-social-creatives.svg",
+        "url": "/images/projects/aura-social.svg",
+        "altText": "Matching social media post designs and story templates for Aura Capital",
+        "displayOrder": 2
+      }
+    ],
+    "status": "published",
+    "displayOrder": 1,
+    "publishedAt": "2026-09-15T10:00:00Z"
+  },
+  {
+    "id": "proj-kura-ceramics",
+    "slug": "kura-ceramics-storefront",
+    "title": "Kura Artisan Goods: Catalogue & Studio Stories",
+    "clientName": "Kura Studio (Concept Project)",
+    "category": "Combined Projects",
+    "summary": "Artisan pottery studio portfolio and product catalogue paired with authentic TikTok & Instagram short-form content management.",
+    "isConcept": true,
+    "businessNeed": "High-craft goods require storytelling that highlights the handmade process, driving social viewers to an elegant, high-conversion product catalogue.",
+    "deliveredScope": [
+      "Custom product showcase website with filterable workshop catalogue",
+      "Workshop booking inquiry system with date selection",
+      "16 short-form video edits featuring studio process footage and clay trimming",
+      "Instagram bio, highlight covers, and coordinated aesthetics",
+      "Admin workflow for the studio team to publish upcoming batch releases"
+    ],
+    "resultsSummary": "Illustrative Concept: Demonstrated a 100% unified visual style from 9:16 vertical video reels to desktop catalog pages.",
+    "coverImage": "/images/projects/kura-cover.svg",
+    "galleryImages": [
+      {
+        "id": "m-3",
+        "projectId": "proj-kura-ceramics",
+        "storageObjectKey": "kura-web.svg",
+        "url": "/images/projects/kura-web.svg",
+        "altText": "Kura Studio website layout displaying pottery collection",
+        "displayOrder": 1
+      },
+      {
+        "id": "m-4",
+        "projectId": "proj-kura-ceramics",
+        "storageObjectKey": "kura-reels.svg",
+        "url": "/images/projects/kura-reels.svg",
+        "altText": "Short-form video storyboard layouts showing pottery crafting process",
+        "displayOrder": 2
+      }
+    ],
+    "status": "published",
+    "displayOrder": 2,
+    "publishedAt": "2026-09-28T12:00:00Z"
+  },
+  {
+    "id": "proj-verve-health",
+    "slug": "verve-telehealth-portal",
+    "title": "Verve Health: Responsive Portal & Care Directory",
+    "clientName": "Verve Clinical (Concept Project)",
+    "category": "Websites",
+    "summary": "A high-performance telehealth directory and appointment inquiry website built with Next.js, accessibility standards, and Supabase.",
+    "isConcept": true,
+    "businessNeed": "A clinical team needed a warm, accessible website where patients could easily browse practitioner specialities and submit confidential booking inquiries.",
+    "deliveredScope": [
+      "Accessible Next.js frontend meeting WCAG 2.2 AA standards",
+      "Specialist filtering directory by treatment area and availability",
+      "Server-side validated appointment request pipeline",
+      "Protected staff dashboard with lead triage and follow-up notes",
+      "Sub-2.0s Core Web Vitals performance across mobile devices"
+    ],
+    "resultsSummary": "Illustrative Concept: Clean responsive UX architecture achieving 100% accessible keyboard navigation and fast mobile rendering.",
+    "coverImage": "/images/projects/verve-cover.svg",
+    "galleryImages": [
+      {
+        "id": "m-5",
+        "projectId": "proj-verve-health",
+        "storageObjectKey": "verve-web.svg",
+        "url": "/images/projects/verve-web.svg",
+        "altText": "Verve Health practitioner directory screen with filter controls",
+        "displayOrder": 1
+      }
+    ],
+    "status": "published",
+    "displayOrder": 3,
+    "publishedAt": "2026-10-05T09:00:00Z"
+  },
+  {
+    "id": "proj-solaris-social",
+    "slug": "solaris-energy-social-growth",
+    "title": "Solaris Clean Energy: B2B Social & Thought Leadership",
+    "clientName": "Solaris Power Systems (Concept Project)",
+    "category": "Social Content",
+    "summary": "Consistent LinkedIn and X social media presence turning technical renewable energy whitepapers into digestible visual carousels and infographics.",
+    "isConcept": true,
+    "businessNeed": "B2B clean tech startups struggle to communicate complex engineering benefits to commercial building owners without high friction.",
+    "deliveredScope": [
+      "Monthly 12-post content plan focusing on commercial ROI and carbon offset metrics",
+      "Custom vector infographics and carousel slide decks",
+      "Executive quote cards and industry news commentary templates",
+      "Monthly inbound lead attribution reporting"
+    ],
+    "resultsSummary": "Illustrative Concept: Demonstrated B2B content pacing that established technical authority while channeling readers to enterprise proposal requests.",
+    "coverImage": "/images/projects/solaris-cover.svg",
+    "galleryImages": [
+      {
+        "id": "m-6",
+        "projectId": "proj-solaris-social",
+        "storageObjectKey": "solaris-social.svg",
+        "url": "/images/projects/solaris-social.svg",
+        "altText": "Solaris LinkedIn carousel layouts explaining commercial solar battery ROI",
+        "displayOrder": 1
+      }
+    ],
+    "status": "published",
+    "displayOrder": 4,
+    "publishedAt": "2026-10-18T14:00:00Z"
+  },
+  {
+    "id": "proj-975e2907-3ecf-46ca-a83f-31029140d31c",
+    "title": "Nexca",
+    "slug": "nexcajapan",
+    "clientName": "sdfsdf",
+    "category": "Websites",
+    "summary": "sfasf",
+    "businessNeed": "asfasf",
+    "deliveredScope": [
+      "fasaasf"
+    ],
+    "isConcept": true,
+    "coverImage": "/images/projects/project-700ff4dc-bd6b-4f10-81b2-fe27ff0f05ec.png",
+    "galleryImages": [],
+    "status": "published",
+    "displayOrder": 5,
+    "publishedAt": "2026-10-27T22:46:41.501Z"
+  }
+]

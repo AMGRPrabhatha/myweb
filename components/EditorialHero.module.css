@@ -1,0 +1,98 @@
+/* Shared rhythm; each page keeps its own composition. */
+.hero { background: #fff; color: #151b25; min-height: calc(100svh - 72px); display: flex; align-items: center; padding: clamp(48px, 7svh, 80px) 0 40px; }
+.container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+.label { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; font-size: 12px; font-weight: 600; color: #596373; }
+.label::before { content: ''; width: 24px; height: 2px; background: #ff5722; }
+.heading { font-size: clamp(44px, 5.1vw, 72px); line-height: 1.07; font-weight: 800; letter-spacing: -.055em; text-wrap: balance; }
+.description { max-width: 440px; margin-top: 24px; font-size: 16px; line-height: 1.75; color: #596373; }
+.cta { display: inline-flex; align-items: center; justify-content: space-between; gap: 28px; min-height: 54px; margin-top: 28px; padding: 8px 10px 8px 24px; border-radius: 999px; font-size: 13px; font-weight: 800; }
+.circle { display: grid; place-items: center; flex: 0 0 36px; width: 36px; height: 36px; border-radius: 50%; background: #fff; color: #ff5722; }
+.textLink { display: inline-flex; align-items: center; gap: 16px; min-height: 44px; font-size: 13px; font-weight: 700; text-decoration: underline; text-underline-offset: 7px; text-decoration-color: #bdc2c9; }
+.textLink:hover { text-decoration-color: #ff5722; }
+.textLink svg { color: #ff5722; flex-shrink: 0; }
+.split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(40px, 6vw, 88px); }
+.photo { position: relative; overflow: hidden; border-radius: 10px; background: #f1f1ee; height: clamp(300px, 48svh, 480px); }
+.photo img { object-fit: cover; }
+.caption { display: flex; justify-content: space-between; gap: 20px; padding-top: 14px; color: #657080; font-size: 11px; line-height: 1.6; }
+.serviceLinks { display: grid; grid-template-columns: 1fr 1fr; margin-top: 32px; border-top: 1px solid #dedfdf; }
+.serviceLink { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; padding: 18px 24px 0 0; font-size: 15px; font-weight: 700; }
+.serviceLink + .serviceLink { padding-left: 28px; border-left: 1px solid #dedfdf; }
+.serviceLink svg { color: #ff5722; flex-shrink: 0; }
+.serviceLink:hover { color: #d64418; }
+.workIntro { display: grid; grid-template-columns: 1.25fr 1fr; align-items: end; gap: 60px; margin-bottom: 32px; }
+.workSummary { max-width: 340px; justify-self: end; }
+.workSummary .description { margin-top: 0; margin-bottom: 12px; }
+.workFeature { display: grid; grid-template-columns: minmax(0, 3fr) minmax(210px, 1fr); gap: 40px; align-items: end; }
+.projectImage { display: block; position: relative; height: clamp(240px, 39svh, 390px); background: #f1f0ed; overflow: hidden; border-radius: 6px; }
+.projectImage img { object-fit: contain; padding: 12px; transition: transform .3s ease; }
+.projectImage:hover img { transform: scale(1.015); }
+.projectCaption { padding-bottom: 12px; }
+.small { color: #657080; font-size: 12px; line-height: 1.6; }
+.projectTitle { display: block; margin: 12px 0; font-size: 28px; font-weight: 800; line-height: 1.2; letter-spacing: -.04em; }
+.projectCaption .textLink { margin-top: 20px; }
+.plans { background: #fff; }
+.planIntro { max-width: 470px; }
+.planNote { margin-top: 20px; max-width: 330px; color: #657080; font-size: 12px; line-height: 1.7; }
+.planSheet { padding: 30px 34px 20px; background: #fff; border: 1px solid #e2dfd8; border-radius: 8px; box-shadow: 0 12px 32px -24px #51463755; }
+.sheetHeader { padding-bottom: 22px; border-bottom: 1px solid #d9d9d5; }
+.sheetHeader h2 { font-size: 23px; font-weight: 800; letter-spacing: -.03em; }
+.sheetHeader p { margin-top: 6px; color: #657080; font-size: 12px; }
+.option { display: grid; grid-template-columns: 1fr 22px; gap: 16px; align-items: center; padding: 21px 0; border-bottom: 1px solid #e8e7e3; }
+.option h3 { font-size: 19px; font-weight: 700; letter-spacing: -.025em; }
+.option p { margin-top: 5px; font-size: 12px; color: #657080; line-height: 1.5; }
+.option svg { color: #ff5722; transition: transform .2s; }
+.option:hover h3 { color: #d64418; }
+.option:hover svg { transform: translateX(3px); }
+.sheetFooter { margin-top: 12px; }
+.aboutGrid { display: grid; grid-template-columns: .95fr 1.05fr; align-items: center; gap: clamp(40px, 7vw, 96px); }
+.aboutPhoto { height: clamp(350px, 59svh, 570px); border-radius: 8px 8px 72px 8px; }
+.aboutPhoto img { object-position: 56% center; }
+.aboutCopy .heading { font-size: clamp(44px, 4.8vw, 68px); }
+.aboutLocation { display: flex; gap: 12px; align-items: center; margin-top: 28px; padding-top: 20px; border-top: 1px solid #dedfdf; font-size: 12px; color: #657080; }
+.aboutLocation svg { color: #ff5722; flex-shrink: 0; }
+.hero a:focus-visible { outline: 2px solid #ff5722; outline-offset: 5px; }
+@media (min-width: 900px) and (max-height: 760px) {
+  .hero { padding-top: 40px; padding-bottom: 28px; }
+  .heading { font-size: clamp(44px, 4.6vw, 64px); }
+  .label { margin-bottom: 18px; }
+  .description { margin-top: 18px; }
+  .workIntro { margin-bottom: 24px; }
+  .option { padding-top: 16px; padding-bottom: 16px; }
+}
+@media (max-width: 1000px) and (min-width: 768px) {
+  .split, .aboutGrid { gap: 32px; }
+  .heading, .aboutCopy .heading { font-size: 48px; }
+  .planSheet { padding: 24px; }
+  .workIntro { gap: 32px; }
+  .workFeature { grid-template-columns: 2.2fr 1fr; gap: 24px; }
+}
+@media (max-width: 767px) {
+  .hero { min-height: calc(100svh - 60px); padding: 40px 0 32px; }
+  .container { padding: 0 20px; }
+  .split, .aboutGrid, .workIntro, .workFeature { grid-template-columns: 1fr; gap: 30px; }
+  .label { margin-bottom: 18px; }
+  .heading, .aboutCopy .heading { font-size: clamp(40px, 10.5vw, 58px); }
+  .description { font-size: 14px; margin-top: 20px; }
+  .cta { margin-top: 22px; }
+  .photo { height: auto; aspect-ratio: 4 / 3; }
+  .caption { font-size: 10px; }
+  .serviceLinks { margin-top: 24px; }
+  .serviceLink { font-size: 12px; padding-right: 12px; min-height: 64px; }
+  .serviceLink + .serviceLink { padding-left: 16px; }
+  .workSummary { justify-self: start; max-width: 440px; }
+  .workIntro { gap: 22px; margin-bottom: 26px; }
+  .projectImage { height: auto; aspect-ratio: 1.65; }
+  .projectImage img { padding: 8px; }
+  .workFeature { gap: 16px; }
+  .projectCaption { display: grid; grid-template-columns: 1fr auto; gap: 0 16px; padding: 0; }
+  .projectTitle { font-size: 23px; margin: 5px 0; }
+  .projectCaption .textLink { grid-column: 2; grid-row: 1 / 4; margin: 0; align-self: center; font-size: 12px; }
+  .planSheet { padding: 24px; }
+  .option { padding: 18px 0; }
+  .aboutCopy { grid-row: 1; }
+  .aboutPhoto { aspect-ratio: 1.25; border-bottom-right-radius: 48px; }
+  .aboutLocation { margin-top: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .projectImage img, .option svg { transition: none; }
+}

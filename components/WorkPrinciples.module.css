@@ -1,0 +1,25 @@
+.section { background: #fff; padding: 44px 0 110px; color: #151b25; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+.intro { margin-bottom: 26px; }
+.eyebrow { margin-bottom: 9px; color: #647186; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.intro h2 { font-size: clamp(30px, 3vw, 42px); line-height: 1.14; letter-spacing: -.045em; font-weight: 700; }
+.grid { display: grid; grid-template-columns: 1.9fr 1fr; gap: 14px; }
+.card { position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 430px; overflow: hidden; border-radius: 18px; padding: clamp(28px, 3vw, 42px); }
+.web { background: linear-gradient(150deg, #d5e8ff 0%, #e4e5fc 59%, #f0e4fa 100%); }
+.webMark { position: absolute; top: 18%; right: -4%; color: rgba(255,255,255,.28); font-size: clamp(230px, 28vw, 410px); font-weight: 800; letter-spacing: -.13em; line-height: 1; user-select: none; }
+.social { background: #e9fa2d; }
+.statement { position: relative; z-index: 1; max-width: 680px; font-size: clamp(28px, 2.7vw, 41px); font-weight: 500; line-height: 1.18; letter-spacing: -.045em; text-wrap: balance; }
+.social .statement { max-width: 370px; font-size: clamp(28px, 2.4vw, 37px); }
+.cardFooter { position: relative; z-index: 1; display: flex; align-items: end; justify-content: space-between; gap: 20px; }
+.cardIdentity { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.icon { display: grid; place-items: center; width: 44px; height: 44px; flex: 0 0 44px; border: 1px solid rgba(21,27,37,.15); border-radius: 12px; background: rgba(255,255,255,.3); }
+.cardIdentity div { display: flex; flex-direction: column; gap: 3px; }
+.cardIdentity strong { font-size: 13px; font-weight: 700; }
+.cardIdentity div span { color: #536075; font-size: 11px; line-height: 1.4; }
+.social .cardIdentity div span { color: #495514; }
+.cardLink { display: grid; place-items: center; width: 44px; height: 44px; flex: 0 0 44px; border: 1px solid rgba(21,27,37,.17); border-radius: 50%; transition: transform .2s, background .2s; }
+.cardLink:hover { transform: translate(2px,-2px); background: rgba(255,255,255,.38); }
+.cardLink:focus-visible { outline: 2px solid #151b25; outline-offset: 3px; }
+@media (max-width: 800px) { .section { padding: 32px 0 80px; } .container { padding: 0 20px; } .grid { grid-template-columns: 1fr; } .card { min-height: 350px; } .webMark { right: 0; font-size: clamp(220px, 48vw, 360px); } }
+@media (max-width: 480px) { .card { min-height: 320px; padding: 26px; } .statement, .social .statement { font-size: clamp(28px, 8vw, 36px); } .cardIdentity div span { max-width: 170px; } }
+@media (prefers-reduced-motion: reduce) { .cardLink { transition: none; } }

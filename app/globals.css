@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-manrope: 'Manrope', system-ui, -apple-system, sans-serif;
+  --brand-blue: #3B82F6;
+  --brand-purple: #6366F1;
+  --brand-orange: #FF5722;
+  --marketing-header-height: 66px;
+  --marketing-hero-top-space: calc(var(--marketing-header-height) + 44px);
+}
+
+@media (max-width: 767px) {
+  :root { --marketing-hero-top-space: calc(var(--marketing-header-height) + 32px); }
+}
+
+@media (max-width: 639px) {
+  :root { --marketing-header-height: 62px; }
+}
+
+@media (max-width: 767px) {
+  .mobile-card-rail {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch;
+    gap: 16px !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 16px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 4px 1px 16px;
+  }
+
+  .mobile-card-rail::-webkit-scrollbar { display: none; }
+  .mobile-card-rail > * { flex: 0 0 min(88vw, 560px) !important; width: min(88vw, 560px); min-width: 0; margin-top: 0 !important; scroll-snap-align: start; }
+  main { min-width: 0; }
+  main h1, main h2, main h3 { overflow-wrap: break-word; }
+}
+
+@layer utilities {
+  .marketing-hero-surface {
+    background-color: #fff;
+    background-image:
+      radial-gradient(ellipse at 88% 18%, rgba(255, 225, 211, 0.42), transparent 38%),
+      radial-gradient(ellipse at 8% 88%, rgba(226, 233, 255, 0.42), transparent 40%);
+  }
+
+  .brand-gradient-text {
+    background-image: linear-gradient(90deg, var(--brand-blue) 0%, var(--brand-purple) 42%, #A855A4 72%, var(--brand-orange) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .brand-gradient-button {
+    position: relative;
+    z-index: 0;
+    isolation: isolate;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(192, 139, 112, 0.5);
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.95),
+      inset 0 -2px 3px rgba(130, 83, 58, 0.18),
+      0 7px 18px rgba(88, 53, 37, 0.12);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .brand-gradient-button::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: -24%;
+    right: -5%;
+    width: 48%;
+    height: 150%;
+    border-radius: 50%;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 74% 22%, rgba(255, 255, 255, 0.96), rgba(255, 190, 142, 0.6) 30%, rgba(255, 119, 77, 0.25) 54%, transparent 77%);
+    -webkit-backdrop-filter: blur(5px) saturate(150%);
+    backdrop-filter: blur(5px) saturate(150%);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 55%);
+    mask-image: linear-gradient(to right, transparent, #000 55%);
+  }
+
+  @supports (backdrop-filter: url(#button-glass-corner)) {
+    .brand-gradient-button::before {
+      backdrop-filter: url(#button-glass-corner) blur(4px) saturate(150%);
+    }
+  }
+
+  .brand-gradient-button:hover {
+    background-color: rgba(248, 250, 255, 0.96);
+  }
+}
+
+@layer base {
+  html {
+    font-family: var(--font-manrope);
+    background-color: #FFFFFF;
+    color: #151B25;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: #FFFFFF;
+    color: #151B25;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: clip;
+  }
+
+  /* Accessible focus indicators */
+  :focus-visible {
+    outline: 2px solid #FF5722;
+    outline-offset: 2px;
+  }
+}

@@ -1,0 +1,44 @@
+.hero { position: relative; isolation: isolate; display: flex; align-items: flex-start; min-height: calc(100svh - 42px); overflow: hidden; background: #fff; color: #151b25; }
+.container { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 64px; width: 100%; max-width: 1280px; margin: 0 auto; padding: var(--marketing-hero-top-space) 48px 112px; }
+.intro { min-width: 0; }
+.eyebrow { margin-bottom: 30px; color: #6257d5; font-size: 12px; font-weight: 600; }
+.heading { font-size: clamp(38px, 3.9vw, 56px); line-height: 1.16; font-weight: 700; letter-spacing: -.045em; }
+.description { max-width: 460px; margin-top: 28px; color: #53647a; font-size: 16px; line-height: 1.8; }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 24px; margin-top: 30px; }
+.primary, .secondary { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 46px; font-size: 13px; font-weight: 700; }
+.primary { padding: 10px 20px; border-radius: 999px; }
+.primary svg { color: #ff5722; }
+.secondary { color: #6257d5; }
+.secondary:hover { text-decoration: underline; text-underline-offset: 5px; }
+.visual { position: relative; min-width: 0; padding-top: 32px; }
+.tiles { position: relative; z-index: 2; display: flex; justify-content: flex-end; gap: 14px; margin: 0 24px -15px 0; }
+.tiles > span { display: grid; place-items: center; width: 62px; height: 66px; border-radius: 12px; border: 1px solid #ffffff70; box-shadow: inset 0 1px 0 #ffffff60, 0 12px 22px -14px #382d8d80; color: #fff; }
+.tiles > span:nth-child(1) { background: #7a71de; transform: translateY(-13px) rotate(-8deg); }
+.tiles > span:nth-child(2) { background: #4ebaba; transform: translateY(-30px) rotate(6deg); }
+.tiles > span:nth-child(3) { background: #ed976f; transform: translateY(-9px) rotate(9deg); }
+.board { position: relative; padding: 28px; border: 1px solid #e6e9f2; border-radius: 12px; background: rgba(255,255,255,.94); box-shadow: 0 22px 44px -28px rgba(38,51,86,.4), inset 0 1px 0 #fff; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.boardHeader { padding-bottom: 22px; }
+.boardHeader > p { color: #7369c8; font-size: 10px; font-weight: 600; margin-bottom: 8px; }
+.boardHeader h2 { color: #29364a; font-size: 21px; font-weight: 700; letter-spacing: -.03em; line-height: 1.3; }
+.service { display: grid; grid-template-columns: 42px minmax(0, 1fr) 18px; gap: 14px; align-items: center; padding: 20px 0; border-top: 1px solid #e9ecf2; }
+.icon { display: grid; place-items: center; width: 42px; height: 44px; border-radius: 10px; }
+.web { background: #efedff; color: #7664ca; }
+.social { background: #e8f6f4; color: #319b91; }
+.service h3 { font-size: 14px; font-weight: 700; letter-spacing: -.015em; }
+.service p { margin-top: 5px; color: #657080; font-size: 11px; line-height: 1.6; }
+.serviceArrow { color: #797a9a; transition: transform .2s; }
+.service:hover h3 { color: #6257d5; }
+.service:hover .serviceArrow { transform: translate(2px,-2px); }
+.workflow { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 4px; padding: 16px 0 0; border-top: 1px solid #e9ecf2; color: #657080; font-size: 10px; font-weight: 600; }
+.workflow svg { color: #a0a7ba; flex-shrink: 0; }
+.caption { padding: 16px 4px 0; color: #657080; font-size: 10px; line-height: 1.7; }
+.guides { position: absolute; z-index: 0; inset: 0 max(32px, calc((100% - 1184px) / 2)); border-inline: 1px solid #edf0f580; background-image: repeating-linear-gradient(90deg, transparent, transparent calc(25% - 1px), #edf0f580 calc(25% - 1px), #edf0f580 25%); pointer-events: none; }
+.band { position: absolute; z-index: 1; right: -13%; bottom: -250px; width: 82%; height: 480px; border-radius: 58% 42% 0 0 / 76% 65% 0 0; background: linear-gradient(122deg, #e9e8ff 3%, #b9c4fa 27%, #a6e2de 57%, #ffd2ad 83%, #f3afbe 100%); transform: rotate(-10deg); opacity: .85; pointer-events: none; }
+.band::before { content: ''; position: absolute; inset: -42px 9% 34% 20%; border: 1px solid rgba(255,255,255,.7); border-radius: 56% 44% 45% 55% / 65% 64% 36% 35%; background: linear-gradient(135deg, rgba(255,255,255,.24), rgba(255,255,255,0) 62%); }
+.band::after { content: ''; position: absolute; inset: 21% 25% 13% -12%; border-radius: 60% 40% 0 0 / 70% 62% 0 0; background: linear-gradient(115deg, rgba(154,145,234,.38), rgba(157,223,236,.27) 46%, rgba(255,255,255,.14) 80%); }
+.hero a:focus-visible { outline: 2px solid #ff5722; outline-offset: 4px; }
+@media (min-width: 1001px) and (max-height: 760px) { .container { padding-top: var(--marketing-hero-top-space); padding-bottom: 90px; gap: 48px; } .heading { font-size: clamp(38px, 3.7vw, 52px); } .eyebrow { margin-bottom: 24px; } .description { font-size: 15px; margin-top: 24px; } .board { padding: 24px; } .service { padding: 17px 0; } }
+@media (min-width: 768px) and (max-width: 1000px) { .container { padding: var(--marketing-hero-top-space) 32px 120px; gap: 32px; } .heading { font-size: 42px; } .description { font-size: 14px; } .board { padding: 22px; } .boardHeader h2 { font-size: 19px; } .service { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; } .serviceArrow { display: none; } .icon { width: 34px; height: 38px; } .tiles { gap: 10px; margin-right: 12px; } .tiles > span { width: 50px; height: 56px; } }
+@media (max-width: 767px) { .hero { min-height: auto; } .container { grid-template-columns: 1fr; gap: 38px; padding: var(--marketing-hero-top-space) 20px 90px; } .heading { font-size: clamp(34px, 8.5vw, 50px); } .eyebrow { margin-bottom: 26px; font-size: 11px; } .description { max-width: 520px; font-size: 14px; margin-top: 22px; } .actions { margin-top: 24px; gap: 12px 20px; } .primary, .secondary { font-size: 12px; } .visual { padding-top: 28px; } .board { padding: 24px 20px; } .tiles { gap: 12px; margin-right: 18px; } .tiles > span { width: 52px; height: 56px; } .service { gap: 12px; } .caption { font-size: 10px; } .guides { inset-inline: 20px; background-image: none; } .band { right: -35%; bottom: -105px; width: 120%; height: 260px; transform: rotate(-12deg); } }
+@media (max-width: 480px) { .container { gap: 26px; } .visual { width: 100%; padding-top: 30px; } .board { padding: 18px 16px; } .boardHeader h2 { font-size: 18px; } .tiles { gap: 8px; margin-right: 10px; } .tiles > span { width: 42px; height: 46px; } .workflow { font-size: 9px; } }
+@media (prefers-reduced-motion: reduce) { .serviceArrow { transition: none; } .service:hover .serviceArrow { transform: none; } }
