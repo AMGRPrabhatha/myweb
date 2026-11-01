@@ -1,0 +1,27 @@
+.revealCard {
+  min-width: 0;
+  perspective: 1000px;
+}
+
+.motionReady .revealCard {
+  opacity: 0;
+  transform: translate3d(0, 32px, 0) rotateY(-24deg) scale(.97);
+  transform-origin: left center;
+  transition: opacity 650ms ease, transform 750ms cubic-bezier(.2,.8,.2,1);
+}
+
+.motionReady .revealCard:nth-child(3n + 2) { transition-delay: 100ms; }
+.motionReady .revealCard:nth-child(3n + 3) { transition-delay: 200ms; }
+
+.motionReady .revealCard[data-visible='true'] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotateY(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motionReady .revealCard {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

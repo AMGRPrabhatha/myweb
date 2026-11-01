@@ -1,7 +1,6 @@
 .hero { position: relative; isolation: isolate; display: flex; align-items: flex-start; min-height: calc(100svh - 42px); overflow: hidden; background: #fff; color: #151b25; }
 .container { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 64px; width: 100%; max-width: 1280px; margin: 0 auto; padding: var(--marketing-hero-top-space) 48px 112px; }
 .intro { min-width: 0; }
-.eyebrow { margin-bottom: 30px; color: #6257d5; font-size: 12px; font-weight: 600; }
 .heading { font-size: clamp(38px, 3.9vw, 56px); line-height: 1.16; font-weight: 700; letter-spacing: -.045em; }
 .description { max-width: 460px; margin-top: 28px; color: #53647a; font-size: 16px; line-height: 1.8; }
 .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 24px; margin-top: 30px; }
@@ -13,9 +12,21 @@
 .visual { position: relative; min-width: 0; padding-top: 32px; }
 .tiles { position: relative; z-index: 2; display: flex; justify-content: flex-end; gap: 14px; margin: 0 24px -15px 0; }
 .tiles > span { display: grid; place-items: center; width: 62px; height: 66px; border-radius: 12px; border: 1px solid #ffffff70; box-shadow: inset 0 1px 0 #ffffff60, 0 12px 22px -14px #382d8d80; color: #fff; }
-.tiles > span:nth-child(1) { background: #7a71de; transform: translateY(-13px) rotate(-8deg); }
-.tiles > span:nth-child(2) { background: #4ebaba; transform: translateY(-30px) rotate(6deg); }
-.tiles > span:nth-child(3) { background: #ed976f; transform: translateY(-9px) rotate(9deg); }
+.tiles > span:nth-child(1) { background: #7a71de; transform: translateY(-13px) rotate(-8deg); animation: tileArriveOne 900ms cubic-bezier(.2,.8,.2,1) 180ms both; }
+.tiles > span:nth-child(2) { background: #4ebaba; transform: translateY(-30px) rotate(6deg); animation: tileArriveTwo 950ms cubic-bezier(.2,.8,.2,1) 310ms both; }
+.tiles > span:nth-child(3) { background: #ed976f; transform: translateY(-9px) rotate(9deg); animation: tileArriveThree 900ms cubic-bezier(.2,.8,.2,1) 440ms both; }
+@keyframes tileArriveOne {
+  from { opacity: 0; transform: translate3d(-85px, -95px, 0) rotate(-24deg) scale(.78); }
+  to { opacity: 1; transform: translate3d(0, -13px, 0) rotate(-8deg) scale(1); }
+}
+@keyframes tileArriveTwo {
+  from { opacity: 0; transform: translate3d(6px, -135px, 0) rotate(18deg) scale(.78); }
+  to { opacity: 1; transform: translate3d(0, -30px, 0) rotate(6deg) scale(1); }
+}
+@keyframes tileArriveThree {
+  from { opacity: 0; transform: translate3d(90px, -80px, 0) rotate(26deg) scale(.78); }
+  to { opacity: 1; transform: translate3d(0, -9px, 0) rotate(9deg) scale(1); }
+}
 .board { position: relative; padding: 28px; border: 1px solid #e6e9f2; border-radius: 12px; background: rgba(255,255,255,.94); box-shadow: 0 22px 44px -28px rgba(38,51,86,.4), inset 0 1px 0 #fff; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 .boardHeader { padding-bottom: 22px; }
 .boardHeader > p { color: #7369c8; font-size: 10px; font-weight: 600; margin-bottom: 8px; }
@@ -37,8 +48,8 @@
 .band::before { content: ''; position: absolute; inset: -42px 9% 34% 20%; border: 1px solid rgba(255,255,255,.7); border-radius: 56% 44% 45% 55% / 65% 64% 36% 35%; background: linear-gradient(135deg, rgba(255,255,255,.24), rgba(255,255,255,0) 62%); }
 .band::after { content: ''; position: absolute; inset: 21% 25% 13% -12%; border-radius: 60% 40% 0 0 / 70% 62% 0 0; background: linear-gradient(115deg, rgba(154,145,234,.38), rgba(157,223,236,.27) 46%, rgba(255,255,255,.14) 80%); }
 .hero a:focus-visible { outline: 2px solid #ff5722; outline-offset: 4px; }
-@media (min-width: 1001px) and (max-height: 760px) { .container { padding-top: var(--marketing-hero-top-space); padding-bottom: 90px; gap: 48px; } .heading { font-size: clamp(38px, 3.7vw, 52px); } .eyebrow { margin-bottom: 24px; } .description { font-size: 15px; margin-top: 24px; } .board { padding: 24px; } .service { padding: 17px 0; } }
+@media (min-width: 1001px) and (max-height: 760px) { .container { padding-top: var(--marketing-hero-top-space); padding-bottom: 90px; gap: 48px; } .heading { font-size: clamp(38px, 3.7vw, 52px); } .description { font-size: 15px; margin-top: 24px; } .board { padding: 24px; } .service { padding: 17px 0; } }
 @media (min-width: 768px) and (max-width: 1000px) { .container { padding: var(--marketing-hero-top-space) 32px 120px; gap: 32px; } .heading { font-size: 42px; } .description { font-size: 14px; } .board { padding: 22px; } .boardHeader h2 { font-size: 19px; } .service { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; } .serviceArrow { display: none; } .icon { width: 34px; height: 38px; } .tiles { gap: 10px; margin-right: 12px; } .tiles > span { width: 50px; height: 56px; } }
-@media (max-width: 767px) { .hero { min-height: auto; } .container { grid-template-columns: 1fr; gap: 38px; padding: var(--marketing-hero-top-space) 20px 90px; } .heading { font-size: clamp(34px, 8.5vw, 50px); } .eyebrow { margin-bottom: 26px; font-size: 11px; } .description { max-width: 520px; font-size: 14px; margin-top: 22px; } .actions { margin-top: 24px; gap: 12px 20px; } .primary, .secondary { font-size: 12px; } .visual { padding-top: 28px; } .board { padding: 24px 20px; } .tiles { gap: 12px; margin-right: 18px; } .tiles > span { width: 52px; height: 56px; } .service { gap: 12px; } .caption { font-size: 10px; } .guides { inset-inline: 20px; background-image: none; } .band { right: -35%; bottom: -105px; width: 120%; height: 260px; transform: rotate(-12deg); } }
+@media (max-width: 767px) { .hero { min-height: auto; } .container { grid-template-columns: 1fr; gap: 38px; padding: var(--marketing-hero-top-space) 20px 90px; } .heading { font-size: clamp(34px, 8.5vw, 50px); } .description { max-width: 520px; font-size: 14px; margin-top: 22px; } .actions { margin-top: 24px; gap: 12px 20px; } .primary, .secondary { font-size: 12px; } .visual { padding-top: 28px; } .board { padding: 24px 20px; } .tiles { gap: 12px; margin-right: 18px; } .tiles > span { width: 52px; height: 56px; } .service { gap: 12px; } .caption { font-size: 10px; } .guides { inset-inline: 20px; background-image: none; } .band { right: -35%; bottom: -105px; width: 120%; height: 260px; transform: rotate(-12deg); } }
 @media (max-width: 480px) { .container { gap: 26px; } .visual { width: 100%; padding-top: 30px; } .board { padding: 18px 16px; } .boardHeader h2 { font-size: 18px; } .tiles { gap: 8px; margin-right: 10px; } .tiles > span { width: 42px; height: 46px; } .workflow { font-size: 9px; } }
-@media (prefers-reduced-motion: reduce) { .serviceArrow { transition: none; } .service:hover .serviceArrow { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .serviceArrow { transition: none; } .service:hover .serviceArrow { transform: none; } .tiles > span { animation: none; } }

@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import styles from './ContentHero.module.css';
+import TypewriterText from './TypewriterText';
 
 const content = {
   testimonials: {
-    label: 'Client testimonials',
     heading: ['Client stories.', 'In their own words.'],
     lead: 'The people. The projects. The experience.',
     description: 'Explore feedback on our website development, social media and combined delivery. Get a closer look at the experience of working with Cobalt & Kinetic.',
@@ -14,7 +14,6 @@ const content = {
     secondaryTarget: '/work',
   },
   blog: {
-    label: 'The Cobalt & Kinetic journal',
     heading: ['Ideas to build on.', 'Insights to move forward.'],
     lead: 'Web development. Social strategy. Growth.',
     description: 'Practical guides and perspectives on building websites, creating content and connecting your digital presence. Explore the thinking behind our work.',
@@ -53,13 +52,12 @@ export default function ContentHero({ variant }: { variant: 'testimonials' | 'bl
         )}
       </div>
       <div className={styles.container}>
-        <p className={styles.eyebrow}><span aria-hidden="true" />{page.label}</p>
-        <h1 id={`${variant}-hero-heading`} className={styles.heading}>{page.heading.map(line => <span key={line}>{line}</span>)}</h1>
+        <h1 id={`${variant}-hero-heading`} className={styles.heading}><TypewriterText lines={page.heading} /></h1>
         <p className={styles.lead}>{page.lead}</p>
         <p className={styles.description}>{page.description}</p>
         <div className={styles.actions}>
-          <a href={page.target} className={`${styles.primary} brand-gradient-button`}>{page.primary}<ArrowDown size={17} aria-hidden="true" /></a>
-          <Link href={page.secondaryTarget} className={styles.secondary}>{page.secondary}<ArrowRight size={17} aria-hidden="true" /></Link>
+          <a href={page.target} className={`${styles.primary} brand-gradient-button hero-button-motion`}>{page.primary}<ArrowDown size={17} aria-hidden="true" /></a>
+          <Link href={page.secondaryTarget} className={`${styles.secondary} hero-button-motion`}>{page.secondary}<ArrowRight size={17} aria-hidden="true" /></Link>
         </div>
       </div>
     </section>

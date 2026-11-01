@@ -4,6 +4,7 @@ import HeroSection from '@/components/HeroSection';
 import SelectedWork from '@/components/SelectedWork';
 import ServicesPreview from '@/components/ServicesPreview';
 import StartupBenefits from '@/components/StartupBenefits';
+import ResultsMetrics from '@/components/ResultsMetrics';
 import PlansPreview from '@/components/PlansPreview';
 import ProcessSection from '@/components/ProcessSection';
 import ProofAndFaq from '@/components/ProofAndFaq';
@@ -27,6 +28,9 @@ export default async function HomePage() {
       <SelectedWork projects={projects} />
       <ServicesPreview />
       <StartupBenefits />
+      <div className="mx-auto max-w-7xl bg-white px-4 sm:px-6 lg:px-8">
+        <ResultsMetrics />
+      </div>
       <PlansPreview plans={plans} />
       <ProcessSection />
       <div className="bg-white py-12 sm:py-16">

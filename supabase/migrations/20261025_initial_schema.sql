@@ -7,6 +7,11 @@
 -- 1. EXTENSIONS
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+-- Keep authorization helpers outside the public Data API schema.
+CREATE SCHEMA IF NOT EXISTS agency_private;
+REVOKE ALL ON SCHEMA agency_private FROM PUBLIC;
+GRANT USAGE ON SCHEMA agency_private TO authenticated;
+
 -- 2. ENUMS
 DO $$ BEGIN
     CREATE TYPE lead_status AS ENUM ('New', 'Contacted', 'Proposal Sent', 'Won', 'Closed');
@@ -214,58 +219,75 @@ CREATE POLICY "Public read project_media"
 
 -- STAFF/ADMIN POLICIES:
 -- Helper function to check if current user is an active admin
-CREATE OR REPLACE FUNCTION is_active_admin()
-RETURNS BOOLEAN AS $$
-BEGIN
-    RETURN EXISTS (
-        SELECT 1 FROM admin_profiles
-        WHERE auth_user_id = auth.uid()
+CREATE OR REPLACE FUNCTION agency_private.is_active_admin()
+RETURNS BOOLEAN
+LANGUAGE sql
+STABLE
+SECURITY DEFINER
+SET search_path = ''
+AS $$
+    SELECT EXISTS (
+        SELECT 1 FROM public.admin_profiles
+        WHERE auth_user_id = (SELECT auth.uid())
         AND is_active = true
     );
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$$;
+REVOKE ALL ON FUNCTION agency_private.is_active_admin() FROM PUBLIC, anon;
+GRANT EXECUTE ON FUNCTION agency_private.is_active_admin() TO authenticated;
 
 -- Admin profiles: only active admins can read
 CREATE POLICY "Admins read profiles"
-    ON admin_profiles FOR SELECT
-    USING (is_active_admin());
+    ON admin_profiles FOR SELECT TO authenticated
+    USING (agency_private.is_active_admin());
 
 -- Leads: only active admins can read/update leads
 CREATE POLICY "Admins read leads"
-    ON leads FOR SELECT
-    USING (is_active_admin());
+    ON leads FOR SELECT TO authenticated
+    USING (agency_private.is_active_admin());
 
 CREATE POLICY "Admins update leads"
-    ON leads FOR UPDATE
-    USING (is_active_admin());
+    ON leads FOR UPDATE TO authenticated
+    USING (agency_private.is_active_admin());
 
 -- Lead notes: only active admins can read/insert notes
 CREATE POLICY "Admins read lead notes"
-    ON lead_notes FOR SELECT
-    USING (is_active_admin());
+    ON lead_notes FOR SELECT TO authenticated
+    USING (agency_private.is_active_admin());
 
 CREATE POLICY "Admins insert lead notes"
-    ON lead_notes FOR INSERT
-    WITH CHECK (is_active_admin());
+    ON lead_notes FOR INSERT TO authenticated
+    WITH CHECK (agency_private.is_active_admin());
 
 -- Notification jobs: only active admins can read/update
 CREATE POLICY "Admins manage notification_jobs"
-    ON notification_jobs FOR ALL
-    USING (is_active_admin());
+    ON notification_jobs FOR ALL TO authenticated
+    USING (agency_private.is_active_admin());
 
 -- Projects, Plans, Media: Admins can manage all (including drafts)
 CREATE POLICY "Admins manage projects"
-    ON projects FOR ALL
-    USING (is_active_admin());
+    ON projects FOR ALL TO authenticated
+    USING (agency_private.is_active_admin());
 
 CREATE POLICY "Admins manage project_media"
-    ON project_media FOR ALL
-    USING (is_active_admin());
+    ON project_media FOR ALL TO authenticated
+    USING (agency_private.is_active_admin());
 
 CREATE POLICY "Admins manage plans"
-    ON plans FOR ALL
-    USING (is_active_admin());
+    ON plans FOR ALL TO authenticated
+    USING (agency_private.is_active_admin());
 
 CREATE POLICY "Admins manage site_settings"
-    ON site_settings FOR ALL
-    USING (is_active_admin());
+    ON site_settings FOR ALL TO authenticated
+    USING (agency_private.is_active_admin());
+
+-- Data API table privileges are separate from RLS. These grants do not
+-- bypass the policies above; no anonymous write access is granted.
+GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
+GRANT SELECT ON site_settings, plans, projects, project_media TO anon;
+GRANT SELECT, INSERT, UPDATE, DELETE ON site_settings, plans, projects, project_media TO authenticated;
+GRANT SELECT ON admin_profiles TO authenticated;
+GRANT SELECT, UPDATE ON leads TO authenticated;
+GRANT SELECT, INSERT ON lead_notes TO authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON notification_jobs TO authenticated;
+GRANT SELECT, INSERT, UPDATE, DELETE ON admin_profiles, site_settings, plans,
+    projects, project_media, leads, lead_notes, notification_jobs TO service_role;

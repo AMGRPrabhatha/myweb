@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ArrowUpRight, ArrowDown, Check, Plus, PanelsTopLeft, CalendarDays, Database, Video, ShieldCheck, FileText, Globe2, Share2 } from 'lucide-react';
 import HeroTicker from './HeroTicker';
 import styles from './ServiceDetailContent.module.css';
+import TypewriterText from './TypewriterText';
 
 interface ServiceDetailData {
   title: string;
@@ -43,10 +44,9 @@ export default function ServiceDetailContent({ data }: { data: ServiceDetailData
         <Link href="/services" className={styles.back}><ArrowLeft size={15} aria-hidden="true" /> All services</Link>
         <div className={styles.heroGrid}>
           <div>
-            <p className={styles.eyebrow}>{social ? 'Social media & video production' : 'Website development & web portals'}</p>
-            <h1 id="service-detail-heading">{social ? <>Content that connects.<br />A brand that feels like you.</> : <>A better website.<br />A stronger digital presence.</>}</h1>
+            <h1 id="service-detail-heading"><TypewriterText lines={social ? ['Content that connects.', 'A brand that feels like you.'] : ['A better website.', 'A stronger digital presence.']} /></h1>
             <p className={styles.heroDescription}>{data.tagline}</p>
-            <div className={styles.actions}><Link href={enquiry} className={`${styles.primary} brand-gradient-button`}>Request a proposal <ArrowRight size={16} aria-hidden="true" /></Link><Link href={plans} className={styles.textLink}>Explore packages <ArrowRight size={16} aria-hidden="true" /></Link></div>
+            <div className={styles.actions}><Link href={enquiry} className={`${styles.primary} brand-gradient-button hero-button-motion`}>Request a proposal <ArrowRight size={16} aria-hidden="true" /></Link><Link href={plans} className={styles.textLink}>Explore packages <ArrowRight size={16} aria-hidden="true" /></Link></div>
             <a className={styles.jump} href="#overview">See how it comes together <ArrowDown size={15} aria-hidden="true" /></a>
           </div>
           <figure className={styles.heroVisual}><Illustration social={social} /><figcaption>{social ? 'From your content calendar to the next conversation.' : 'From the first idea to the finished experience.'}</figcaption></figure>

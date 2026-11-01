@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import TypewriterText from '@/components/TypewriterText';
 import { notFound } from 'next/navigation';
 import { db } from '@/lib/db';
 import {
@@ -73,7 +74,7 @@ export default async function BlogDetailPage({ params }: BlogDetailProps) {
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-ink tracking-tight leading-[1.15]">
-            {post.title}
+            <TypewriterText lines={[post.title]} />
           </h1>
 
           {/* Author Strip (Matching Image 2) */}

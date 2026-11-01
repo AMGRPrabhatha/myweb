@@ -1,4 +1,5 @@
 import HeroTicker from '@/components/HeroTicker';
+import TypewriterText from '@/components/TypewriterText';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
@@ -51,7 +52,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           <div className={styles.intro}>
             <div>
               <p className={styles.kind}><span>{project.category}</span>{project.isConcept && <span className={styles.concept}>Concept study</span>}</p>
-              <h1 className={styles.title}>{project.title}</h1>
+              <h1 className={styles.title}><TypewriterText lines={[project.title]} /></h1>
             </div>
             <div>
               <p className={styles.summary}>{project.summary}</p>

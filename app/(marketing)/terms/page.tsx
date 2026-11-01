@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import TypewriterText from '@/components/TypewriterText';
 
 export const metadata: Metadata = {
   title: 'Terms of Service',
@@ -14,7 +15,7 @@ export default function TermsPage() {
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-cobalt">Commercial Terms</span>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-ink tracking-tight mt-2">
-              Terms of Service
+              <TypewriterText lines={['Terms of Service']} />
             </h1>
             <p className="mt-2 text-xs text-ink-500">
               Effective Date: 25 October 2026

@@ -21,7 +21,7 @@ export default async function WorkPage({ searchParams }: { searchParams?: { cate
   return (
     <div className="bg-white min-h-screen text-ink">
       
-      <WorkHero />
+      <WorkHero projects={projects} />
       <HeroTicker />
 
       <section id="projects" className="scroll-mt-28 py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

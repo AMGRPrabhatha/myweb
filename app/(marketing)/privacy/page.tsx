@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import TypewriterText from '@/components/TypewriterText';
 
 export const metadata: Metadata = {
   title: 'Privacy Notice',
@@ -14,7 +15,7 @@ export default function PrivacyPage() {
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-cobalt">Legal & Data Use</span>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-ink tracking-tight mt-2">
-              Privacy Notice
+              <TypewriterText lines={['Privacy Notice']} />
             </h1>
             <p className="mt-2 text-xs text-ink-500">
               Last updated: 25 October 2026 • Compliant with truthful agency operations

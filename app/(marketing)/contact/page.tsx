@@ -1,4 +1,5 @@
 import HeroTicker from '@/components/HeroTicker';
+import TypewriterText from '@/components/TypewriterText';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import ContactForm from '@/components/ContactForm';
@@ -56,7 +57,7 @@ export default async function ContactPage() {
             <div className="lg:col-span-6 flex flex-col justify-between gap-12">
               <div>
                 <h1 className="max-w-[680px] text-4xl sm:text-5xl lg:text-[3.25rem] font-semibold text-ink tracking-tight leading-[1.12]">
-                  Ready to take your marketing to the next level?
+                  <TypewriterText lines={['Ready to take your marketing to the next level?']} />
                 </h1>
                 <h2 className="mt-8 text-xl sm:text-2xl font-semibold text-ink">Get a look at:</h2>
                 <ul className="mt-5 space-y-4 pl-6 list-disc text-base sm:text-lg leading-relaxed text-slate-600 marker:text-slate-400">

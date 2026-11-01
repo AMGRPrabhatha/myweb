@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowDown, ArrowRight, ArrowUpRight, PanelsTopLeft, MessagesSquare, Rocket } from 'lucide-react';
 import styles from './ServicesHero.module.css';
+import TypewriterText from './TypewriterText';
 
 export default function ServicesHero() {
   return (
@@ -9,11 +10,10 @@ export default function ServicesHero() {
       <div className={styles.band} aria-hidden="true" />
       <div className={styles.container}>
         <div className={styles.intro}>
-          <p className={styles.eyebrow}>Digital services</p>
-          <h1 id="services-hero-heading" className={styles.heading}>Build your website.<br />Connect your brand.</h1>
+          <h1 id="services-hero-heading" className={styles.heading}><TypewriterText lines={['Build your website.', 'Connect your brand.']} /></h1>
           <p className={styles.description}>Bring your website and social presence together. We combine strategy, design and development to help startups and growing businesses move from idea to launch.</p>
           <div className={styles.actions}>
-            <Link href="/contact" className={`${styles.primary} brand-gradient-button`}>Start a project <ArrowRight size={16} aria-hidden="true" /></Link>
+            <Link href="/contact" className={`${styles.primary} brand-gradient-button hero-button-motion`}>Start a project <ArrowRight size={16} aria-hidden="true" /></Link>
             <a href="#service-disciplines" className={styles.secondary}>Explore services <ArrowDown size={16} aria-hidden="true" /></a>
           </div>
         </div>

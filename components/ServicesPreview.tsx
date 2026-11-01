@@ -1,6 +1,8 @@
 'use client';
 
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import styles from './ServicesPreview.module.css';
 import {
   Globe,
   Share2,
@@ -12,6 +14,32 @@ import {
 } from 'lucide-react';
 
 export default function ServicesPreview() {
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const grid = cardsRef.current;
+    if (!grid || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>('[data-service-card]'));
+    grid.classList.add(styles.motionReady);
+
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach((card) => { card.dataset.visible = 'true'; });
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        (entry.target as HTMLElement).dataset.visible = 'true';
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -6% 0px' });
+
+    cards.forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, []);
+
   const serviceCards = [
     {
       id: 'web-dev',
@@ -118,14 +146,14 @@ export default function ServicesPreview() {
         {/* ========================================================= */}
         {/* 2. LIQUID GLASS CARDS WITH ATMOSPHERIC SHADE (Image 2 UI)  */}
         {/* ========================================================= */}
-        <div className="mobile-card-rail grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div ref={cardsRef} className="mobile-card-rail grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {serviceCards.map((service) => {
             const Icon = service.icon;
             return (
+              <div key={service.id} data-service-card className={styles.revealCard}>
               <Link
-                key={service.id}
                 href={service.href}
-                className={`group relative rounded-[28px] sm:rounded-[32px] p-7 sm:p-8 bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_24px_-6px_rgba(0,0,0,0.05)] hover:shadow-[0_16px_36px_-8px_rgba(255,87,34,0.14)] ${service.borderHover} hover:-translate-y-1.5 transition-all duration-300 overflow-hidden flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]`}
+                className={`group relative h-full rounded-[28px] sm:rounded-[32px] p-7 sm:p-8 bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_24px_-6px_rgba(0,0,0,0.05)] hover:shadow-[0_16px_36px_-8px_rgba(255,87,34,0.14)] ${service.borderHover} hover:-translate-y-1.5 transition-all duration-300 overflow-hidden flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]`}
               >
                 {/* Subtle Atmospheric Corner Shade / Glow (Liquid Glass Look) */}
                 <div
@@ -155,6 +183,7 @@ export default function ServicesPreview() {
                   </p>
                 </div>
               </Link>
+              </div>
             );
           })}
         </div>

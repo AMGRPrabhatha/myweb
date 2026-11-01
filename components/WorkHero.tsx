@@ -1,8 +1,33 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowDown, ArrowRight } from 'lucide-react';
+import { Project } from '@/lib/types';
 import styles from './WorkHero.module.css';
+import TypewriterText from './TypewriterText';
 
-export default function WorkHero() {
+export default function WorkHero({ projects }: { projects: Project[] }) {
+  const featuredProjects = projects.filter(project => project.coverImage && project.slug).slice(0, 8);
+
+  const projectCards = (duplicate = false) => featuredProjects.map(project => (
+    <Link
+      key={`${duplicate ? 'copy-' : ''}${project.id}`}
+      href={`/work/${project.slug}`}
+      className={styles.projectCard}
+      tabIndex={duplicate ? -1 : undefined}
+    >
+      <span className={styles.projectImage}>
+        <Image
+          src={project.coverImage}
+          alt={duplicate ? '' : `${project.title} project preview`}
+          fill
+          sizes="(max-width: 767px) 50vw, 220px"
+        />
+      </span>
+      <span className={styles.projectCategory}>{project.category}</span>
+      <span className={styles.projectTitle}>{project.title}</span>
+    </Link>
+  ));
+
   return (
     <section className={styles.hero} aria-labelledby="work-hero-heading">
       <div className={styles.art} aria-hidden="true">
@@ -28,16 +53,22 @@ export default function WorkHero() {
         </svg>
       </div>
       <div className={styles.container}>
-        <p className={styles.eyebrow}><span aria-hidden="true" /> Selected work</p>
-        <h1 id="work-hero-heading" className={styles.heading}>Digital work, built around your business.</h1>
+        <h1 id="work-hero-heading" className={styles.heading}><TypewriterText lines={['Digital work, built around your business.']} /></h1>
         <p className={styles.lead}>Websites. Interfaces. Social creative.</p>
         <p className={styles.description}>Discover the ideas, design decisions and thoughtful details behind our projects. A closer look at what we build and how it comes together.</p>
         <div className={styles.actions}>
-          <Link href="#projects" className={`${styles.primary} brand-gradient-button`}>Browse our projects <ArrowDown size={17} aria-hidden="true" /></Link>
-          <Link href="/contact" className={styles.secondary}>Start a project <ArrowRight size={17} aria-hidden="true" /></Link>
+          <Link href="#projects" className={`${styles.primary} brand-gradient-button hero-button-motion`}>Browse our projects <ArrowDown size={17} aria-hidden="true" /></Link>
+          <Link href="/contact" className={`${styles.secondary} hero-button-motion`}>Start a project <ArrowRight size={17} aria-hidden="true" /></Link>
         </div>
-        <p className={styles.note}>Project work and clearly labelled concept studies.</p>
       </div>
+      {featuredProjects.length > 0 && (
+        <div className={styles.projectRail} aria-label="Featured projects">
+          <div className={styles.projectTrack}>
+            <div className={styles.projectGroup}>{projectCards()}</div>
+            <div className={styles.projectGroup} aria-hidden="true">{projectCards(true)}</div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

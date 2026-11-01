@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ArrowDown, ArrowRight, MapPin } from 'lucide-react';
 import styles from './AboutHero.module.css';
+import TypewriterText from './TypewriterText';
 
 export default function AboutHero() {
   return (
@@ -27,11 +28,10 @@ export default function AboutHero() {
         </svg>
       </div>
       <div className={styles.container}>
-        <p className={styles.eyebrow}>About Cobalt & Kinetic</p>
-        <h1 id="about-hero-heading" className={styles.heading}>A digital team.<br />On your side.</h1>
+        <h1 id="about-hero-heading" className={styles.heading}><TypewriterText lines={['A digital team.', 'On your side.']} /></h1>
         <p className={styles.description}>We bring website development and social strategy together for startups and growing businesses. One connected team, from the first conversation to launch.</p>
         <div className={styles.actions}>
-          <Link href="/contact" className={`${styles.contact} brand-gradient-button`}>Let’s talk <ArrowRight size={16} aria-hidden="true" /></Link>
+          <Link href="/contact" className={`${styles.contact} brand-gradient-button hero-button-motion`}>Let’s talk <ArrowRight size={16} aria-hidden="true" /></Link>
           <a href="#about-company" className={styles.storyLink}>Get to know us <ArrowDown size={16} aria-hidden="true" /></a>
         </div>
         <p className={styles.location}><MapPin size={14} aria-hidden="true" /> Based in Nawala, Sri Lanka</p>

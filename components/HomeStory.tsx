@@ -1,3 +1,6 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, PanelsTopLeft, MessagesSquare, Layers3 } from 'lucide-react';
@@ -11,9 +14,31 @@ const stories = [
 ];
 
 export default function HomeStory() {
+  const storyRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = storyRef.current;
+    if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    section.classList.add(styles.motionReady);
+    if (!('IntersectionObserver' in window)) {
+      section.classList.add(styles.motionVisible);
+      return;
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      section.classList.add(styles.motionVisible);
+      observer.disconnect();
+    }, { threshold: 0.18 });
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
-      <section className={styles.story} aria-labelledby="our-story-heading">
+      <section ref={storyRef} className={styles.story} aria-labelledby="our-story-heading">
         <div className={styles.container}>
           <div className={styles.sectionHeader}>
             <div><p className={styles.eyebrow}>Our story</p><h2 id="our-story-heading">A shared idea.<br />A connected way of working.</h2></div>

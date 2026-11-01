@@ -1,0 +1,63 @@
+.outerOrbit,
+.verticalOrbit,
+.horizontalOrbit,
+.core {
+  transform-origin: 260px 260px;
+  will-change: transform;
+}
+
+.outerOrbit {
+  animation: orbitTurn 42s linear infinite;
+}
+
+.verticalOrbit {
+  animation: orbitSway 10s ease-in-out infinite;
+}
+
+.horizontalOrbit {
+  animation: orbitSway 13s ease-in-out infinite reverse;
+}
+
+.core {
+  animation: coreBreathe 5s ease-in-out infinite;
+}
+
+.labelOne,
+.labelTwo,
+.labelThree {
+  animation: labelFloat 5s ease-in-out infinite;
+}
+
+.labelTwo { animation-delay: -1.7s; }
+.labelThree { animation-delay: -3.3s; }
+
+@keyframes orbitTurn {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbitSway {
+  0%, 100% { transform: rotate(-7deg); }
+  50% { transform: rotate(7deg); }
+}
+
+@keyframes coreBreathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+
+@keyframes labelFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .outerOrbit,
+  .verticalOrbit,
+  .horizontalOrbit,
+  .core,
+  .labelOne,
+  .labelTwo,
+  .labelThree {
+    animation: none;
+  }
+}

@@ -5,6 +5,7 @@ import AboutServicesCarousel from '@/components/AboutServicesCarousel';
 import WhyCoordinateSection from '@/components/WhyCoordinateSection';
 import OperatingArrangementsSection from '@/components/OperatingArrangementsSection';
 import DedicatedTeamAccordion from '@/components/DedicatedTeamAccordion';
+import orbitStyles from '@/components/AboutOrbit.module.css';
 import { db } from '@/lib/db';
 
 export const metadata: Metadata = {
@@ -50,19 +51,27 @@ export default async function AboutPage() {
                     <stop offset="1" stopColor="#FFF1EB" />
                   </linearGradient>
                 </defs>
-                <circle cx="260" cy="260" r="219" stroke="url(#about-orbit)" strokeOpacity=".48" strokeWidth="1.5" />
-                <ellipse cx="260" cy="260" rx="111" ry="219" stroke="#7B85A3" strokeOpacity=".55" strokeWidth="1.5" />
-                <ellipse cx="260" cy="260" rx="219" ry="111" stroke="#7B85A3" strokeOpacity=".55" strokeWidth="1.5" />
-                <circle cx="260" cy="260" r="70" fill="url(#about-core)" stroke="white" strokeWidth="2" />
-                <path d="M222 284V237L260 214L298 237V284L260 307L222 284Z" fill="white" stroke="url(#about-orbit)" strokeWidth="2" />
-                <path d="M222 237L260 260L298 237M260 260V307" stroke="url(#about-orbit)" strokeWidth="2" strokeLinejoin="round" />
-                <circle cx="260" cy="41" r="5" fill="#FF6840" />
-                <circle cx="479" cy="260" r="5" fill="#477DF7" />
-                <circle cx="107" cy="417" r="5" fill="#9361C9" />
+                <g className={orbitStyles.outerOrbit}>
+                  <circle cx="260" cy="260" r="219" stroke="url(#about-orbit)" strokeOpacity=".48" strokeWidth="1.5" />
+                  <circle cx="260" cy="41" r="5" fill="#FF6840" />
+                  <circle cx="107" cy="417" r="5" fill="#9361C9" />
+                </g>
+                <g className={orbitStyles.verticalOrbit}>
+                  <ellipse cx="260" cy="260" rx="111" ry="219" stroke="#7B85A3" strokeOpacity=".55" strokeWidth="1.5" />
+                </g>
+                <g className={orbitStyles.horizontalOrbit}>
+                  <ellipse cx="260" cy="260" rx="219" ry="111" stroke="#7B85A3" strokeOpacity=".55" strokeWidth="1.5" />
+                  <circle cx="479" cy="260" r="5" fill="#477DF7" />
+                </g>
+                <g className={orbitStyles.core}>
+                  <circle cx="260" cy="260" r="70" fill="url(#about-core)" stroke="white" strokeWidth="2" />
+                  <path d="M222 284V237L260 214L298 237V284L260 307L222 284Z" fill="white" stroke="url(#about-orbit)" strokeWidth="2" />
+                  <path d="M222 237L260 260L298 237M260 260V307" stroke="url(#about-orbit)" strokeWidth="2" strokeLinejoin="round" />
+                </g>
               </svg>
-              <span className="absolute left-[2%] top-[42%] rounded-xl border border-[#E8C1DB] bg-white/75 px-3 py-2 text-xs font-bold text-[#9255AA] shadow-sm backdrop-blur-xl sm:text-sm">Clear scope</span>
-              <span className="absolute right-[1%] top-[18%] rounded-xl border border-[#FFD0BE] bg-white/75 px-3 py-2 text-xs font-bold text-[#E45E3D] shadow-sm backdrop-blur-xl sm:text-sm">Direct collaboration</span>
-              <span className="absolute bottom-[12%] right-[2%] rounded-xl border border-[#C4D4FF] bg-white/75 px-3 py-2 text-xs font-bold text-[#477DF7] shadow-sm backdrop-blur-xl sm:text-sm">Full ownership</span>
+              <span className={`${orbitStyles.labelOne} absolute left-[2%] top-[42%] rounded-xl border border-[#E8C1DB] bg-white/75 px-3 py-2 text-xs font-bold text-[#9255AA] shadow-sm backdrop-blur-xl sm:text-sm`}>Clear scope</span>
+              <span className={`${orbitStyles.labelTwo} absolute right-[1%] top-[18%] rounded-xl border border-[#FFD0BE] bg-white/75 px-3 py-2 text-xs font-bold text-[#E45E3D] shadow-sm backdrop-blur-xl sm:text-sm`}>Direct collaboration</span>
+              <span className={`${orbitStyles.labelThree} absolute bottom-[12%] right-[2%] rounded-xl border border-[#C4D4FF] bg-white/75 px-3 py-2 text-xs font-bold text-[#477DF7] shadow-sm backdrop-blur-xl sm:text-sm`}>Full ownership</span>
             </div>
 
             <div className="max-w-xl">

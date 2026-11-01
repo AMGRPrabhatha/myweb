@@ -94,7 +94,7 @@ export default function Navbar() {
       
       {/* Floating Centered Liquid Glass Pill */}
       <div
-        className={`pointer-events-auto mx-auto hidden w-full transition-all duration-300 rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 xl:flex items-center justify-between border ${
+        className={`pointer-events-auto mx-auto hidden w-full transition-all duration-300 rounded-full px-3.5 sm:px-5 py-1.5 xl:flex items-center justify-between border ${
           isScrolled
             ? 'bg-white/85 backdrop-blur-2xl border-white/80 shadow-[0_12px_40px_-8px_rgba(0,0,0,0.12),0_1px_2px_0_rgba(0,0,0,0.05)] ring-1 ring-black/[0.04]'
             : 'bg-white/75 backdrop-blur-xl border-white/70 shadow-[0_8px_30px_-6px_rgba(0,0,0,0.08),0_1px_2px_0_rgba(0,0,0,0.03)] ring-1 ring-black/[0.03]'
@@ -109,12 +109,12 @@ export default function Navbar() {
           className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] rounded-full p-1 pl-1.5"
         >
           {/* Circular Monogram Badge */}
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#FF5722] flex items-center justify-center text-white font-black text-sm shadow-sm transition-transform group-hover:scale-105">
+          <div className="w-8 h-8 rounded-full bg-[#FF5722] flex items-center justify-center text-white font-black text-sm shadow-sm transition-transform group-hover:scale-105">
             CK
           </div>
 
           <div className="flex flex-col">
-            <span className="font-extrabold text-ink tracking-tight text-base sm:text-lg leading-tight">
+            <span className="font-extrabold text-ink tracking-tight text-base sm:text-[17px] leading-tight">
               Cobalt<span className="text-[#FF5722]">&</span>Kinetic
             </span>
             <span className="hidden sm:inline-block text-[9px] font-bold text-ink-500 uppercase tracking-widest -mt-0.5">
@@ -133,7 +133,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3.5 lg:px-4 py-1.5 rounded-full text-xs lg:text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] ${
+                className={`px-3.5 lg:px-4 py-1 rounded-full text-xs lg:text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] ${
                   isActive
                     ? 'bg-ink text-white shadow-xs font-bold'
                     : 'text-ink-700 hover:text-ink hover:bg-black/[0.04]'
@@ -160,7 +160,7 @@ export default function Navbar() {
           {/* Orange Pill CTA Button */}
           <Link
             href="/contact"
-            className="hidden sm:inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-[#FF5722] hover:bg-[#F24B18] text-white font-bold text-xs sm:text-sm tracking-tight transition-all shadow-sm shadow-orange-500/20 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] focus-visible:ring-offset-2"
+            className="hidden sm:inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 rounded-full bg-[#FF5722] hover:bg-[#F24B18] text-white font-bold text-xs sm:text-sm tracking-tight transition-all shadow-sm shadow-orange-500/20 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] focus-visible:ring-offset-2"
           >
             <span>Start a Project</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
