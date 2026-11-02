@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowDown, ArrowRight, MapPin } from 'lucide-react';
+import { ArrowDown, ArrowRight } from 'lucide-react';
 import styles from './AboutHero.module.css';
 import TypewriterText from './TypewriterText';
 
@@ -34,7 +34,6 @@ export default function AboutHero() {
           <Link href="/contact" className={`${styles.contact} brand-gradient-button hero-button-motion`}>Let’s talk <ArrowRight size={16} aria-hidden="true" /></Link>
           <a href="#about-company" className={styles.storyLink}>Get to know us <ArrowDown size={16} aria-hidden="true" /></a>
         </div>
-        <p className={styles.location}><MapPin size={14} aria-hidden="true" /> Based in Nawala, Sri Lanka</p>
       </div>
     </section>
   );

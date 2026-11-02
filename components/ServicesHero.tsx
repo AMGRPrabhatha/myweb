@@ -6,7 +6,6 @@ import TypewriterText from './TypewriterText';
 export default function ServicesHero() {
   return (
     <section className={styles.hero} aria-labelledby="services-hero-heading">
-      <div className={styles.guides} aria-hidden="true" />
       <div className={styles.band} aria-hidden="true" />
       <div className={styles.container}>
         <div className={styles.intro}>

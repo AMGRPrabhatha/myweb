@@ -69,7 +69,7 @@ export default async function AdminLayout({
               </div>
             </div>
             <Link
-              href="/"
+              href="https://design1x.com"
               target="_blank"
               className="text-ink-400 hover:text-white p-1 rounded-md hover:bg-ink-800 transition-colors"
               title="Open public website"
@@ -205,7 +205,7 @@ export default async function AdminLayout({
           </div>
           <div className="flex items-center gap-3 text-xs text-ink-500">
             <Link
-              href="/"
+              href="https://design1x.com"
               className="text-cobalt hover:underline font-semibold"
             >
               View Public Website ↗

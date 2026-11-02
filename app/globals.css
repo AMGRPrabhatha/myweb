@@ -8,12 +8,12 @@
   --brand-purple: #6366F1;
   --brand-orange: #FF5722;
   --marketing-header-height: 54px;
-  --marketing-hero-top-space: calc(var(--marketing-header-height) + 44px);
+  --marketing-hero-top-space: calc(var(--marketing-header-height) + 64px);
   --marketing-mobile-hero-height: calc(100svh - 42px);
 }
 
 @media (max-width: 767px) {
-  :root { --marketing-hero-top-space: calc(var(--marketing-header-height) + 32px); }
+  :root { --marketing-hero-top-space: calc(var(--marketing-header-height) + 40px); }
 }
 
 @media (max-width: 639px) {

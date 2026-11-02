@@ -12,7 +12,6 @@ const packageLinks = [
 export default function PlansHero() {
   return (
     <section className={styles.hero} aria-labelledby="plans-hero-heading">
-      <div className={styles.guides} aria-hidden="true" />
       <div className={styles.band} aria-hidden="true" />
       <div className={styles.container}>
         <div className={styles.intro}>

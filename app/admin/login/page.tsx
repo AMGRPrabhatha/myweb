@@ -22,7 +22,7 @@ export default async function AdminLoginPage({ searchParams }: { searchParams?: 
     <div className="min-h-screen bg-warm-100 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-2xl p-8 border border-warm-300 shadow-card space-y-6">
         <Link
-          href="/"
+          href="https://design1x.com"
           className="inline-flex items-center gap-2 text-xs font-bold text-cobalt hover:text-cobalt-700"
         >
           <ArrowLeft className="w-3.5 h-3.5" />

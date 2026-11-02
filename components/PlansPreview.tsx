@@ -480,14 +480,14 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
               'bg-[#FF5722]/[0.14]',
               'bg-emerald-400/[0.08]',
             ];
-            const glowColor = cornerGlows[idx % cornerGlows.length];
+            const glowColor = isPopular ? 'bg-sky-400/[0.14]' : cornerGlows[idx % cornerGlows.length];
 
             return (
               <div
                 key={tier.id}
                 className={`relative rounded-[28px] sm:rounded-[32px] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 group ${
                   isPopular
-                    ? 'bg-gradient-to-b from-orange-50/40 via-white/95 to-white/95 backdrop-blur-xl border-2 border-[#FF5722] shadow-[0_12px_36px_-8px_rgba(255,87,34,0.18)] ring-4 ring-[#FF5722]/10 hover:-translate-y-1.5'
+                    ? 'bg-gradient-to-b from-violet-50/50 via-white/95 to-sky-50/40 backdrop-blur-xl border-2 border-[#6540e8] shadow-[0_12px_36px_-8px_rgba(80,70,220,0.18)] ring-4 ring-[#6540e8]/10 hover:-translate-y-1.5'
                     : 'bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_4px_24px_-6px_rgba(0,0,0,0.05)] hover:shadow-[0_16px_36px_-8px_rgba(0,0,0,0.10)] hover:border-slate-300 hover:-translate-y-1.5'
                 }`}
               >
@@ -500,7 +500,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
 
                 {/* Centered Top MOST POPULAR Pill (NinjaPromo Style) */}
                 {isPopular && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-full bg-gradient-to-r from-[#FF5722] to-amber-500 text-white text-[10px] font-black uppercase tracking-widest shadow-md shadow-orange-500/25">
+                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 px-4 py-1 rounded-full bg-gradient-to-r from-[#a600ef] via-[#4b17f2] to-[#03a9e8] text-white text-[10px] font-black uppercase tracking-widest shadow-md shadow-violet-500/25">
                     Most Popular
                   </div>
                 )}
@@ -521,7 +521,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                       <span
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider border ${
                           isPopular
-                            ? 'bg-orange-50 text-[#FF5722] border-orange-200'
+                            ? 'bg-violet-50 text-[#5635e9] border-violet-200'
                             : 'bg-slate-100 text-slate-700 border-slate-200'
                         }`}
                       >
@@ -544,7 +544,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                           {tier.originalPrice}
                         </span>
                         {tier.discountBadge && (
-                          <span className="px-2 py-0.5 rounded-full bg-orange-100 text-[#FF5722] text-[10px] font-black uppercase tracking-wider">
+                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${isPopular ? 'bg-violet-100 text-[#5635e9]' : 'bg-orange-100 text-[#FF5722]'}`}>
                             {tier.discountBadge}
                           </span>
                         )}
@@ -565,7 +565,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                   <div className="relative py-1 flex items-center justify-center">
                     <div
                       className={`w-full border-t ${
-                        isPopular ? 'border-orange-200/80' : 'border-slate-200/80'
+                        isPopular ? 'border-violet-200/80' : 'border-slate-200/80'
                       }`}
                     />
                   </div>
@@ -577,7 +577,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                         <div
                           className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 border ${
                             isPopular
-                              ? 'bg-orange-50 text-[#FF5722] border-orange-200'
+                              ? 'bg-violet-50 text-[#5635e9] border-violet-200'
                               : 'bg-emerald-50 text-emerald-600 border-emerald-200/70'
                           }`}
                         >
@@ -592,7 +592,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                 {/* Bottom CTA Button: Book a call [ → ] (NinjaPromo Style) */}
                 <div
                   className={`relative z-10 pt-5 mt-5 border-t ${
-                    isPopular ? 'border-orange-200/60' : 'border-slate-100'
+                    isPopular ? 'border-violet-200/60' : 'border-slate-100'
                   }`}
                 >
                   <Link

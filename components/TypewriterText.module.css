@@ -1,4 +1,5 @@
 .word { display: inline-block; white-space: nowrap; }
-.character { display: inline-block; opacity: 0; animation: typeIn 1ms steps(1, end) forwards; }
-@keyframes typeIn { to { opacity: 1; } }
+.character { display: inline-block; opacity: .72; animation: typeIn 100ms steps(1, end) both; }
+.complete .character { opacity: 1; animation: none; }
+@keyframes typeIn { from { opacity: .72; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .character { opacity: 1; animation: none; } }

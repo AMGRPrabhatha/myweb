@@ -55,7 +55,6 @@
   to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
-.guides { position: absolute; z-index: 0; inset: 0 max(32px, calc((100% - 1216px) / 2)); border-inline: 1px solid #edf0f580; background-image: repeating-linear-gradient(90deg, transparent, transparent calc(25% - 1px), #edf0f580 calc(25% - 1px), #edf0f580 25%); pointer-events: none; }
 .band { position: absolute; z-index: 1; inset: auto 0 0; height: 52%; background: radial-gradient(ellipse 38% 64% at 13% 100%, rgba(255,181,148,.72), transparent 100%), radial-gradient(ellipse 35% 55% at 49% 107%, rgba(191,165,237,.76), transparent 100%), radial-gradient(ellipse 38% 68% at 91% 100%, rgba(130,213,232,.7), transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent, #000 68%); mask-image: linear-gradient(to bottom, transparent, #000 68%); pointer-events: none; }
 .hero a:focus-visible { outline: 2px solid #ff5722; outline-offset: 4px; }
 
@@ -78,7 +77,6 @@
   .packageLinks { margin-top: 20px; }
   .packageLinks a { min-height: 50px; font-size: 12px; }
   .band { height: 42%; }
-  .guides { inset-inline: 20px; background-image: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

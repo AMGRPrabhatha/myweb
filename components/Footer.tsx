@@ -5,12 +5,6 @@ import Image from 'next/image';
 import {
   ArrowRight,
   ArrowUp,
-  ShieldCheck,
-  Globe2,
-  Mail,
-  Clock,
-  Sparkles,
-  CheckCircle2,
 } from 'lucide-react';
 import { initialSiteSettings } from '@/lib/sample-data';
 
@@ -100,25 +94,15 @@ export default function Footer({ settings = initialSiteSettings }: { settings?: 
               Your website and social media, coordinated by one dedicated team. High-performance Next.js web applications and 30-day ongoing creative management.
             </p>
 
-            <div className="space-y-3 pt-2 text-xs">
-              <a
-                href={`mailto:${settings.businessEmail}`}
-                className="inline-flex items-center gap-2 font-bold text-ink hover:text-[#FF5722] transition-colors text-sm"
-              >
-                <Mail className="w-4 h-4 text-cobalt" />
-                <span>{settings.businessEmail}</span>
-              </a>
-
-              <div className="flex items-center gap-2 text-slate-500 font-medium">
-                <Clock className="w-4 h-4 text-[#FF5722]" />
-                <span>Response Target: {settings.responseExpectation}</span>
-              </div>
-
-              <div className="flex items-center gap-2 text-slate-500 font-medium">
-                <Globe2 className="w-4 h-4 text-emerald-600" />
-                <span>Delivery Hubs: Colombo HQ · Tokyo & Europe Remote</span>
-              </div>
-            </div>
+            <address className="space-y-2 pt-2 text-sm not-italic text-slate-600">
+              <p><span className="font-semibold text-ink">Email:</span>{' '}
+                <a href="mailto:design1xconnect@gmail.com" className="break-words hover:text-cobalt transition-colors">design1xconnect@gmail.com</a>
+              </p>
+              <p><span className="font-semibold text-ink">Phone:</span>{' '}
+                <a href="tel:+94758429898" className="hover:text-cobalt transition-colors">075 8429898</a>
+              </p>
+              <p><span className="font-semibold text-ink">Location:</span> Nawala, Sri Lanka</p>
+            </address>
           </div>
 
           {/* Col 2: Navigation (2 cols) */}
@@ -205,27 +189,10 @@ export default function Footer({ settings = initialSiteSettings }: { settings?: 
               Guarantees
             </h3>
             <ul className="space-y-3 text-sm text-slate-600 font-medium">
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>100% Code Handover</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Full IP & NDA Security</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Zero Hidden Fees</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Direct Lead Contact</span>
-              </li>
-              <li className="pt-2">
-                <Link href="/admin" className="text-xs font-bold text-cobalt hover:underline">
-                  Staff Admin Login →
-                </Link>
-              </li>
+              <li>100% Code Handover</li>
+              <li>Full IP & NDA Security</li>
+              <li>Zero Hidden Fees</li>
+              <li>Direct Lead Contact</li>
             </ul>
           </div>
 
