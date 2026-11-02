@@ -33,7 +33,7 @@ export default function CategoryFilterBar({
         </p>
       </div>
 
-      <div className={styles.scroll}>
+      <div className={styles.scroll} tabIndex={0} aria-label={`${label}, swipe to see more filters`}>
         <div className={styles.options} role="group" aria-label={label}>
           {options.map((option) => (
             <button

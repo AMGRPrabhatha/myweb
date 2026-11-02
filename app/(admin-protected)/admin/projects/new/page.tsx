@@ -334,7 +334,7 @@ export default function NewProjectPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="inline-flex items-center gap-2 rounded-full bg-[#FF5722] hover:bg-[#F4511E] px-8 py-3 font-bold text-white shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer disabled:opacity-60"
+            className="inline-flex items-center gap-2 rounded-full brand-solid-button px-8 py-3 font-bold text-white shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer disabled:opacity-60"
           >
             <Save className="h-4 w-4" />
             <span>{isSubmitting ? 'Saving Project...' : 'Save & Publish Project'}</span>

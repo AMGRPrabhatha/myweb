@@ -207,7 +207,8 @@ export default function ServicesSlider() {
           </div>
 
           {/* Right Column: 4 White Liquid Glass Cards with Hover Corner Shade (Col 7) */}
-          <div className="mobile-card-rail lg:col-span-7 space-y-4 sm:space-y-4.5 animate-fadeIn">
+          <div className="lg:col-span-7">
+            <div className="mobile-card-rail space-y-4 sm:space-y-4.5 animate-fadeIn" tabIndex={0} aria-label="Service cards, swipe to see more">
             {currentCards.map((card) => (
               <div
                 key={card.number}
@@ -221,7 +222,7 @@ export default function ServicesSlider() {
                 <div className="relative z-10 space-y-2.5 flex-1 pr-2">
                   {/* Number Badge + Role / Capability Title */}
                   <div className="flex items-center gap-3">
-                    <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-orange-50 text-[#FF5722] border border-orange-200/80 group-hover:bg-[#FF5722] group-hover:text-white transition-colors flex-shrink-0">
+                    <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-lg bg-orange-50 text-[#FF5722] border border-orange-200/80 group-hover:bg-[#4b26df] group-hover:text-white transition-colors flex-shrink-0">
                       {card.number}
                     </span>
                     <h4 className="text-lg sm:text-[1.25rem] font-bold text-ink tracking-tight leading-snug group-hover:text-[#FF5722] transition-colors">
@@ -236,11 +237,12 @@ export default function ServicesSlider() {
                 </div>
 
                 {/* Subtle Interactive Arrow Indicator on Right */}
-                <div className="relative z-10 w-9 h-9 rounded-full bg-slate-100/90 border border-slate-200/80 flex items-center justify-center text-slate-400 group-hover:bg-[#FF5722] group-hover:text-white group-hover:border-[#FF5722] transition-all flex-shrink-0 shadow-2xs mt-0.5">
+                <div className="relative z-10 w-9 h-9 rounded-full bg-slate-100/90 border border-slate-200/80 flex items-center justify-center text-slate-400 group-hover:bg-[#4b26df] group-hover:text-white group-hover:border-[#4b26df] transition-all flex-shrink-0 shadow-2xs mt-0.5">
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </div>
             ))}
+            </div>
           </div>
 
         </div>

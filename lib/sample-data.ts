@@ -1,7 +1,7 @@
 import { Plan, Project, SiteSettings, BlogPost, Testimonial } from './types';
 
 export const initialSiteSettings: SiteSettings = {
-  agencyName: "Cobalt & Kinetic Digital",
+  agencyName: "Design1X",
   tagline: "Your website and social media, working together.",
   businessEmail: "hello@cobaltkinetic.example.com",
   phone: "+1 (555) 019-2834",
@@ -867,7 +867,7 @@ export const initialBlogPosts: BlogPost[] = [
     content: [
       "Speed is no longer just a technical metric — it is the single most critical factor in startup bounce rates and conversion performance. In 2026, visitors abandon mobile web pages that take more than 1.8 seconds to render.",
       "Traditional monolithic setups load hundreds of kilobytes of unoptimized JavaScript and outdated plugins before the user can even see the primary hero headline. By leveraging React Server Components in Next.js, all data queries, HTML templating, and layout composition happen instantaneously on the edge.",
-      "At Cobalt & Kinetic, our Next.js architectures consistently score 98+ on Google Lighthouse. For our e-commerce and SaaS clients, transitioning to static edge generation and streaming server rendering reduced checkout abandonment by 42% in the first quarter of deployment.",
+      "At Design1X, our Next.js architectures consistently score 98+ on Google Lighthouse. For our e-commerce and SaaS clients, transitioning to static edge generation and streaming server rendering reduced checkout abandonment by 42% in the first quarter of deployment.",
       "Furthermore, semantic HTML markup, automatic sitemap generation, and dynamic Open Graph image previews ensure your pages rank higher on search engines and stand out across LinkedIn and Twitter shares."
     ],
   },
@@ -960,7 +960,7 @@ export const initialBlogPosts: BlogPost[] = [
       "Operating across global markets requires much more than translating copy into local languages. Cultural UX expectations vary drastically between Asian, European, and local markets.",
       "In Japan, users expect dense information architecture, detailed technical specifications, and explicit verification credentials before making a purchasing decision.",
       "In Europe and the UK, minimalist typography, WCAG accessibility standards, and clean whitespace dominate user preferences.",
-      "By coordinating cross-cultural delivery from our engineering headquarters, Cobalt & Kinetic provides global scale while maintaining responsive direct communication and local precision."
+      "By coordinating cross-cultural delivery from our engineering headquarters, Design1X provides global scale while maintaining responsive direct communication and local precision."
     ],
   },
   {
@@ -995,8 +995,8 @@ export const initialTestimonials: Testimonial[] = [
     clientRole: "Head of Digital Growth",
     companyName: "NIO Mobility",
     companySubtitle: "Electric EV platform, $12M revenue, 320K users",
-    quote: "I'm really happy we're now working together. Cobalt & Kinetic's clear plan and vision made it clear from the start that they understood our business and could deliver results.",
-    fullReview: "Before working with Cobalt & Kinetic, our customer acquisition was fragmented between three different agencies. Cobalt & Kinetic rebuilt our Next.js customer portal and aligned our monthly social video campaigns. Within 90 days, our inbound pre-order reservations doubled.",
+    quote: "I'm really happy we're now working together. Design1X's clear plan and vision made it clear from the start that they understood our business and could deliver results.",
+    fullReview: "Before working with Design1X, our customer acquisition was fragmented between three different agencies. Design1X rebuilt our Next.js customer portal and aligned our monthly social video campaigns. Within 90 days, our inbound pre-order reservations doubled.",
     videoDuration: "1:45 min",
     videoThumbnail: "/images/projects/dribbble-devion.png",
     rating: 5,
@@ -1009,7 +1009,7 @@ export const initialTestimonials: Testimonial[] = [
     clientRole: "VP of Product",
     companyName: "Galaxy Platform",
     companySubtitle: "Digital asset & financial portal, UK & USA",
-    quote: "We're really happy with Cobalt & Kinetic. Way better than the other agency we worked with. Their Next.js engineering is top-tier and their delivery speed is unmatched.",
+    quote: "We're really happy with Design1X. Way better than the other agency we worked with. Their Next.js engineering is top-tier and their delivery speed is unmatched.",
     fullReview: "The speed at which the engineering pod built our custom PostgreSQL customer portal was astonishing. They solved complex state management and database security effortlessly, hitting sub-second load times globally.",
     videoDuration: "2:10 min",
     videoThumbnail: "/images/projects/dribbble-eatzy.png",
@@ -1023,7 +1023,7 @@ export const initialTestimonials: Testimonial[] = [
     clientRole: "Marketing Director",
     companyName: "Power Kiosk",
     companySubtitle: "Clean energy platform, 16K customers, Europe",
-    quote: "Thanks to Cobalt & Kinetic, we've been getting really consistent leads from our social campaigns — that's where we've seen the most success.",
+    quote: "Thanks to Design1X, we've been getting really consistent leads from our social campaigns — that's where we've seen the most success.",
     fullReview: "Their weekly social batches look gorgeous and reflect our complex B2B offering accurately. The monthly calendar is delivered 7 days early like clockwork, giving us full predictability.",
     videoDuration: "1:30 min",
     videoThumbnail: "/images/agency-team-collab.jpg",
@@ -1037,7 +1037,7 @@ export const initialTestimonials: Testimonial[] = [
     clientRole: "Chief Operating Officer",
     companyName: "Axi Capital",
     companySubtitle: "Global financial services & brokerage network",
-    quote: "Cobalt & Kinetic's work looks great. Very impressive. I like how structured their milestones are and how easy it is to communicate with the engineering lead directly.",
+    quote: "Design1X's work looks great. Very impressive. I like how structured their milestones are and how easy it is to communicate with the engineering lead directly.",
     fullReview: "No bloated meetings, no junior account reps. We got direct access to the lead developer who understood our technical constraints immediately. The project launched two weeks ahead of schedule.",
     videoDuration: "1:55 min",
     videoThumbnail: "/images/cities/london.png",
@@ -1051,7 +1051,7 @@ export const initialTestimonials: Testimonial[] = [
     clientRole: "Digital Transformation Lead",
     companyName: "Super Group",
     companySubtitle: "Consumer retail & e-commerce, 6.1M monthly users",
-    quote: "Super excited about Cobalt & Kinetic — they've been on our radar for a while and their unified web + social delivery exceeded our expectations.",
+    quote: "Super excited about Design1X — they've been on our radar for a while and their unified web + social delivery exceeded our expectations.",
     fullReview: "Running social creative alongside the new web checkout overhaul created an immediate lift in brand trust and transaction velocity. They are our go-to digital partner.",
     videoDuration: "2:20 min",
     videoThumbnail: "/images/hero-dribbble-exact.png",
@@ -1066,7 +1066,7 @@ export const initialTestimonials: Testimonial[] = [
     companyName: "Velio Supply",
     companySubtitle: "B2B automotive & logistics network, Japan & Sri Lanka",
     quote: "Eight qualified contract inquiries yesterday alone is great. Their coordinated social creative driving directly into our custom portal just works.",
-    fullReview: "As a founder, my time is limited. Cobalt & Kinetic gave me complete peace of mind. They handled everything from database architecture to short-form video editing seamlessly.",
+    fullReview: "As a founder, my time is limited. Design1X gave me complete peace of mind. They handled everything from database architecture to short-form video editing seamlessly.",
     videoDuration: "1:40 min",
     videoThumbnail: "/images/cities/japan.png",
     rating: 5,

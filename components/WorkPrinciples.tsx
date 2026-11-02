@@ -7,12 +7,11 @@ export default function WorkPrinciples() {
     <section className={styles.section} aria-labelledby="work-principles-heading">
       <div className={styles.container}>
         <div className={styles.intro}>
-          <p className={styles.eyebrow}>Behind the work</p>
           <h2 id="work-principles-heading">What shapes every project.</h2>
         </div>
         <div className={styles.grid}>
           <article className={`${styles.card} ${styles.web}`}>
-            <div className={styles.webMark} aria-hidden="true">CK</div>
+            <div className={styles.webMark} aria-hidden="true">D1X</div>
             <p className={styles.statement}>A good website makes the complex feel simple.</p>
             <div className={styles.cardFooter}>
               <div className={styles.cardIdentity}>

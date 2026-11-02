@@ -1,7 +1,6 @@
 .layout { display:grid; grid-template-columns:minmax(220px,280px) minmax(0,1fr); gap:42px; align-items:start; }
 .sidebar { position:sticky; top:122px; padding:12px 0; }
-.sidebarEyebrow,.resultsEyebrow { color:#6658d9; text-transform:uppercase; letter-spacing:.13em; font-size:11px; font-weight:800; }
-.sidebar h2 { margin:12px 0 10px; color:#17233a; font-size:clamp(24px,2.4vw,32px); line-height:1.1; letter-spacing:-.04em; font-weight:800; }
+.sidebar h2 { margin:0 0 10px; color:#17233a; font-size:clamp(24px,2.4vw,32px); line-height:1.1; letter-spacing:-.04em; font-weight:800; }
 .sidebarIntro { color:#647186; font-size:14px; line-height:1.55; }
 .categoryList { display:grid; gap:4px; margin-top:27px; }
 .categoryButton { width:100%; min-height:62px; display:flex; align-items:center; gap:12px; padding:10px 12px; border:1px solid transparent; border-radius:12px; color:#536078; text-align:left; transition:background .2s,color .2s,border-color .2s; }

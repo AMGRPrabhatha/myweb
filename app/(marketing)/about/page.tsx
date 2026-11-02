@@ -11,7 +11,7 @@ import { db } from '@/lib/db';
 export const metadata: Metadata = {
   title: 'About Us | Coordinated Digital Agency & Core Team',
   description:
-    'Learn about Cobalt & Kinetic Digital, our coordinated website and social media delivery model, and our commitment to truthful startup partnerships.',
+    'Learn about Design1X, our coordinated website and social media delivery model, and our commitment to truthful startup partnerships.',
 };
 
 export const revalidate = 60;
@@ -32,7 +32,6 @@ export default async function AboutPage() {
         <div className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-[#6A6BEB]/[0.06] blur-3xl" />
         <div className="pointer-events-none absolute -right-20 top-0 h-72 w-72 rounded-full bg-[#FF6A3D]/[0.06] blur-3xl" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-ink-600">About our company</p>
           <h2 id="about-company-heading" className="max-w-4xl text-4xl font-black leading-[1.08] tracking-tight text-ink sm:text-5xl lg:text-6xl">
             Digital work, <span className="brand-gradient-text">working together.</span>
           </h2>
@@ -77,7 +76,7 @@ export default async function AboutPage() {
             <div className="max-w-xl">
               <h3 className="text-2xl font-black tracking-tight text-ink sm:text-3xl">Our mission and values</h3>
               <p className="mt-5 text-base leading-relaxed text-ink-600 sm:text-lg">
-                Cobalt &amp; Kinetic Digital is a coordinated digital agency based in Nawala, Sri Lanka. We bring website development and social strategy together for startups and growing businesses.
+                Design1X is a coordinated digital agency based in Nawala, Sri Lanka. We bring website development and social strategy together for startups and growing businesses.
               </p>
               <p className="mt-5 text-base leading-relaxed text-ink-600 sm:text-lg">
                 Our team works with you through clear scopes, direct communication, and transparent milestones, connecting your website and content to the goals that matter to your business.

@@ -10,6 +10,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileHeaderHidden, setMobileHeaderHidden] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -17,7 +18,35 @@ export default function Navbar() {
   // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
+    setMobileHeaderHidden(false);
   }, [pathname]);
+
+  // Keep the mobile controls clear of section headings while reading down the page.
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let distance = 0;
+    const onScroll = () => {
+      const y = window.scrollY;
+      const delta = y - lastY;
+      lastY = y;
+      if (mobileMenuOpen || window.innerWidth >= 1280 || y < 96) {
+        distance = 0;
+        setMobileHeaderHidden(false);
+        return;
+      }
+      if (Math.sign(delta) !== Math.sign(distance)) distance = 0;
+      distance += delta;
+      if (distance > 16) {
+        setMobileHeaderHidden(true);
+        distance = 0;
+      } else if (distance < -16) {
+        setMobileHeaderHidden(false);
+        distance = 0;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -75,7 +104,7 @@ export default function Navbar() {
   return (
     <header className={`fixed inset-x-0 top-3 sm:top-5 ${mobileMenuOpen ? 'z-[60]' : 'z-50'} px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pointer-events-none`}>
 
-      <div className="pointer-events-auto flex items-center justify-between gap-2 xl:hidden">
+      <div className={`flex items-center justify-between gap-2 transition-[transform,opacity] duration-200 xl:hidden ${mobileHeaderHidden && !mobileMenuOpen ? 'pointer-events-none -translate-y-24 opacity-0' : 'pointer-events-auto'}`} onFocusCapture={() => setMobileHeaderHidden(false)}>
         <Link href="/" className="inline-flex min-w-0 items-center gap-2 rounded-full border border-white/90 bg-white/90 py-1.5 pl-2 pr-3.5 shadow-[0_8px_30px_rgba(15,23,42,0.12)] ring-1 ring-black/[0.05] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]">
           <div className="relative w-7 h-7 flex items-center justify-center shrink-0">
             <Image
@@ -87,7 +116,7 @@ export default function Navbar() {
               className="w-auto h-6 object-contain"
             />
           </div>
-          <span className="truncate text-[13px] font-extrabold tracking-tight text-ink sm:text-sm">Cobalt<span className="text-[#FF5722]">&amp;</span>Kinetic</span>
+          <span className="design1x-wordmark truncate text-[13px] sm:text-sm">Design<span className="design1x-wordmark-accent">1X</span></span>
         </Link>
         <button
           ref={menuButtonRef}
@@ -122,7 +151,7 @@ export default function Navbar() {
           <div className="relative w-8 h-8 flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
             <Image
               src="/images/logo.webp"
-              alt="Cobalt & Kinetic Logo"
+              alt="Design1X logo"
               width={36}
               height={32}
               priority
@@ -130,14 +159,9 @@ export default function Navbar() {
             />
           </div>
 
-          <div className="flex flex-col">
-            <span className="font-extrabold text-ink tracking-tight text-base sm:text-[17px] leading-tight">
-              Cobalt<span className="text-[#FF5722]">&</span>Kinetic
-            </span>
-            <span className="hidden sm:inline-block text-[9px] font-bold text-ink-500 uppercase tracking-widest -mt-0.5">
-              Digital Agency
-            </span>
-          </div>
+          <span className="design1x-wordmark text-base sm:text-[17px] leading-tight">
+            Design<span className="design1x-wordmark-accent">1X</span>
+          </span>
         </Link>
 
         {/* ========================================================= */}
@@ -177,7 +201,7 @@ export default function Navbar() {
           {/* Orange Pill CTA Button */}
           <Link
             href="/contact"
-            className="hidden sm:inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 rounded-full bg-[#FF5722] hover:bg-[#F24B18] text-white font-bold text-xs sm:text-sm tracking-tight transition-all shadow-sm shadow-orange-500/20 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] focus-visible:ring-offset-2"
+            className="brand-solid-button hidden sm:inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 rounded-full font-bold text-xs sm:text-sm tracking-tight transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6556ed] focus-visible:ring-offset-2"
           >
             <span>Start a Project</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -210,13 +234,13 @@ export default function Navbar() {
                 <div className="relative w-9 h-9 flex items-center justify-center shrink-0">
                   <Image
                     src="/images/logo.webp"
-                    alt="Cobalt & Kinetic Logo"
+                    alt="Design1X logo"
                     width={40}
                     height={36}
                     className="w-auto h-8 object-contain"
                   />
                 </div>
-                <span className="truncate text-base font-extrabold tracking-tight text-ink sm:text-lg">Cobalt<span className="text-[#FF5722]">&amp;</span>Kinetic</span>
+                <span className="design1x-wordmark truncate text-base sm:text-lg">Design<span className="design1x-wordmark-accent">1X</span></span>
               </Link>
               <button
                 ref={closeButtonRef}
@@ -254,8 +278,7 @@ export default function Navbar() {
               <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="inline-flex min-h-11 items-center gap-2 font-bold text-[#FF5722] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]">
                 Start a Project <ArrowRight className="h-4 w-4" />
               </Link>
-              <p className="mt-3 text-base font-extrabold text-ink">Cobalt &amp; Kinetic</p>
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Digital Agency</p>
+              <p className="design1x-wordmark mt-3 text-base">Design<span className="design1x-wordmark-accent">1X</span></p>
             </div>
           </div>
         </div>

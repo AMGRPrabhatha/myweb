@@ -26,12 +26,12 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
   const post = await db.getBlogPostBySlug(params.slug);
   if (!post) {
     return {
-      title: 'Article Not Found | Cobalt & Kinetic Digital',
+      title: 'Article Not Found | Design1X',
     };
   }
 
   return {
-    title: `${post.title} | Cobalt & Kinetic Digital`,
+    title: `${post.title} | Design1X`,
     description: post.excerpt,
   };
 }

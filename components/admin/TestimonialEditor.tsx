@@ -102,7 +102,7 @@ export default function TestimonialEditor({
     highlightKpi: highlightKpi || '+150% Performance KPI',
     quote:
       quote ||
-      'Cobalt & Kinetic delivered outstanding engineering and creative strategy for our platform.',
+      'Design1X delivered outstanding engineering and creative strategy for our platform.',
     fullReview: fullReview || quote,
     rating: rating,
     videoThumbnail: imageUrl,
@@ -182,7 +182,7 @@ export default function TestimonialEditor({
             type="button"
             onClick={handleSave}
             disabled={isPending}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#FF5722] hover:bg-[#F4511E] text-white font-bold text-xs tracking-tight shadow-sm transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl brand-solid-button font-bold text-xs tracking-tight shadow-sm transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
           >
             {isPending ? (
               <>
@@ -338,7 +338,7 @@ export default function TestimonialEditor({
                 rows={3}
                 value={quote}
                 onChange={(e) => setQuote(e.target.value)}
-                placeholder="I'm really happy we're now working together. Cobalt & Kinetic's clear plan made it clear from the start that they understood our business and could deliver results."
+                placeholder="I'm really happy we're now working together. Design1X's clear plan made it clear from the start that they understood our business and could deliver results."
                 className="w-full p-3.5 rounded-xl border border-warm-300 text-xs sm:text-sm text-ink focus:outline-none focus:border-[#FF5722] leading-relaxed"
               />
             </div>
@@ -376,7 +376,7 @@ export default function TestimonialEditor({
                     onClick={() => setImageUrl(preset.url)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                       imageUrl === preset.url
-                        ? 'bg-[#FF5722] text-white border-[#FF5722]'
+                        ? 'brand-solid-button border-[#6556ed]'
                         : 'bg-warm-50 hover:bg-warm-100 text-ink-700 border-warm-300'
                     }`}
                   >

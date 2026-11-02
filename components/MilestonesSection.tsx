@@ -1,5 +1,6 @@
 'use client';
 
+
 import React from 'react';
 import { Trophy, HeartHandshake, Rocket, Globe2, Sparkles } from 'lucide-react';
 

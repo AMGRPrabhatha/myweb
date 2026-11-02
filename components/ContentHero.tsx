@@ -7,7 +7,7 @@ const content = {
   testimonials: {
     heading: ['Client stories.', 'In their own words.'],
     lead: 'The people. The projects. The experience.',
-    description: 'Explore feedback on our website development, social media and combined delivery. Get a closer look at the experience of working with Cobalt & Kinetic.',
+    description: 'Explore feedback on our website development, social media and combined delivery. Get a closer look at the experience of working with Design1X.',
     primary: 'Read the reviews',
     target: '#client-reviews',
     secondary: 'Explore our work',

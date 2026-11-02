@@ -4,7 +4,7 @@ import TypewriterText from '@/components/TypewriterText';
 
 export const metadata: Metadata = {
   title: 'Privacy Notice',
-  description: 'Understand how Cobalt & Kinetic Digital collects, stores, and protects your information.',
+  description: 'Understand how Design1X collects, stores, and protects your information.',
 };
 
 export default function PrivacyPage() {

@@ -6,7 +6,7 @@
 .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 24px; margin-top: 30px; }
 .primary, .secondary { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 46px; font-size: 13px; font-weight: 700; }
 .primary { padding: 10px 20px; border-radius: 999px; }
-.primary svg { color: #ff5722; }
+.primary svg { color: #5635e9; }
 .secondary { color: #6257d5; }
 .secondary:hover { text-decoration: underline; text-underline-offset: 5px; }
 .visual { position: relative; min-width: 0; padding-top: 32px; }
@@ -50,6 +50,6 @@
 .hero a:focus-visible { outline: 2px solid #ff5722; outline-offset: 4px; }
 @media (min-width: 1001px) and (max-height: 760px) { .container { padding-top: var(--marketing-hero-top-space); padding-bottom: 90px; gap: 48px; } .heading { font-size: clamp(38px, 3.7vw, 52px); } .description { font-size: 15px; margin-top: 24px; } .board { padding: 24px; } .service { padding: 17px 0; } }
 @media (min-width: 768px) and (max-width: 1000px) { .container { padding: var(--marketing-hero-top-space) 32px 120px; gap: 32px; } .heading { font-size: 42px; } .description { font-size: 14px; } .board { padding: 22px; } .boardHeader h2 { font-size: 19px; } .service { grid-template-columns: 34px minmax(0, 1fr); gap: 10px; } .serviceArrow { display: none; } .icon { width: 34px; height: 38px; } .tiles { gap: 10px; margin-right: 12px; } .tiles > span { width: 50px; height: 56px; } }
-@media (max-width: 767px) { .hero { min-height: auto; } .container { grid-template-columns: 1fr; gap: 38px; padding: var(--marketing-hero-top-space) 20px 90px; } .heading { font-size: clamp(34px, 8.5vw, 50px); } .description { max-width: 520px; font-size: 14px; margin-top: 22px; } .actions { margin-top: 24px; gap: 12px 20px; } .primary, .secondary { font-size: 12px; } .visual { padding-top: 28px; } .board { padding: 24px 20px; } .tiles { gap: 12px; margin-right: 18px; } .tiles > span { width: 52px; height: 56px; } .service { gap: 12px; } .caption { font-size: 10px; } .guides { inset-inline: 20px; background-image: none; } .band { right: -35%; bottom: -105px; width: 120%; height: 260px; transform: rotate(-12deg); } }
+@media (max-width: 767px) { .hero { min-height: var(--marketing-mobile-hero-height); } .container { grid-template-columns: 1fr; gap: 38px; padding: var(--marketing-hero-top-space) 20px 90px; } .heading { font-size: clamp(34px, 8.5vw, 50px); } .description { max-width: 520px; font-size: 14px; margin-top: 22px; } .actions { margin-top: 24px; gap: 12px 20px; } .primary, .secondary { font-size: 12px; } .visual { padding-top: 28px; } .board { padding: 24px 20px; } .tiles { gap: 12px; margin-right: 18px; } .tiles > span { width: 52px; height: 56px; } .service { gap: 12px; } .caption { font-size: 10px; } .guides { inset-inline: 20px; background-image: none; } .band { right: -35%; bottom: -105px; width: 120%; height: 260px; transform: rotate(-12deg); } }
 @media (max-width: 480px) { .container { gap: 26px; } .visual { width: 100%; padding-top: 30px; } .board { padding: 18px 16px; } .boardHeader h2 { font-size: 18px; } .tiles { gap: 8px; margin-right: 10px; } .tiles > span { width: 42px; height: 46px; } .workflow { font-size: 9px; } }
 @media (prefers-reduced-motion: reduce) { .serviceArrow { transition: none; } .service:hover .serviceArrow { transform: none; } .tiles > span { animation: none; } }

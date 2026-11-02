@@ -1,5 +1,6 @@
 'use client';
 
+
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -106,7 +107,7 @@ export default function SelectedWork({ projects = [] }: SelectedWorkProps) {
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
           
           {/* Category Filter Pills (Scrollable on small screens) */}
-          <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto pb-1 scrollbar-none flex-1">
+          <div className="flex items-center gap-2 sm:gap-2.5 overflow-x-auto pb-1 scrollbar-none flex-1" tabIndex={0} aria-label="Project categories, swipe to see more">
             {categories.map((cat) => {
               const isActive = activeCategory === cat;
               return (
@@ -207,7 +208,7 @@ export default function SelectedWork({ projects = [] }: SelectedWorkProps) {
                 </div>
 
                 {/* Circular Arrow Button (matching Dribbble screenshot) */}
-                <div className="flex-shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-warm-300 text-ink flex items-center justify-center group-hover:bg-[#FF5722] group-hover:text-white group-hover:border-[#FF5722] transition-all duration-300 shadow-sm">
+                <div className="flex-shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-warm-300 text-ink flex items-center justify-center group-hover:bg-[#4b26df] group-hover:text-white group-hover:border-[#4b26df] transition-all duration-300 shadow-sm">
                   <ArrowUpRight className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
                 </div>
               </div>

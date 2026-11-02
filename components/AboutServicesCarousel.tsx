@@ -328,7 +328,7 @@ export default function AboutServicesCarousel() {
             type="button"
             onClick={prevSlide}
             aria-label="Previous service"
-            className="absolute left-2 sm:-left-6 lg:left-6 z-20 w-12 h-12 rounded-full bg-white border border-slate-200/90 text-ink flex items-center justify-center hover:bg-[#FF5722] hover:text-white hover:border-[#FF5722] transition-all shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
+            className="absolute left-2 sm:-left-6 lg:left-6 z-20 w-12 h-12 rounded-full bg-white border border-slate-200/90 text-ink flex items-center justify-center hover:bg-[#4b26df] hover:text-white hover:border-[#4b26df] transition-all shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
@@ -338,7 +338,7 @@ export default function AboutServicesCarousel() {
             type="button"
             onClick={nextSlide}
             aria-label="Next service"
-            className="absolute right-2 sm:-right-6 lg:right-6 z-20 w-12 h-12 rounded-full bg-white border border-slate-200/90 text-ink flex items-center justify-center hover:bg-[#FF5722] hover:text-white hover:border-[#FF5722] transition-all shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
+            className="absolute right-2 sm:-right-6 lg:right-6 z-20 w-12 h-12 rounded-full bg-white border border-slate-200/90 text-ink flex items-center justify-center hover:bg-[#4b26df] hover:text-white hover:border-[#4b26df] transition-all shadow-xl hover:scale-105 active:scale-95 cursor-pointer"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

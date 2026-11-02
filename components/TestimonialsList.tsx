@@ -30,7 +30,7 @@ export default function TestimonialsList({ initialTestimonials }: TestimonialsLi
         resultNoun="review"
       />
 
-      <div className={styles.gallery}>
+      <div className={styles.gallery} tabIndex={0} aria-label="Client reviews, swipe to see more">
         {filteredTestimonials.map((testimonial) => (
           <TestimonialCard key={testimonial.id} testimonial={testimonial} />
         ))}

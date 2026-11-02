@@ -7,9 +7,9 @@ import { db } from '@/lib/db';
 import { Plus, Globe2, Mail, MapPin, MessageSquare, ArrowUpRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Start a Project | Cobalt & Kinetic Digital',
+  title: 'Start a Project | Design1X',
   description:
-    'Book a discovery call with Cobalt & Kinetic to discuss your website and marketing goals.',
+    'Book a discovery call with Design1X to discuss your website and marketing goals.',
 };
 
 export default async function ContactPage() {
@@ -61,7 +61,7 @@ export default async function ContactPage() {
                 </h1>
                 <h2 className="mt-8 text-xl sm:text-2xl font-semibold text-ink">Get a look at:</h2>
                 <ul className="mt-5 space-y-4 pl-6 list-disc text-base sm:text-lg leading-relaxed text-slate-600 marker:text-slate-400">
-                  <li>How Cobalt &amp; Kinetic works with your team;</li>
+                  <li>How Design1X works with your team;</li>
                   <li>How a coordinated website and social strategy can support your goals;</li>
                   <li>How we plan scope, timelines, and deliverables;</li>
                   <li>Which service plan is most suitable for your needs.</li>
@@ -147,7 +147,7 @@ export default async function ContactPage() {
 
                 {/* Office Location - Nawala, Sri Lanka */}
                 <div className="group flex items-start gap-4 p-4.5 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-orange-300 hover:shadow-md hover:shadow-orange-500/10 transition-all duration-300">
-                  <div className="w-11 h-11 rounded-xl bg-orange-50 border border-orange-200/80 flex items-center justify-center flex-shrink-0 group-hover:bg-[#FF5722] group-hover:border-[#FF5722] transition-all duration-300">
+                  <div className="w-11 h-11 rounded-xl bg-orange-50 border border-orange-200/80 flex items-center justify-center flex-shrink-0 group-hover:bg-[#4b26df] group-hover:border-[#4b26df] transition-all duration-300">
                     <MapPin className="w-5 h-5 text-[#FF5722] group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div className="space-y-0.5">
@@ -200,7 +200,7 @@ export default async function ContactPage() {
                 {/* Google Maps Street View Frame */}
                 <div className="relative w-full h-[360px] sm:h-[420px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner bg-slate-100">
                   <iframe
-                    title="Cobalt & Kinetic Digital Headquarters - Nawala, Sri Lanka"
+                    title="Design1X Headquarters - Nawala, Sri Lanka"
                     src="https://maps.google.com/maps?q=Nawala%2C%20Sri%20Lanka&t=m&z=15&output=embed&iwloc=near"
                     className="w-full h-full border-0 filter contrast-[1.02] saturate-[1.1]"
                     loading="lazy"

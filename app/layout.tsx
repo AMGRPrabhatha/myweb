@@ -4,8 +4,8 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://cobaltkinetic.example.com'),
   title: {
-    default: 'Cobalt & Kinetic Digital | Website Development & Social Media Management',
-    template: '%s | Cobalt & Kinetic Digital',
+    default: 'Design1X | Website Development & Social Media Management',
+    template: '%s | Design1X',
   },
   description:
     'We build responsive, functional websites with Next.js and Supabase, and manage the ongoing social media content that keeps startups active across Instagram, Facebook, TikTok, and LinkedIn.',
@@ -18,28 +18,28 @@ export const metadata: Metadata = {
     'short-form video editing',
     'Supabase web application',
   ],
-  authors: [{ name: 'Cobalt & Kinetic Team' }],
-  creator: 'Cobalt & Kinetic Digital',
+  authors: [{ name: 'Design1X Team' }],
+  creator: 'Design1X',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://cobaltkinetic.example.com',
-    title: 'Cobalt & Kinetic Digital | Web & Social Media Agency',
+    title: 'Design1X | Web & Social Media Agency',
     description:
       'Your website and social media, working together. Responsive web applications and coordinated monthly content management for startups.',
-    siteName: 'Cobalt & Kinetic Digital',
+    siteName: 'Design1X',
     images: [
       {
         url: '/images/projects/aura-cover.svg',
         width: 1200,
         height: 630,
-        alt: 'Cobalt & Kinetic Digital Agency Preview',
+        alt: 'Design1X Agency Preview',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Cobalt & Kinetic Digital | Web & Social Media Agency',
+    title: 'Design1X | Web & Social Media Agency',
     description:
       'Responsive web applications and coordinated monthly content management for startups.',
     images: ['/images/projects/aura-cover.svg'],

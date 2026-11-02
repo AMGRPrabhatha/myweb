@@ -48,7 +48,7 @@
 .packageLinks svg { flex-shrink: 0; color: #6257d5; }
 .packageLinks a:hover { color: #6257d5; }
 .primary { align-self: flex-start; margin-top: 24px; }
-.primary svg { flex-shrink: 0; color: #ff5722; }
+.primary svg { flex-shrink: 0; color: #5635e9; }
 
 @keyframes packageCardArrive {
   from { opacity: 0; transform: translate3d(70px, 0, 0) scale(.97); }
@@ -67,7 +67,7 @@
 }
 
 @media (max-width: 600px) {
-  .hero { min-height: auto; }
+  .hero { min-height: var(--marketing-mobile-hero-height); }
   .container { gap: 34px; padding: var(--marketing-hero-top-space) 20px 48px; }
   .heading { font-size: clamp(35px, 8.7vw, 50px); }
   .lead { margin-top: 22px; font-size: clamp(23px, 5.8vw, 31px); }

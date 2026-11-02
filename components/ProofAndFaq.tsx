@@ -81,10 +81,6 @@ export default function ProofAndFaq() {
     );
   };
 
-  // Split FAQs into two balanced columns (left & right)
-  const leftFaqs = faqs.filter((_, idx) => idx % 2 === 0);
-  const rightFaqs = faqs.filter((_, idx) => idx % 2 !== 0);
-
   const renderFaqCard = (faq: FaqItem) => {
     const isOpen = openIds.includes(faq.id);
 
@@ -168,15 +164,9 @@ export default function ProofAndFaq() {
         {/* ========================================================= */}
         {/* 2. TWO-COLUMN ACCORDION GRID (Ninja Promo Style)          */}
         {/* ========================================================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-start">
-          {/* Left Column */}
-          <div className="space-y-4 sm:space-y-5">
-            {leftFaqs.map((faq) => renderFaqCard(faq))}
-          </div>
-
-          {/* Right Column */}
-          <div className="space-y-4 sm:space-y-5">
-            {rightFaqs.map((faq) => renderFaqCard(faq))}
+        <div>
+          <div className="mobile-card-rail mobile-faq-rail grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-start" tabIndex={0} aria-label="Frequently asked questions, swipe to see more">
+            {faqs.map((faq) => renderFaqCard(faq))}
           </div>
         </div>
 

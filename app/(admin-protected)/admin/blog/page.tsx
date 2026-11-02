@@ -44,7 +44,7 @@ export default async function AdminBlogPage() {
 
           <Link
             href="/admin/blog/new"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#FF5722] hover:bg-[#F4511E] text-white font-bold text-xs shadow-sm transition-all active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl brand-solid-button font-bold text-xs shadow-sm transition-all active:scale-[0.98]"
           >
             <Plus className="w-4 h-4" />
             <span>Write New Article</span>

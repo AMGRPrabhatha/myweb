@@ -1,5 +1,6 @@
 'use client';
 
+
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import styles from './ServicesPreview.module.css';
@@ -168,7 +169,7 @@ export default function ServicesPreview() {
                     <Icon className="w-5 h-5" />
                   </div>
 
-                  <div className="w-8 h-8 rounded-full bg-slate-100/80 border border-slate-200/60 flex items-center justify-center text-slate-500 group-hover:bg-[#FF5722] group-hover:text-white group-hover:border-[#FF5722] transition-all shadow-2xs">
+                  <div className="w-8 h-8 rounded-full bg-slate-100/80 border border-slate-200/60 flex items-center justify-center text-slate-500 group-hover:bg-[#4b26df] group-hover:text-white group-hover:border-[#4b26df] transition-all shadow-2xs">
                     <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                 </div>

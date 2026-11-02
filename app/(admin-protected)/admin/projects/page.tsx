@@ -22,7 +22,7 @@ export default async function AdminProjectsPage() {
         </div>
         <Link
           href="/admin/projects/new"
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FF5722] hover:bg-[#F4511E] px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all shrink-0 cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 rounded-full brand-solid-button px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-[1.02] active:scale-[0.98] transition-all shrink-0 cursor-pointer"
         >
           <Plus className="h-4 w-4 stroke-[3]" />
           <span>Add New Project</span>
@@ -40,7 +40,7 @@ export default async function AdminProjectsPage() {
           </p>
           <Link
             href="/admin/projects/new"
-            className="inline-flex items-center gap-2 rounded-full bg-[#FF5722] hover:bg-[#F4511E] px-6 py-2.5 text-xs font-bold text-white shadow-sm"
+            className="inline-flex items-center gap-2 rounded-full brand-solid-button px-6 py-2.5 text-xs font-bold text-white shadow-sm"
           >
             <Plus className="w-4 h-4" /> Create First Project
           </Link>

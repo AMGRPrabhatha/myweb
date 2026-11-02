@@ -6,7 +6,7 @@ import TestimonialsList from '@/components/TestimonialsList';
 import ResultsMetrics from '@/components/ResultsMetrics';
 
 export const metadata: Metadata = {
-  title: 'Client Testimonials & Video Stories | Cobalt & Kinetic Digital',
+  title: 'Client Testimonials & Video Stories | Design1X',
   description:
     'Read real client stories and watch verified testimonials from founders and executives across Japan, Europe, and Sri Lanka.',
 };

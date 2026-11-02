@@ -41,10 +41,9 @@ export default function PlanTabs({ plans, initialCategory = 'website' }: { plans
   return (
     <div className={styles.layout}>
       <aside className={styles.sidebar} aria-label="Package categories">
-        <p className={styles.sidebarEyebrow}>Explore packages</p>
         <h2>Find the right starting point.</h2>
         <p className={styles.sidebarIntro}>Choose a service to see its scope, price and what is included.</p>
-        <nav className={styles.categoryList} aria-label="Package categories">
+        <nav className={styles.categoryList} aria-label="Package categories" tabIndex={0}>
           {categories.map(category => {
             const Icon = category.icon;
             const selected = activeCategory === category.id;
@@ -73,14 +72,13 @@ export default function PlanTabs({ plans, initialCategory = 'website' }: { plans
       <div className={styles.results}>
         <div className={styles.resultsHeader}>
           <div>
-            <p className={styles.resultsEyebrow}>Plans & pricing</p>
             <h2>{active.label}</h2>
             <p>{active.description}. Clear deliverables and ownership from day one.</p>
           </div>
           <span className={styles.resultsCount}>{visiblePlans.length} {visiblePlans.length === 1 ? 'package' : 'packages'}</span>
         </div>
 
-        <div className={styles.planList}>
+        <div className={styles.planList} tabIndex={0} aria-label="Available packages, swipe to see more">
           {visiblePlans.map(plan => {
             const bundle = plan.category === 'combined' || Boolean(plan.hasSocialBundle);
             const price = priceFor(plan);

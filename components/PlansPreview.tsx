@@ -1,5 +1,6 @@
 'use client';
 
+
 import { useState } from 'react';
 import Link from 'next/link';
 import { Check, ArrowRight, Sparkles, Gift, Globe, Smartphone, Share2, Layers } from 'lucide-react';
@@ -599,7 +600,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                     className="group/btn flex items-center justify-between w-full py-3 px-4 rounded-full brand-gradient-button text-ink text-xs font-bold tracking-tight transition-all duration-300 shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/40"
                   >
                     <span>Book a call</span>
-                    <span className="w-6 h-6 rounded-full bg-white text-[#FF5722] font-black flex items-center justify-center text-xs shadow-sm transition-transform duration-300 group-hover/btn:translate-x-0.5">
+                    <span className="w-6 h-6 rounded-full bg-white text-[#5635e9] font-black flex items-center justify-center text-xs shadow-sm transition-transform duration-300 group-hover/btn:translate-x-0.5">
                       →
                     </span>
                   </Link>

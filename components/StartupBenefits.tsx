@@ -107,7 +107,7 @@ export default function StartupBenefits() {
         {/* ========================================================= */}
         {/* 2. NUMBERED TIMELINE ROWS (Inspired by Ninja Promo UI)    */}
         {/* ========================================================= */}
-        <div className="border-t border-warm-300 divide-y divide-warm-200">
+        <div className="mobile-card-rail mobile-benefit-rail border-t border-warm-300 divide-y divide-warm-200" tabIndex={0} aria-label="Startup benefits, swipe to see more">
           {advantages.map((item, index) => {
             const Icon = item.icon;
             const isHovered = hoveredIndex === index;

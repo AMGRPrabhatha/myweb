@@ -22,7 +22,6 @@ export default function BlogFeatureCarousel({ posts }: { posts: BlogPost[] }) {
     <section className={styles.section} aria-labelledby="featured-articles-heading" aria-roledescription="carousel">
       <div className={styles.header}>
         <div>
-          <p className={styles.eyebrow}>From the journal</p>
           <h2 id="featured-articles-heading">Ideas worth exploring.<span> The latest from our team.</span></h2>
         </div>
         {posts.length > 1 && <div className={styles.controls}>

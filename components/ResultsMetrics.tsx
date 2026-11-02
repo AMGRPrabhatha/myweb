@@ -25,7 +25,26 @@ const metrics = [
 
 export default function ResultsMetrics() {
   const sectionRef = useRef<HTMLElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
   const [progress, setProgress] = useState(0);
+  const [activeMetric, setActiveMetric] = useState(0);
+
+  const scrollToMetric = (index: number) => {
+    const rail = railRef.current;
+    const card = rail?.children[index] as HTMLElement | undefined;
+    if (!rail || !card) return;
+    rail.scrollTo({ left: card.offsetLeft, behavior: 'smooth' });
+  };
+
+  const updateActiveMetric = () => {
+    const rail = railRef.current;
+    if (!rail) return;
+    const cards = Array.from(rail.children) as HTMLElement[];
+    const nearest = cards.reduce((best, card, index) =>
+      Math.abs(card.offsetLeft - rail.scrollLeft) <
+      Math.abs(cards[best].offsetLeft - rail.scrollLeft) ? index : best, 0);
+    setActiveMetric(nearest);
+  };
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -73,15 +92,14 @@ export default function ResultsMetrics() {
       className="relative isolate overflow-hidden bg-white py-12 sm:py-16 lg:py-20"
     >
       <div className="relative z-10">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#6E61CF]">The impact</p>
-        <h2 id="results-heading" className="mt-4 max-w-3xl text-3xl font-black tracking-tight text-ink sm:text-4xl lg:text-5xl">
+        <h2 id="results-heading" className="max-w-3xl text-3xl font-black tracking-tight text-ink sm:text-4xl lg:text-5xl">
           Our work, in three numbers.
         </h2>
       </div>
 
       <svg
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-28 h-[280px] w-full opacity-70 sm:top-16 sm:h-[390px]"
+        className="pointer-events-none relative mt-8 block h-32 w-full opacity-70 sm:absolute sm:inset-x-0 sm:top-16 sm:mt-0 sm:h-[390px]"
         viewBox="0 0 1200 390"
         preserveAspectRatio="none"
       >
@@ -104,15 +122,21 @@ export default function ResultsMetrics() {
         ))}
       </svg>
 
-      <div className="relative z-10 mt-32 flex snap-x snap-mandatory gap-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mt-44 lg:mt-48 lg:grid lg:grid-cols-3 lg:overflow-visible">
+      <div
+        ref={railRef}
+        className="relative z-10 mt-2 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-5 [scrollbar-color:#8B77E8_#E9EAF5] [scrollbar-width:thin] sm:mt-44 sm:grid sm:grid-cols-2 sm:gap-0 sm:overflow-visible sm:pb-0 lg:mt-48 lg:grid-cols-3"
+        tabIndex={0}
+        aria-label="Results metrics"
+        onScroll={updateActiveMetric}
+      >
         {metrics.map((metric, index) => (
           <article
             key={metric.label}
-            className="flex min-w-[82%] snap-start flex-col border-r border-[#E6EAF2] bg-white/90 px-5 py-7 last:border-r-0 sm:min-w-[48%] sm:px-8 sm:py-9 lg:min-w-0 lg:px-10"
+            className="flex min-w-[82%] max-w-[82%] shrink-0 snap-start flex-col rounded-2xl border border-[#E8E5F4] bg-gradient-to-br from-white to-[#F8F7FF] p-5 shadow-[0_12px_32px_rgba(71,55,138,0.07)] sm:min-w-0 sm:max-w-none sm:rounded-none sm:border-0 sm:bg-white/90 sm:px-8 sm:py-9 sm:shadow-none lg:border-r lg:border-[#E6EAF2] lg:px-10 lg:last:border-r-0"
           >
             <span className="text-xs font-bold tracking-[0.18em] text-[#8B94A8]">0{index + 1} / 03</span>
             <div
-              className={`mt-8 whitespace-nowrap bg-gradient-to-r from-[#ED836C] via-[#AD5ECF] to-[#756BEC] bg-clip-text text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-none tracking-[-0.055em] text-transparent ${index === 1 ? 'text-[clamp(2rem,3.5vw,3.4rem)]' : ''}`}
+              className={`mt-8 bg-gradient-to-r from-[#ED836C] via-[#AD5ECF] to-[#756BEC] bg-clip-text text-[clamp(2.5rem,8vw,4.5rem)] font-semibold leading-tight tracking-[-0.055em] text-transparent ${index === 1 ? 'text-[clamp(2rem,6.5vw,3.4rem)]' : ''}`}
               aria-label={`${metric.value}${metric.suffix}`}
             >
               <span aria-hidden="true">{Math.round(metric.value * progress)}{metric.suffix}</span>
@@ -120,6 +144,18 @@ export default function ResultsMetrics() {
             <h3 className="mt-5 text-lg font-bold text-ink sm:text-xl">{metric.label}</h3>
             <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-500 sm:text-base">{metric.detail}</p>
           </article>
+        ))}
+      </div>
+      <div className="mt-4 flex justify-center gap-2 sm:hidden" aria-label="Select a result">
+        {metrics.map((metric, index) => (
+          <button
+            key={metric.label}
+            type="button"
+            onClick={() => scrollToMetric(index)}
+            aria-label={`Show ${metric.label}`}
+            aria-current={activeMetric === index ? 'true' : undefined}
+            className={`h-2 rounded-full transition-[width,background-color] duration-300 ${activeMetric === index ? 'w-8 bg-[#7764DE]' : 'w-2 bg-[#D8D2EF]'}`}
+          />
         ))}
       </div>
     </section>

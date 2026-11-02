@@ -268,7 +268,7 @@ export default function BlogEditor({ initialPost, isNew = false }: BlogEditorPro
             type="button"
             onClick={handleSave}
             disabled={isPending}
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl bg-[#FF5722] hover:bg-[#F4511E] text-white font-bold text-xs tracking-tight shadow-sm transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
+            className="inline-flex items-center gap-2 px-5 py-2 rounded-xl brand-solid-button font-bold text-xs tracking-tight shadow-sm transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
           >
             {isPending ? (
               <>
@@ -405,7 +405,7 @@ export default function BlogEditor({ initialPost, isNew = false }: BlogEditorPro
                       onClick={() => setCoverImage(preset.url)}
                       className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                         coverImage === preset.url
-                          ? 'bg-[#FF5722] text-white border-[#FF5722]'
+                          ? 'brand-solid-button border-[#6556ed]'
                           : 'bg-warm-50 hover:bg-warm-100 text-ink-700 border-warm-300'
                       }`}
                     >
@@ -711,7 +711,7 @@ export default function BlogEditor({ initialPost, isNew = false }: BlogEditorPro
                       ))}
                     </div>
 
-                    <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#FF5722] text-white font-bold text-xs tracking-tight shadow-md">
+                    <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full brand-solid-button font-bold text-xs tracking-tight shadow-md">
                       <span>Start a Project with Us</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </div>

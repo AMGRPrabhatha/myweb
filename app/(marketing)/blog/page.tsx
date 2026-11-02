@@ -6,7 +6,7 @@ import BlogList from '@/components/BlogList';
 import BlogFeatureCarousel from '@/components/BlogFeatureCarousel';
 
 export const metadata: Metadata = {
-  title: 'Blog & Digital Insights | Cobalt & Kinetic Digital',
+  title: 'Blog & Digital Insights | Design1X',
   description:
     'Read actionable insights, Next.js engineering playbooks, social media growth strategies, and cross-border digital delivery case studies.',
 };

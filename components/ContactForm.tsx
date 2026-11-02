@@ -267,7 +267,7 @@ export default function ContactForm({ plans = [] }: ContactFormProps) {
 
       {/* 7. Privacy Disclaimer (Exact NinjaPromo Text) */}
       <p className="text-[11px] sm:text-xs text-slate-400 text-center leading-relaxed pt-1">
-        By clicking, you agree to receive communications from Cobalt &amp; Kinetic in accordance with our{' '}
+        By clicking, you agree to receive communications from Design1X in accordance with our{' '}
         <Link href="/privacy" className="underline hover:text-ink font-medium">
           Privacy Policy
         </Link>
