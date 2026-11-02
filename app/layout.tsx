@@ -44,6 +44,11 @@ export const metadata: Metadata = {
       'Responsive web applications and coordinated monthly content management for startups.',
     images: ['/images/projects/aura-cover.svg'],
   },
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
   robots: {
     index: true,
     follow: true,

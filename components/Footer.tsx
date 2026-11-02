@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   ArrowRight,
   ArrowUp,
@@ -81,8 +82,14 @@ export default function Footer({ settings = initialSiteSettings }: { settings?: 
               href="/"
               className="inline-flex items-center gap-3 group focus-visible:outline-none"
             >
-              <div className="w-10 h-10 rounded-2xl bg-[#FF5722] flex items-center justify-center text-white font-black text-lg shadow-sm transition-transform group-hover:scale-105">
-                CK
+              <div className="relative w-10 h-10 flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
+                <Image
+                  src="/images/logo.webp"
+                  alt="Cobalt & Kinetic Logo"
+                  width={44}
+                  height={40}
+                  className="w-auto h-9 object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-extrabold text-ink tracking-tight text-xl sm:text-2xl leading-none">

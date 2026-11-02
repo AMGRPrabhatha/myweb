@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
@@ -75,8 +76,17 @@ export default function Navbar() {
     <header className={`fixed inset-x-0 top-3 sm:top-5 ${mobileMenuOpen ? 'z-[60]' : 'z-50'} px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pointer-events-none`}>
 
       <div className="pointer-events-auto flex items-center justify-between gap-2 xl:hidden">
-        <Link href="/" className="inline-flex min-w-0 items-center gap-2 rounded-full border border-white/90 bg-white/90 py-1.5 pl-1.5 pr-3 shadow-[0_8px_30px_rgba(15,23,42,0.12)] ring-1 ring-black/[0.05] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]">
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#FF5722] text-xs font-black text-white">CK</span>
+        <Link href="/" className="inline-flex min-w-0 items-center gap-2 rounded-full border border-white/90 bg-white/90 py-1.5 pl-2 pr-3.5 shadow-[0_8px_30px_rgba(15,23,42,0.12)] ring-1 ring-black/[0.05] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]">
+          <div className="relative w-7 h-7 flex items-center justify-center shrink-0">
+            <Image
+              src="/images/logo.webp"
+              alt="Logo"
+              width={32}
+              height={28}
+              priority
+              className="w-auto h-6 object-contain"
+            />
+          </div>
           <span className="truncate text-[13px] font-extrabold tracking-tight text-ink sm:text-sm">Cobalt<span className="text-[#FF5722]">&amp;</span>Kinetic</span>
         </Link>
         <button
@@ -108,9 +118,16 @@ export default function Navbar() {
           href="/"
           className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] rounded-full p-1 pl-1.5"
         >
-          {/* Circular Monogram Badge */}
-          <div className="w-8 h-8 rounded-full bg-[#FF5722] flex items-center justify-center text-white font-black text-sm shadow-sm transition-transform group-hover:scale-105">
-            CK
+          {/* Logo Mark */}
+          <div className="relative w-8 h-8 flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
+            <Image
+              src="/images/logo.webp"
+              alt="Cobalt & Kinetic Logo"
+              width={36}
+              height={32}
+              priority
+              className="w-auto h-7 object-contain"
+            />
           </div>
 
           <div className="flex flex-col">
@@ -190,7 +207,15 @@ export default function Navbar() {
           >
             <div className="flex items-center justify-between gap-4">
               <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex min-w-0 items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#FF5722] text-sm font-black text-white">CK</span>
+                <div className="relative w-9 h-9 flex items-center justify-center shrink-0">
+                  <Image
+                    src="/images/logo.webp"
+                    alt="Cobalt & Kinetic Logo"
+                    width={40}
+                    height={36}
+                    className="w-auto h-8 object-contain"
+                  />
+                </div>
                 <span className="truncate text-base font-extrabold tracking-tight text-ink sm:text-lg">Cobalt<span className="text-[#FF5722]">&amp;</span>Kinetic</span>
               </Link>
               <button

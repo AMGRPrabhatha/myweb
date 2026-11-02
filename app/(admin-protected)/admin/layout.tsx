@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   LayoutDashboard,
   Inbox,
@@ -49,8 +50,14 @@ export default async function AdminLayout({
           {/* Brand header */}
           <div className="flex items-center justify-between pb-6 mb-6 border-b border-ink-800">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-cobalt flex items-center justify-center text-white font-extrabold text-sm">
-                CK
+              <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center p-1 shrink-0">
+                <Image
+                  src="/images/logo.webp"
+                  alt="Staff Admin Logo"
+                  width={30}
+                  height={26}
+                  className="w-auto h-6 object-contain"
+                />
               </div>
               <div>
                 <span className="font-extrabold text-white text-sm block leading-tight">
