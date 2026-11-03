@@ -214,7 +214,7 @@ async function triggerEmailNotification(leadId: string, jobId: string, lead: any
         Authorization: `Bearer ${emailApiKey}`,
       },
       body: JSON.stringify({
-        from: 'enquiries@agency.com',
+        from: 'Design1X <notifications@design1x.com>',
         to: process.env.AGENCY_NOTIFICATION_EMAIL || 'design1xconnect@gmail.com',
         subject: `New Project Enquiry: ${lead.name} (${lead.serviceInterest})`,
         html: `
