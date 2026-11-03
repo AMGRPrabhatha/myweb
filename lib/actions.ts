@@ -312,6 +312,20 @@ export async function saveProjectAction(project: Project) {
   return { success: true };
 }
 
+export async function deleteProjectAction(projectId: string) {
+  const admin = await requireAdmin();
+  const project = (await db.getProjects()).find(item => item.id === projectId);
+  if (!project) return { success: false, error: 'Project not found.' };
+
+  await db.deleteProject(projectId, admin.user.id);
+  revalidatePath('/');
+  revalidatePath('/work');
+  revalidatePath(`/work/${project.slug}`);
+  revalidatePath('/admin');
+  revalidatePath('/admin/projects');
+  return { success: true };
+}
+
 // Admin Action: Save plan
 export async function savePlanAction(plan: Plan) {
   await requireAdmin();

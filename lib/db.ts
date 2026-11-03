@@ -1,4 +1,6 @@
 import * as leadDb from './lead-db';
+import { getDeletedProjectIds, markProjectDeleted } from './project-deletions';
+import { unstable_noStore as noStore } from 'next/cache';
 import { initialPlans, initialProjects, initialSiteSettings, initialBlogPosts, initialTestimonials } from './sample-data';
 import { Lead, LeadNote, NotificationJob, Plan, Project, SiteSettings, BlogPost, Testimonial } from './types';
 import { readFileSync, mkdirSync, writeFileSync, renameSync } from 'node:fs';
@@ -173,13 +175,23 @@ if (process.env.NODE_ENV !== 'production') globalForDb.localStore = localDb;
 // Unified Data Access API
 export const db = {
   getProjects: async (filter?: { category?: string; status?: 'draft' | 'published' }) => {
-    return localDb.getProjects ? localDb.getProjects(filter) : initialProjects;
+    noStore();
+    const [projects, deletedIds] = await Promise.all([localDb.getProjects(filter), getDeletedProjectIds()]);
+    return projects.filter(project => !deletedIds.has(project.id));
   },
   getProjectBySlug: async (slug: string) => {
-    return localDb.getProjectBySlug ? localDb.getProjectBySlug(slug) : (initialProjects.find(p => p.slug === slug) || null);
+    noStore();
+    const [project, deletedIds] = await Promise.all([localDb.getProjectBySlug(slug), getDeletedProjectIds()]);
+    return project && !deletedIds.has(project.id) ? project : null;
   },
   saveProject: async (project: Project) => {
     return localDb.saveProject(project);
+  },
+  deleteProject: async (id: string, userId: string) => {
+    const project = (await localDb.getProjects()).find(item => item.id === id);
+    if (!project) return false;
+    await markProjectDeleted(id, userId);
+    return true;
   },
   getPlans: async (category?: string) => {
     return localDb.getPlans ? localDb.getPlans(category) : initialPlans;

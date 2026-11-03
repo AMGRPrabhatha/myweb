@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { db } from '@/lib/db';
 import { formatDate } from '@/lib/utils';
 import { Plus, FolderPlus, ExternalLink, Edit } from 'lucide-react';
+import DeleteProjectButton from '@/components/admin/DeleteProjectButton';
 
 export const revalidate = 0;
 
@@ -110,6 +111,7 @@ export default async function AdminProjectsPage() {
                         <Edit className="w-3 h-3" />
                         <span>Edit Scope</span>
                       </Link>
+                      <DeleteProjectButton projectId={proj.id} projectTitle={proj.title} />
                     </td>
                   </tr>
                 ))}
