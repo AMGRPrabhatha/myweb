@@ -103,9 +103,9 @@ export default function OperatingArrangementsSection({
         {/* ========================================================= */}
         {/* Main Stage: NinjaPromo Step / Funnel Card Stage           */}
         {/* ========================================================= */}
-        <div className="space-y-3 md:space-y-10 md:bg-slate-50/70 md:border md:border-slate-200/90 md:rounded-[32px] md:p-10 lg:p-12 md:shadow-sm">
+        <div className="mobile-card-rail md:space-y-10 md:bg-slate-50/70 md:border md:border-slate-200/90 md:rounded-[32px] md:p-10 lg:p-12 md:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500" role="region" aria-label="Operating roles" tabIndex={0}>
           {arrangements.map((item, idx) => (
-            <div key={idx} className="space-y-4 rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50/70 p-5 shadow-sm md:space-y-6 md:rounded-none md:border-0 md:bg-none md:p-0 md:shadow-none">
+            <div key={idx} className="flex flex-col justify-between space-y-4 rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50/70 p-5 shadow-sm md:block md:space-y-6 md:rounded-none md:border-0 md:bg-none md:p-0 md:shadow-none">
               
               {/* Row Grid: Left (Step & Title), Middle (Metric & Description), Right (Avatar Stack) */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8 items-center">
@@ -141,7 +141,7 @@ export default function OperatingArrangementsSection({
                     {item.avatars.map((av, avIdx) => (
                       <div
                         key={avIdx}
-                        className="relative w-8 h-8 md:w-11 md:h-11 rounded-full border-2 border-white shadow-sm overflow-hidden bg-slate-100 flex-shrink-0"
+                        className={`relative w-8 h-8 md:w-11 md:h-11 rounded-full border-2 border-white shadow-sm overflow-hidden bg-slate-100 flex-shrink-0 ${avIdx === 3 ? 'hidden md:block' : ''}`}
                       >
                         <Image
                           src={av}

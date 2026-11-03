@@ -123,7 +123,7 @@ export default async function ContactPage() {
                     <div className={`${styles.value} break-all text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors duration-300`}>
                       {settings.businessEmail}
                     </div>
-                    <div className="text-xs text-slate-500">Response within {settings.responseExpectation}</div>
+                    <div className="text-xs text-slate-500">Response target: {settings.responseExpectation}</div>
                   </div>
                 </a>
 
@@ -159,21 +159,6 @@ export default async function ContactPage() {
                 </div>
               </div>
 
-              {/* Proof Strip */}
-              <div className={`${styles.proofStrip} flex flex-wrap items-center gap-2.5 pt-1`}>
-                <div className={`${styles.proofItem} flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700`}>
-                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <span>Available Mon–Sat</span>
-                </div>
-                <div className={`${styles.proofItem} flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700`}>
-                  <span className="w-2 h-2 rounded-full bg-blue-500" />
-                  <span>GMT+5:30 (SLST)</span>
-                </div>
-                <div className={`${styles.proofItem} flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700`}>
-                  <span className="w-2 h-2 rounded-full bg-[#FF5722]" />
-                  <span>Remote Friendly</span>
-                </div>
-              </div>
             </div>
 
             {/* RIGHT: Real Street Map Highlighting Nawala, Sri Lanka (7 cols) */}

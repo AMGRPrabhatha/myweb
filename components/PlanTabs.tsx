@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Check, Clock3, Gift, Globe2, Layers3, Share2, Smartphone } from 'lucide-react';
 import { Plan } from '@/lib/types';
+import { approximateUsd } from '@/lib/pricing';
 import styles from './PlanTabs.module.css';
 
 type Category = 'website' | 'mobile' | 'combined' | 'social' | 'all';
@@ -24,13 +25,15 @@ const belongsTo = (plan: Plan, category: Category) => {
 };
 
 function priceFor(plan: Plan) {
-  if (plan.category === 'combined' || plan.hasSocialBundle) {
-    return { amount: plan.finalPrice?.toLocaleString() ?? plan.priceDisplay ?? 'Custom quote', note: 'LKR · first month', original: plan.originalPrice?.toLocaleString() };
+  const bundle = plan.category === 'combined' || plan.hasSocialBundle;
+  const amount = bundle ? plan.finalPrice ?? plan.oneTimeAmount : plan.category === 'social' ? plan.monthlyAmount : plan.oneTimeAmount;
+  const lkr = amount ?? Number(plan.priceDisplay?.replace(/,/g, '').match(/\d+/)?.[0]);
+  const startingAt = plan.priceDisplay?.includes('+') ? '+' : '';
+  const note = bundle ? 'first month' : plan.category === 'social' ? 'per month' : 'one-time development';
+  if (Number.isFinite(lkr) && lkr > 0) {
+    return { usd: `${approximateUsd(lkr)}${startingAt}`, lkr: `${lkr.toLocaleString('en-US')} LKR${startingAt}`, note, original: bundle ? plan.originalPrice?.toLocaleString('en-US') : undefined };
   }
-  if (plan.category === 'social') {
-    return { amount: plan.monthlyAmount?.toLocaleString() ?? plan.priceDisplay ?? 'Custom quote', note: 'LKR / month' };
-  }
-  return { amount: plan.priceDisplay ?? (plan.oneTimeAmount ? `${plan.oneTimeAmount.toLocaleString()} LKR` : 'Custom quote'), note: 'one-time development' };
+  return { usd: plan.priceDisplay ?? 'Custom quote', lkr: '', note: '', original: undefined };
 }
 
 export default function PlanTabs({ plans, initialCategory = 'website' }: { plans: Plan[]; initialCategory?: Category }) {
@@ -74,6 +77,7 @@ export default function PlanTabs({ plans, initialCategory = 'website' }: { plans
           <div>
             <h2>{active.label}</h2>
             <p>{active.description}. Clear deliverables and ownership from day one.</p>
+            <p className={styles.estimateNote}>USD estimates rounded to $10 at 330 LKR/USD.</p>
           </div>
           <span className={styles.resultsCount}>{visiblePlans.length} {visiblePlans.length === 1 ? 'package' : 'packages'}</span>
         </div>
@@ -96,7 +100,8 @@ export default function PlanTabs({ plans, initialCategory = 'website' }: { plans
                   </div>
                   <div className={styles.priceBox}>
                     {price.original && <span className={styles.originalPrice}>{price.original} LKR</span>}
-                    <strong>{price.amount}</strong>
+                    <strong>{price.lkr ? `≈ ${price.usd} USD` : price.usd}</strong>
+                    {price.lkr && <span className={styles.lkrPrice}>{price.lkr}</span>}
                     <span>{price.note}</span>
                   </div>
                 </div>
@@ -115,7 +120,7 @@ export default function PlanTabs({ plans, initialCategory = 'website' }: { plans
                     Select package <ArrowRight size={17} aria-hidden="true" />
                   </Link>
                 </div>
-                {bundle && <p className={styles.bundleNote}>After the first month, social media management continues at 35,000 LKR/month. Cancel anytime.</p>}
+                {bundle && <p className={styles.bundleNote}>After the first month, social media management continues at approximately {approximateUsd(plan.socialMonthlyAfter ?? 35000)} USD/month ({(plan.socialMonthlyAfter ?? 35000).toLocaleString('en-US')} LKR/month). Cancel anytime.</p>}
               </article>
             );
           })}

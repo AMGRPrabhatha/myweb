@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Check, ArrowRight, Sparkles, Gift, Globe, Smartphone, Share2, Layers } from 'lucide-react';
 import { Plan } from '@/lib/types';
+import { approximateUsd } from '@/lib/pricing';
 
 interface PlansPreviewProps {
   plans?: Plan[];
@@ -401,6 +402,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           <p className="max-w-3xl mx-auto text-base sm:text-lg text-ink-600 leading-relaxed font-normal">
             Your dedicated team works on transparent milestone pricing with zero hidden costs. Choose standalone development or combine with 1-month social media to save 10,000 LKR.
           </p>
+          <p className="text-xs text-slate-500">USD estimates rounded to $10 at 330 LKR/USD. LKR prices are shown on each package.</p>
 
           {/* Capsule Switcher 1: Platform Categories */}
           <div className="pt-2 flex items-center justify-center">
@@ -472,6 +474,10 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
         <div className="mobile-card-rail grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch pt-2">
           {currentTiers.map((tier, idx) => {
             const isPopular = tier.isPopular;
+            const lkrAmount = Number(tier.price.replace(/,/g, ''));
+            const hasLkrPrice = Number.isFinite(lkrAmount);
+            const startingAt = tier.priceSub.includes('LKR +') ? '+' : '';
+            const billingNote = tier.priceSub.replace(/^LKR\s*\+?\s*(?:·\s*)?/, '').replace('then 35k/mo', `then ≈ ${approximateUsd(35000)} USD/mo (35,000 LKR/mo)`);
 
             // Background liquid glass glow accents
             const cornerGlows = [
@@ -551,13 +557,12 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                       </div>
                     )}
 
-                    <div className="flex items-baseline gap-1.5">
+                    <div className="flex flex-col gap-0.5">
                       <span className="text-3xl sm:text-4xl font-black text-ink tracking-tight">
-                        {tier.price}
+                        {hasLkrPrice ? `≈ ${approximateUsd(lkrAmount)}${startingAt} USD` : tier.price}
                       </span>
-                      <span className="text-xs font-bold text-slate-600">
-                        {tier.priceSub}
-                      </span>
+                      {hasLkrPrice && <span className="text-sm font-bold text-slate-600">{tier.price} LKR{startingAt}</span>}
+                      <span className="text-xs font-semibold text-slate-500">{billingNote}</span>
                     </div>
                   </div>
 

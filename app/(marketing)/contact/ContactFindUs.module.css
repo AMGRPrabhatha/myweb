@@ -36,18 +36,4 @@
     letter-spacing: -.02em;
   }
 
-  .proofStrip {
-    display: grid;
-    gap: 10px;
-    padding: 18px 4px 0;
-    border-top: 1px solid #e5eaf3;
-  }
-
-  .proofItem {
-    width: fit-content;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    font-size: 12px;
-  }
 }

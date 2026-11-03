@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import * as leadDb from './lead-db';
 import { initialPlans, initialProjects, initialSiteSettings, initialBlogPosts, initialTestimonials } from './sample-data';
 import { Lead, LeadNote, NotificationJob, Plan, Project, SiteSettings, BlogPost, Testimonial } from './types';
 import { readFileSync, mkdirSync, writeFileSync, renameSync } from 'node:fs';
@@ -19,96 +19,16 @@ function loadProjects(): Project[] {
   return [...initialProjects];
 }
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-export const isLiveSupabaseConfigured = Boolean(supabaseUrl && (supabaseServiceKey || supabaseAnonKey));
-
-// Server-privileged client (bypasses RLS for secure server actions)
-export const getSupabaseServerClient = () => {
-  if (!supabaseUrl || !supabaseServiceKey) return null;
-  return createClient(supabaseUrl, supabaseServiceKey, {
-    auth: { persistSession: false, autoRefreshToken: false }
-  });
-};
-
-// Public client for browser / public reads
-export const getSupabaseBrowserClient = () => {
-  if (!supabaseUrl || !supabaseAnonKey) return null;
-  return createClient(supabaseUrl, supabaseAnonKey);
-};
-
 /**
- * Robust Local In-Memory Fallback Store
- * Used when Supabase credentials have not yet been provided in .env.local
- * Guarantees zero crashing and enables full interactive testing of enquiry submissions,
- * duplicate rejection, notification job failures, admin edits, and note triage.
+ * Existing local store for public content still backed by sample data.
+ * Enquiries and notification jobs are routed to Supabase below and never use this store.
  */
 class LocalDatabaseStore {
-  private leads: Lead[] = [];
-  private leadNotes: LeadNote[] = [];
-  private notificationJobs: NotificationJob[] = [];
   private projects: Project[] = loadProjects();
   private plans: Plan[] = [...initialPlans];
   private blogPosts: BlogPost[] = [...initialBlogPosts];
   private testimonials: Testimonial[] = [...initialTestimonials];
   private settings: SiteSettings = { ...initialSiteSettings };
-
-  constructor() {
-    // Seed initial demo lead for admin testing
-    const demoLeadId = "lead-demo-seed-01";
-    this.leads.push({
-      id: demoLeadId,
-      submissionKey: "seed-key-demo-001",
-      name: "Kasun Perera",
-      email: "kasun@samplebrand.lk",
-      phone: "+94 77 123 4567",
-      businessName: "Ceylon Roast & Brew",
-      serviceInterest: "both",
-      projectBrief: "We are launching a specialty coffee startup in Colombo. We need a 5-page responsive website with online table booking inquiry and ongoing Instagram/TikTok reels to drive footfall.",
-      budgetRange: "$2,000 - $5,000",
-      targetTimeline: "1 to 2 months",
-      existingWebsite: "",
-      existingPlatforms: "Instagram: @ceylonroast_preview",
-      selectedPlanId: "plan-launch-and-grow",
-      planSnapshot: {
-        id: "plan-launch-and-grow",
-        slug: "launch-and-grow",
-        title: "Launch & Grow (Combined)",
-        category: "combined",
-        pricingMode: "hybrid",
-        currency: "USD",
-        inclusions: initialPlans.find(p => p.id === 'plan-launch-and-grow')?.inclusions || [],
-        exclusions: initialPlans.find(p => p.id === 'plan-launch-and-grow')?.exclusions || [],
-      },
-      source: "Plans page CTA",
-      status: "New",
-      createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-    });
-
-    this.leadNotes.push({
-      id: "note-01",
-      leadId: demoLeadId,
-      authorId: "staff-1",
-      authorName: "Agency Team Lead",
-      note: "Initial review: Solid fit for Launch & Grow package. Schedule discovery call for Tuesday afternoon.",
-      followUpDate: new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0],
-      createdAt: new Date(Date.now() - 3600000 * 2).toISOString(),
-    });
-
-    this.notificationJobs.push({
-      id: "notif-01",
-      leadId: demoLeadId,
-      eventType: "lead_created",
-      state: "success",
-      attemptCount: 1,
-      nextAttemptTime: new Date().toISOString(),
-      createdAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-      updatedAt: new Date(Date.now() - 3600000 * 4).toISOString(),
-    });
-  }
 
   // Blog Posts & Testimonials
   async getAllBlogPosts(): Promise<BlogPost[]> {
@@ -230,110 +150,7 @@ class LocalDatabaseStore {
     return { ...this.settings };
   }
 
-  // Leads
-  async saveLeadWithJob(leadData: Omit<Lead, 'id' | 'createdAt' | 'updatedAt' | 'status'>): Promise<{ lead: Lead; job: NotificationJob }> {
-    // Duplicate check by unique submissionKey
-    const existing = this.leads.find(l => l.submissionKey === leadData.submissionKey);
-    if (existing) {
-      const existingJob = this.notificationJobs.find(j => j.leadId === existing.id) || {
-        id: `job-${Date.now()}`,
-        leadId: existing.id,
-        eventType: 'lead_created',
-        state: 'success',
-        attemptCount: 1,
-        nextAttemptTime: new Date().toISOString(),
-        createdAt: existing.createdAt,
-        updatedAt: existing.updatedAt,
-      };
-      return { lead: existing, job: existingJob };
-    }
 
-    const id = `lead-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
-    const now = new Date().toISOString();
-    const newLead: Lead = {
-      ...leadData,
-      id,
-      status: 'New',
-      createdAt: now,
-      updatedAt: now,
-    };
-
-    // Create Notification Job
-    const jobId = `job-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
-    const newJob: NotificationJob = {
-      id: jobId,
-      leadId: id,
-      eventType: 'lead_created',
-      state: 'pending',
-      attemptCount: 0,
-      nextAttemptTime: now,
-      createdAt: now,
-      updatedAt: now,
-    };
-
-    this.leads.unshift(newLead);
-    this.notificationJobs.unshift(newJob);
-
-    return { lead: newLead, job: newJob };
-  }
-
-  async getLeads(filter?: { status?: string; search?: string }): Promise<Lead[]> {
-    let result = [...this.leads];
-    if (filter?.status && filter.status !== 'All') {
-      result = result.filter(l => l.status === filter.status);
-    }
-    if (filter?.search) {
-      const q = filter.search.toLowerCase();
-      result = result.filter(l => 
-        l.name.toLowerCase().includes(q) || 
-        l.email.toLowerCase().includes(q) || 
-        (l.businessName && l.businessName.toLowerCase().includes(q))
-      );
-    }
-    return result;
-  }
-
-  async getLeadById(id: string): Promise<Lead | null> {
-    return this.leads.find(l => l.id === id) || null;
-  }
-
-  async updateLeadStatus(id: string, status: Lead['status']): Promise<Lead | null> {
-    const lead = this.leads.find(l => l.id === id);
-    if (!lead) return null;
-    lead.status = status;
-    lead.updatedAt = new Date().toISOString();
-    return lead;
-  }
-
-  // Lead Notes
-  async getLeadNotes(leadId: string): Promise<LeadNote[]> {
-    return this.leadNotes
-      .filter(n => n.leadId === leadId)
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-  }
-
-  async addLeadNote(noteData: Omit<LeadNote, 'id' | 'createdAt'>): Promise<LeadNote> {
-    const id = `note-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
-    const newNote: LeadNote = {
-      ...noteData,
-      id,
-      createdAt: new Date().toISOString(),
-    };
-    this.leadNotes.unshift(newNote);
-    return newNote;
-  }
-
-  // Notification Jobs
-  async getNotificationJobs(): Promise<NotificationJob[]> {
-    return [...this.notificationJobs];
-  }
-
-  async updateNotificationJob(id: string, update: Partial<NotificationJob>): Promise<NotificationJob | null> {
-    const job = this.notificationJobs.find(j => j.id === id);
-    if (!job) return null;
-    Object.assign(job, update, { updatedAt: new Date().toISOString() });
-    return job;
-  }
 }
 
 // Global singleton for in-memory store so it persists during hot-reloads and dev server requests
@@ -383,28 +200,28 @@ export const db = {
     return localDb.updateSettings(settings);
   },
   saveLeadWithJob: async (leadData: Omit<Lead, 'id' | 'createdAt' | 'updatedAt' | 'status'>) => {
-    return localDb.saveLeadWithJob(leadData);
+    return leadDb.saveLeadWithJob(leadData);
   },
   getLeads: async (filter?: { status?: string; search?: string }) => {
-    return localDb.getLeads(filter);
+    return leadDb.getLeads(filter);
   },
   getLeadById: async (id: string) => {
-    return localDb.getLeadById(id);
+    return leadDb.getLeadById(id);
   },
   updateLeadStatus: async (id: string, status: Lead['status']) => {
-    return localDb.updateLeadStatus(id, status);
+    return leadDb.updateLeadStatus(id, status);
   },
   getLeadNotes: async (leadId: string) => {
-    return localDb.getLeadNotes(leadId);
+    return leadDb.getLeadNotes(leadId);
   },
   addLeadNote: async (noteData: Omit<LeadNote, 'id' | 'createdAt'>) => {
-    return localDb.addLeadNote(noteData);
+    return leadDb.addLeadNote(noteData);
   },
   getNotificationJobs: async () => {
-    return localDb.getNotificationJobs();
+    return leadDb.getNotificationJobs();
   },
   updateNotificationJob: async (id: string, update: Partial<NotificationJob>) => {
-    return localDb.updateNotificationJob(id, update);
+    return leadDb.updateNotificationJob(id, update);
   },
   getAllBlogPosts: async () => {
     return (localDb && typeof localDb.getAllBlogPosts === 'function') 

@@ -10,7 +10,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileHeaderHidden, setMobileHeaderHidden] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -18,35 +17,7 @@ export default function Navbar() {
   // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
-    setMobileHeaderHidden(false);
   }, [pathname]);
-
-  // Keep the mobile controls clear of section headings while reading down the page.
-  useEffect(() => {
-    let lastY = window.scrollY;
-    let distance = 0;
-    const onScroll = () => {
-      const y = window.scrollY;
-      const delta = y - lastY;
-      lastY = y;
-      if (mobileMenuOpen || window.innerWidth >= 1280 || y < 96) {
-        distance = 0;
-        setMobileHeaderHidden(false);
-        return;
-      }
-      if (Math.sign(delta) !== Math.sign(distance)) distance = 0;
-      distance += delta;
-      if (distance > 16) {
-        setMobileHeaderHidden(true);
-        distance = 0;
-      } else if (distance < -16) {
-        setMobileHeaderHidden(false);
-        distance = 0;
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [mobileMenuOpen]);
 
   useEffect(() => {
     if (!mobileMenuOpen) return;
@@ -100,11 +71,12 @@ export default function Navbar() {
     { href: '/testimonials', label: 'Testimonials' },
     { href: '/blog', label: 'Blog' },
   ];
+  const mobileNavLinks = [...navLinks, { href: '/contact', label: 'Contact' }];
 
   return (
     <header className={`fixed inset-x-0 top-3 sm:top-5 ${mobileMenuOpen ? 'z-[60]' : 'z-50'} px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pointer-events-none`}>
 
-      <div className={`flex items-center justify-between gap-2 transition-[transform,opacity] duration-200 xl:hidden ${mobileHeaderHidden && !mobileMenuOpen ? 'pointer-events-none -translate-y-24 opacity-0' : 'pointer-events-auto'}`} onFocusCapture={() => setMobileHeaderHidden(false)}>
+      <div className="flex pointer-events-auto items-center justify-between gap-2 xl:hidden">
         <Link href="/" className="inline-flex min-w-0 items-center gap-2 rounded-full border border-white/90 bg-white/90 py-1.5 pl-2 pr-3.5 shadow-[0_8px_30px_rgba(15,23,42,0.12)] ring-1 ring-black/[0.05] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]">
           <div className="relative w-7 h-7 flex items-center justify-center shrink-0">
             <Image
@@ -257,7 +229,7 @@ export default function Navbar() {
             </div>
 
             <nav className="flex flex-1 flex-col justify-center gap-2 py-8" aria-label="Mobile Navigation">
-              {navLinks.map((link) => {
+              {mobileNavLinks.map((link) => {
                 const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
                 return (
                   <Link

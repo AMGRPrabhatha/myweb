@@ -55,7 +55,7 @@ export default function PrivacyPage() {
             <section className="space-y-2">
               <h2 className="text-lg font-bold text-ink">4. Data Retention & Deletion Rights</h2>
               <p>
-                You may request a copy of the information we hold about you or request deletion of your enquiry records at any time by emailing our data coordinator at <a href="mailto:hello@cobaltkinetic.example.com" className="text-cobalt underline">hello@cobaltkinetic.example.com</a>.
+                You may request a copy of the information we hold about you or request deletion of your enquiry records at any time by emailing our data coordinator at <a href="mailto:design1xconnect@gmail.com" className="text-cobalt underline">design1xconnect@gmail.com</a>.
               </p>
             </section>
           </div>

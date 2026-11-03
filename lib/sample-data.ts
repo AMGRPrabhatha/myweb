@@ -3,9 +3,9 @@ import { Plan, Project, SiteSettings, BlogPost, Testimonial } from './types';
 export const initialSiteSettings: SiteSettings = {
   agencyName: "Design1X",
   tagline: "Your website and social media, working together.",
-  businessEmail: "hello@cobaltkinetic.example.com",
-  phone: "+1 (555) 019-2834",
-  whatsappNumber: "+15550192834",
+  businessEmail: "design1xconnect@gmail.com",
+  phone: "075 8429898",
+  whatsappNumber: "+94758429898",
   responseExpectation: "Within 1 business day",
   officeLocation: "Nawala, Sri Lanka",
   facebookUrl: "https://facebook.com/example",

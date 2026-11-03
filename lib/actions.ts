@@ -69,8 +69,7 @@ export async function submitEnquiry(
 
   // Bot honeypot check
   if (rawData.botField) {
-    // Silently drop bots without throwing
-    return { success: true, message: 'Thank you for your enquiry. We will review your brief shortly.' };
+    return { success: false, message: 'Unable to submit this enquiry. Please try again.', errors: { form: 'Submission rejected.' } };
   }
 
   // Rate limit check by email/submission key
@@ -148,7 +147,7 @@ export async function submitEnquiry(
     }
 
     // Save lead and notification job in single operation
-    const { lead, job } = await db.saveLeadWithJob({
+    const { lead, job, created } = await db.saveLeadWithJob({
       submissionKey: rawData.submissionKey,
       name: rawData.name,
       email: rawData.email,
@@ -166,7 +165,13 @@ export async function submitEnquiry(
     });
 
     // Attempt notification delivery
-    await triggerEmailNotification(lead.id, job.id, lead);
+    if (created && job) {
+      try {
+        await triggerEmailNotification(lead.id, job.id, lead);
+      } catch (notificationError) {
+        console.error('Lead persisted, but notification processing failed:', notificationError);
+      }
+    }
 
     revalidatePath('/admin');
     revalidatePath('/admin/leads');
@@ -177,10 +182,11 @@ export async function submitEnquiry(
       message: 'Thank you! Your project brief has been received. Our team will review your requirements and reach out within 1 business day.',
     };
   } catch (err: unknown) {
-    const errorMsg = err instanceof Error ? err.message : 'Database error';
+    console.error('Enquiry persistence failed:', err);
     return {
       success: false,
-      message: `Failed to save enquiry: ${errorMsg}. Your entries have been retained. Please try submitting again.`,
+      message: 'We could not save your enquiry. Your entries have been retained. Please try again later.',
+      errors: { form: 'Enquiry was not saved.' },
       inputValues: rawData,
     };
   }
@@ -191,13 +197,11 @@ async function triggerEmailNotification(leadId: string, jobId: string, lead: any
   const emailApiKey = process.env.RESEND_API_KEY;
 
   if (!emailApiKey) {
-    // In local development, the lead is 100% saved in the database.
-    // Simulate notification dispatch so the admin queue reflects success without false failure alarms.
-    console.log(`[Email Alert Simulator] New lead received for ${lead.name} (${lead.email}) - saved in database. In production, configure RESEND_API_KEY to send external emails.`);
+    // The enquiry is persisted; leave the alert as failed until delivery is configured.
     await db.updateNotificationJob(jobId, {
-      state: 'success',
-      attemptCount: 1,
-      errorSummary: 'Local Dev Mode: Lead saved in database. Simulated email dispatch (Add RESEND_API_KEY for live external emails).',
+      state: 'failed',
+      attemptCount: 0,
+      errorSummary: 'RESEND_API_KEY is not configured. Lead saved; email not sent.',
     });
     return;
   }
@@ -211,7 +215,7 @@ async function triggerEmailNotification(leadId: string, jobId: string, lead: any
       },
       body: JSON.stringify({
         from: 'enquiries@agency.com',
-        to: process.env.AGENCY_NOTIFICATION_EMAIL || 'hello@cobaltkinetic.example.com',
+        to: process.env.AGENCY_NOTIFICATION_EMAIL || 'design1xconnect@gmail.com',
         subject: `New Project Enquiry: ${lead.name} (${lead.serviceInterest})`,
         html: `
           <h2>New Website & Social Media Project Brief</h2>

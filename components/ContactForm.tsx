@@ -65,10 +65,14 @@ export default function ContactForm({ plans = [] }: ContactFormProps) {
     formData.set('serviceInterest', serviceInterest);
 
     startTransition(async () => {
-      const res = await submitEnquiry(state, formData);
-      setState(res);
-      if (res.success) {
-        setSubmissionKey(`req-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`);
+      try {
+        const res = await submitEnquiry(state, formData);
+        setState(res);
+        if (res.success) {
+          setSubmissionKey(`req-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`);
+        }
+      } catch {
+        setState({ success: false, message: 'We could not save your enquiry. Please try again later.', errors: { form: 'Enquiry was not saved.' } });
       }
     });
   };
