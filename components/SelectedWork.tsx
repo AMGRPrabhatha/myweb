@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Project } from '@/lib/types';
-import { initialProjects } from '@/lib/sample-data';
 
 interface SelectedWorkProps {
   projects?: Project[];
@@ -16,10 +15,8 @@ export default function SelectedWork({ projects = [] }: SelectedWorkProps) {
   const [activeCategory, setActiveCategory] = useState<string>('All Projects');
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  // Ensure latest reference projects (Devion, Velio, Eatzy) are present and at the front
   const projectList = useMemo(() => {
-    const list = [...(projects && projects.length > 0 ? projects : initialProjects)];
-    // Sort so Devion, Velio, Eatzy appear first as latest
+    const list = [...projects];
     return list.sort((a, b) => (a.displayOrder || 99) - (b.displayOrder || 99));
   }, [projects]);
 

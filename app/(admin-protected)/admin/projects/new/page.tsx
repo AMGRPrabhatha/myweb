@@ -71,18 +71,10 @@ export default function NewProjectPage() {
       if (selectedFile) {
         const formData = new FormData();
         formData.append('coverFile', selectedFile);
-        try {
-          const res = await fetch('/api/upload-cover', {
-            method: 'POST',
-            body: formData,
-          });
-          if (res.ok) {
-            const data = await res.json();
-            if (data.url) finalCover = data.url;
-          }
-        } catch {
-          // If upload endpoint not configured, keep fallback image
-        }
+        const res = await fetch('/api/upload-cover', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (!res.ok || !data.url) throw new Error(data.error || 'Could not upload the cover image.');
+        finalCover = data.url;
       }
 
       // 3. Format scope items

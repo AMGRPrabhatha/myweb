@@ -47,7 +47,7 @@ export default async function AdminProjectEditPage({ params, searchParams }: Pro
         </Link>}
       </div>
 
-      {searchParams?.error === 'image' && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700">Choose a PNG, JPEG, WebP, GIF, or AVIF image under 10 MB.</p>}
+      {searchParams?.error === 'image' && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700">Could not upload the cover. Choose a PNG, JPEG, WebP, GIF, or AVIF image under 10 MB and try again.</p>}
 
       <form
         action={async (formData: FormData) => {

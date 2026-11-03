@@ -313,17 +313,28 @@ export async function saveProjectAction(project: Project) {
 }
 
 export async function deleteProjectAction(projectId: string) {
-  const admin = await requireAdmin();
-  const project = (await db.getProjects()).find(item => item.id === projectId);
-  if (!project) return { success: false, error: 'Project not found.' };
+  await requireAdmin();
+  try {
+    const project = (await db.getProjects()).find(item => item.id === projectId);
+    if (!project) return { success: false, error: 'This project is no longer in the database.' };
 
-  await db.deleteProject(projectId, admin.user.id);
-  revalidatePath('/');
-  revalidatePath('/work');
-  revalidatePath(`/work/${project.slug}`);
-  revalidatePath('/admin');
-  revalidatePath('/admin/projects');
-  return { success: true };
+    const deleted = await db.deleteProject(projectId);
+    if (!deleted) return { success: false, error: 'The database did not delete this project. Refresh and try again.' };
+    revalidatePath('/');
+    revalidatePath('/work');
+    revalidatePath(`/work/${project.slug}`);
+    revalidatePath('/admin');
+    revalidatePath('/admin/projects');
+    revalidatePath('/sitemap.xml');
+    return { success: true };
+  } catch (error) {
+    const code = error && typeof error === 'object' && 'code' in error ? String(error.code) : '';
+    console.error('Project deletion failed', { projectId, code });
+    if (code === '23503') return { success: false, error: 'This project is linked to other database records. No records were deleted.' };
+    if (code === '42501') return { success: false, error: 'Your account is not allowed to delete projects.' };
+    if (code === '42P01' || code === 'PGRST205') return { success: false, error: 'The projects table is unavailable. Check the production Supabase setup.' };
+    return { success: false, error: 'The database could not delete this project. Please try again.' };
+  }
 }
 
 // Admin Action: Save plan

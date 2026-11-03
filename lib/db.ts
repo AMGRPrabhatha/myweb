@@ -1,32 +1,13 @@
 import * as leadDb from './lead-db';
-import { getDeletedProjectIds, markProjectDeleted } from './project-deletions';
-import { unstable_noStore as noStore } from 'next/cache';
-import { initialPlans, initialProjects, initialSiteSettings, initialBlogPosts, initialTestimonials } from './sample-data';
+import * as projectDb from './project-db';
+import { initialPlans, initialSiteSettings, initialBlogPosts, initialTestimonials } from './sample-data';
 import { Lead, LeadNote, NotificationJob, Plan, Project, SiteSettings, BlogPost, Testimonial } from './types';
-import { readFileSync, mkdirSync, writeFileSync, renameSync } from 'node:fs';
-import { join } from 'node:path';
-
-const projectsFile = join(process.cwd(), 'data', 'projects.json');
-
-function loadProjects(): Project[] {
-  try {
-    const saved = JSON.parse(readFileSync(projectsFile, 'utf8')) as Project[];
-    if (Array.isArray(saved)) {
-      return [...initialProjects.map(seed => saved.find(p => p.id === seed.id) || seed),
-        ...saved.filter(p => !initialProjects.some(seed => seed.id === p.id))];
-    }
-  } catch (error: any) {
-    if (error?.code !== 'ENOENT') throw error;
-  }
-  return [...initialProjects];
-}
 
 /**
- * Existing local store for public content still backed by sample data.
- * Enquiries and notification jobs are routed to Supabase below and never use this store.
+ * Existing local store for non-project public content.
+ * Projects, enquiries, and notification jobs use Supabase below.
  */
 class LocalDatabaseStore {
-  private projects: Project[] = loadProjects();
   private plans: Plan[] = [...initialPlans];
   private blogPosts: BlogPost[] = [...initialBlogPosts];
   private testimonials: Testimonial[] = [...initialTestimonials];
@@ -85,36 +66,6 @@ class LocalDatabaseStore {
     return this.testimonials.length < initialLen;
   }
 
-  // Projects
-  async getProjects(filter?: { category?: string; status?: 'draft' | 'published' }): Promise<Project[]> {
-    let result = [...this.projects];
-    if (filter?.category && filter.category !== 'All') {
-      result = result.filter(p => p.category === filter.category);
-    }
-    if (filter?.status) {
-      result = result.filter(p => p.status === filter.status);
-    }
-    return result.sort((a, b) => (a.displayOrder || 99) - (b.displayOrder || 99));
-  }
-
-  async getProjectBySlug(slug: string): Promise<Project | null> {
-    return this.projects.find(p => p.slug === slug && p.status === 'published') || null;
-  }
-
-  async saveProject(project: Project): Promise<Project> {
-    const idx = this.projects.findIndex(p => p.id === project.id);
-    if (idx >= 0) {
-      this.projects[idx] = { ...project };
-    } else {
-      this.projects.push(project);
-    }
-    mkdirSync(join(process.cwd(), 'data'), { recursive: true });
-    const temporaryFile = `${projectsFile}.${process.pid}.tmp`;
-    writeFileSync(temporaryFile, JSON.stringify(this.projects, null, 2));
-    renameSync(temporaryFile, projectsFile);
-    return project;
-  }
-
   // Plans
   async getPlans(category?: string): Promise<Plan[]> {
     let result = this.plans.filter(p => p.status === 'published');
@@ -165,7 +116,7 @@ if (
 ) {
   delete globalForDb.localStore;
 }
-// Keep the live dev store while applying updated project methods after hot reloads.
+// Keep the live dev store while applying updated content methods after hot reloads.
 if (globalForDb.localStore) {
   Object.setPrototypeOf(globalForDb.localStore, LocalDatabaseStore.prototype);
 }
@@ -175,23 +126,16 @@ if (process.env.NODE_ENV !== 'production') globalForDb.localStore = localDb;
 // Unified Data Access API
 export const db = {
   getProjects: async (filter?: { category?: string; status?: 'draft' | 'published' }) => {
-    noStore();
-    const [projects, deletedIds] = await Promise.all([localDb.getProjects(filter), getDeletedProjectIds()]);
-    return projects.filter(project => !deletedIds.has(project.id));
+    return projectDb.getProjects(filter);
   },
   getProjectBySlug: async (slug: string) => {
-    noStore();
-    const [project, deletedIds] = await Promise.all([localDb.getProjectBySlug(slug), getDeletedProjectIds()]);
-    return project && !deletedIds.has(project.id) ? project : null;
+    return projectDb.getProjectBySlug(slug);
   },
   saveProject: async (project: Project) => {
-    return localDb.saveProject(project);
+    return projectDb.saveProject(project);
   },
-  deleteProject: async (id: string, userId: string) => {
-    const project = (await localDb.getProjects()).find(item => item.id === id);
-    if (!project) return false;
-    await markProjectDeleted(id, userId);
-    return true;
+  deleteProject: async (id: string) => {
+    return projectDb.deleteProject(id);
   },
   getPlans: async (category?: string) => {
     return localDb.getPlans ? localDb.getPlans(category) : initialPlans;

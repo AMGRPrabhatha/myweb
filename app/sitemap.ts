@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
-import { initialProjects } from '@/lib/sample-data';
+import { db } from '@/lib/db';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://cobaltkinetic.example.com';
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = 'https://design1x.com';
   const now = new Date();
 
   // Static marketing routes
@@ -20,7 +20,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // Dynamic project routes
-  const projectRoutes: MetadataRoute.Sitemap = initialProjects.map((p) => ({
+  const projects = await db.getProjects({ status: 'published' });
+  const projectRoutes: MetadataRoute.Sitemap = projects.map((p) => ({
     url: `${baseUrl}/work/${p.slug}`,
     lastModified: new Date(p.publishedAt),
     changeFrequency: 'monthly',
