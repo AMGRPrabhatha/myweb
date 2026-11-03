@@ -114,7 +114,7 @@ export default function DedicatedTeamAccordion() {
   const [activeIndex, setActiveIndex] = useState<number>(3); // Default to Specialist or PM
 
   return (
-    <section className="py-20 sm:py-28 bg-white relative overflow-hidden">
+    <section className="py-14 md:py-28 bg-white relative overflow-hidden">
       {/* Lightweight Ambient Radial Gradient (GPU Optimized) */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] pointer-events-none opacity-40"
@@ -124,15 +124,15 @@ export default function DedicatedTeamAccordion() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-16">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+        <div className="text-left md:text-center max-w-3xl mx-auto space-y-3 md:space-y-4">
+          <h2 className="text-[28px] md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
             Meet Your Dedicated Digital Team
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
+          <p className="text-sm md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
             We assemble your specialized team around your industry, technical requirements, and target audience — seamlessly coordinated under one roof.
           </p>
         </div>
@@ -267,14 +267,14 @@ export default function DedicatedTeamAccordion() {
         {/* ============================================================== */}
         {/* MOBILE: Collapsible Accordion Cards                            */}
         {/* ============================================================== */}
-        <div className="md:hidden space-y-3.5">
+        <div className="md:hidden space-y-3">
           {teamMembers.map((member, idx) => {
             const isOpen = activeIndex === idx;
 
             return (
               <div
                 key={member.num}
-                className={`rounded-2xl border transition-all duration-300 overflow-hidden bg-white ${
+                className={`rounded-[22px] border transition-all duration-300 overflow-hidden bg-white ${
                   isOpen
                     ? 'border-slate-300 shadow-md ring-1 ring-slate-200'
                     : 'border-slate-200 shadow-2xs hover:border-slate-300'
@@ -284,17 +284,18 @@ export default function DedicatedTeamAccordion() {
                 <button
                   type="button"
                   onClick={() => setActiveIndex(isOpen ? -1 : idx)}
-                  className="w-full text-left p-5 flex items-start justify-between gap-4"
+                  aria-expanded={isOpen}
+                  className="w-full text-left p-4 flex items-start justify-between gap-3"
                 >
-                  <div className="flex items-start gap-3.5">
-                    <div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-xs font-mono font-bold text-slate-700 flex-shrink-0 mt-0.5">
+                  <div className="flex min-w-0 items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-xs font-mono font-bold text-slate-700 flex-shrink-0 mt-0.5">
                       {member.num}
                     </div>
-                    <div>
-                      <h3 className="text-base font-bold text-slate-900 leading-snug">
+                    <div className="min-w-0">
+                      <h3 className="text-[15px] font-bold text-slate-900 leading-snug">
                         {member.title}
                       </h3>
-                      <p className={`text-xs mt-1 ${member.subtextColor}`}>
+                      <p className={`text-xs mt-1 leading-snug ${member.subtextColor}`}>
                         {member.subtitle}
                       </p>
                     </div>
@@ -309,7 +310,7 @@ export default function DedicatedTeamAccordion() {
                 {/* Expanded Drawer */}
                 {isOpen && (
                   <div
-                    className={`px-5 pb-5 pt-1 space-y-4 border-t border-slate-100 bg-gradient-to-b ${member.glowBg}`}
+                    className={`px-4 pb-4 pt-1 space-y-4 border-t border-slate-100 bg-gradient-to-b ${member.glowBg}`}
                   >
                     <div className="pt-2 text-slate-300">
                       <Quote className="w-7 h-7 fill-slate-200/80 text-transparent" />

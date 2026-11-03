@@ -1,0 +1,53 @@
+@media (max-width: 767px) {
+  .section {
+    padding-top: 56px;
+    padding-bottom: 72px;
+    background: radial-gradient(circle at 100% 0, rgba(99, 102, 241, .07), transparent 42%), #fff;
+  }
+
+  .intro::before {
+    content: '';
+    display: block;
+    width: 44px;
+    height: 4px;
+    margin-bottom: 16px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #a600ef, #1154f3, #03c9eb);
+  }
+
+  .card {
+    min-width: 0;
+    padding: 18px;
+    border-radius: 22px;
+    border-color: #e2e8f3;
+    background: linear-gradient(135deg, #fff, #f9fbff);
+    box-shadow: 0 12px 30px -24px rgba(44, 55, 103, .45);
+  }
+
+  .cardContent {
+    min-width: 0;
+  }
+
+  .value {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    font-size: 15px;
+    line-height: 1.4;
+    letter-spacing: -.02em;
+  }
+
+  .proofStrip {
+    display: grid;
+    gap: 10px;
+    padding: 18px 4px 0;
+    border-top: 1px solid #e5eaf3;
+  }
+
+  .proofItem {
+    width: fit-content;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-size: 12px;
+  }
+}

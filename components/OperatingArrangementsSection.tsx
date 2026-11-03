@@ -81,21 +81,21 @@ export default function OperatingArrangementsSection({
   ];
 
   return (
-    <section className="py-20 sm:py-28 bg-white relative overflow-hidden">
+    <section className="py-14 md:py-28 bg-white relative overflow-hidden">
       {/* Subtle ambient light */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-r from-blue-50/40 via-purple-50/30 to-orange-50/30 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 md:space-y-16">
         
         {/* ========================================================= */}
         {/* Section Header (NinjaPromo Style)                         */}
         {/* ========================================================= */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+        <div className="text-left md:text-center max-w-3xl mx-auto space-y-3 md:space-y-4">
+          <h2 className="text-[28px] md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
             Operating Arrangements & Roles
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
+          <p className="text-sm md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal">
             Specialized engineering, creative motion, and delivery leads coordinated under one roof — zero bloat, direct communication, and 100% accountability.
           </p>
         </div>
@@ -103,34 +103,34 @@ export default function OperatingArrangementsSection({
         {/* ========================================================= */}
         {/* Main Stage: NinjaPromo Step / Funnel Card Stage           */}
         {/* ========================================================= */}
-        <div className="bg-slate-50/70 border border-slate-200/90 rounded-[32px] p-6 sm:p-10 lg:p-12 shadow-sm space-y-8 sm:space-y-10">
+        <div className="space-y-3 md:space-y-10 md:bg-slate-50/70 md:border md:border-slate-200/90 md:rounded-[32px] md:p-10 lg:p-12 md:shadow-sm">
           {arrangements.map((item, idx) => (
-            <div key={idx} className="space-y-6">
+            <div key={idx} className="space-y-4 rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50/70 p-5 shadow-sm md:space-y-6 md:rounded-none md:border-0 md:bg-none md:p-0 md:shadow-none">
               
               {/* Row Grid: Left (Step & Title), Middle (Metric & Description), Right (Avatar Stack) */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8 items-center">
                 
                 {/* Left Column: Step Pill + Role Title */}
                 <div className="lg:col-span-4 space-y-2.5">
                   <span className="inline-block px-3 py-1 rounded-full text-xs font-bold text-slate-600 bg-white border border-slate-200 shadow-2xs">
                     {item.step}
                   </span>
-                  <h3 className="text-2xl sm:text-[26px] font-black text-slate-900 tracking-tight leading-snug">
+                  <h3 className="text-xl md:text-[26px] font-black text-slate-900 tracking-tight leading-snug">
                     {item.title}
                   </h3>
                 </div>
 
                 {/* Middle Column: Metric Badge + Clear Narrative */}
                 <div className="lg:col-span-5 space-y-2">
-                  <div className="flex items-baseline gap-2.5">
-                    <span className={`text-2xl sm:text-3xl font-black tracking-tight ${item.metricColor}`}>
+                  <div className="flex flex-wrap items-baseline gap-x-2.5 gap-y-1 md:flex-nowrap">
+                    <span className={`whitespace-nowrap text-xl md:text-3xl font-black tracking-tight ${item.metricColor}`}>
                       {item.metricNumber}
                     </span>
-                    <span className="text-sm font-semibold text-slate-500">
+                    <span className="text-xs md:text-sm font-semibold text-slate-500">
                       {item.metricLabel}
                     </span>
                   </div>
-                  <p className="text-sm text-slate-600 leading-relaxed font-normal">
+                  <p className="text-[13px] md:text-sm text-slate-600 leading-relaxed font-normal">
                     {item.description}
                   </p>
                 </div>
@@ -141,7 +141,7 @@ export default function OperatingArrangementsSection({
                     {item.avatars.map((av, avIdx) => (
                       <div
                         key={avIdx}
-                        className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 border-white shadow-sm overflow-hidden bg-slate-100 flex-shrink-0"
+                        className="relative w-8 h-8 md:w-11 md:h-11 rounded-full border-2 border-white shadow-sm overflow-hidden bg-slate-100 flex-shrink-0"
                       >
                         <Image
                           src={av}
@@ -153,7 +153,7 @@ export default function OperatingArrangementsSection({
                       </div>
                     ))}
                     {/* Extra badge pill like +95 in NinjaPromo */}
-                    <div className="relative h-10 sm:h-11 px-3 rounded-full border-2 border-white bg-slate-900 text-white font-mono font-bold text-xs flex items-center justify-center shadow-sm flex-shrink-0 z-10">
+                    <div className="relative h-8 md:h-11 px-2 md:px-3 rounded-full border-2 border-white bg-slate-900 text-white font-mono font-bold text-[10px] md:text-xs flex items-center justify-center shadow-sm flex-shrink-0 z-10">
                       <span>{item.extraTag}</span>
                     </div>
                   </div>

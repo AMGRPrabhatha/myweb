@@ -13,7 +13,7 @@ export default function ServicesHero() {
           <p className={styles.description}>Bring your website and social presence together. We combine strategy, design and development to help startups and growing businesses move from idea to launch.</p>
           <div className={styles.actions}>
             <Link href="/contact" className={`${styles.primary} brand-gradient-button hero-button-motion`}>Start a project <ArrowRight size={16} aria-hidden="true" /></Link>
-            <a href="#service-disciplines" className={styles.secondary}>Explore services <ArrowDown size={16} aria-hidden="true" /></a>
+            <a href="#service-disciplines" className={`${styles.secondary} hero-button-motion`}>Explore services <ArrowDown size={16} aria-hidden="true" /></a>
           </div>
         </div>
 

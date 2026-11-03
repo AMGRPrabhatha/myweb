@@ -9,4 +9,5 @@
 .toggle:focus-visible { outline: 2px solid #6055e8; outline-offset: -4px; }
 .ticker[data-paused='true'] .track, .ticker:hover .track { animation-play-state: paused; }
 @keyframes scroll { to { transform: translateX(-50%); } }
+@media (max-width: 767px) { .mobileHidden { display: none; } }
 @media (prefers-reduced-motion: reduce) { .viewport { padding-right: 0; } .track { width: 100%; animation: none; } .group { min-width: 0; width: 100%; flex-wrap: wrap; justify-content: center; padding: 8px 12px; gap: 6px 22px; } .group > span { height: auto; padding: 0; gap: 0; font-size: 11px; } .group i, .group + .group, .toggle { display: none; } }

@@ -29,10 +29,11 @@ export default function AboutHero() {
       </div>
       <div className={styles.container}>
         <h1 id="about-hero-heading" className={styles.heading}><TypewriterText lines={['A digital team.', 'On your side.']} /></h1>
+        <p className={styles.lead}>Websites, content and strategy. Working together for what comes next.</p>
         <p className={styles.description}>We bring website development and social strategy together for startups and growing businesses. One connected team, from the first conversation to launch.</p>
         <div className={styles.actions}>
           <Link href="/contact" className={`${styles.contact} brand-gradient-button hero-button-motion`}>Let’s talk <ArrowRight size={16} aria-hidden="true" /></Link>
-          <a href="#about-company" className={styles.storyLink}>Get to know us <ArrowDown size={16} aria-hidden="true" /></a>
+          <a href="#about-company" className={`${styles.storyLink} hero-button-motion`}>Get to know us <ArrowDown size={16} aria-hidden="true" /></a>
         </div>
       </div>
     </section>

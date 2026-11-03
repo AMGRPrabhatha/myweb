@@ -3,6 +3,7 @@ import TypewriterText from '@/components/TypewriterText';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 import ContactForm from '@/components/ContactForm';
+import styles from './ContactFindUs.module.css';
 import { db } from '@/lib/db';
 import { Plus, Globe2, Mail, MapPin, MessageSquare, ArrowUpRight } from 'lucide-react';
 
@@ -92,13 +93,13 @@ export default async function ContactPage() {
       {/* ========================================================= */}
       {/* 2. FIND US — Contact Details + Nawala, Sri Lanka Map       */}
       {/* ========================================================= */}
-      <section className="py-20 sm:py-28 bg-white">
+      <section className={`${styles.section} py-20 sm:py-28 bg-white`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
 
             {/* LEFT: Contact Details (5 cols) */}
             <div className="lg:col-span-5 space-y-8 sm:space-y-10">
-              <div className="space-y-3">
+              <div className={`${styles.intro} space-y-3`}>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-ink tracking-tight leading-tight">
                   Find Us
                 </h2>
@@ -112,14 +113,14 @@ export default async function ContactPage() {
                 {/* Email */}
                 <a
                   href={`mailto:${settings.businessEmail}`}
-                  className="group flex items-start gap-4 p-4.5 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/10 transition-all duration-300"
+                  className={`${styles.card} group flex items-start gap-4 p-4.5 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-blue-300 hover:shadow-md hover:shadow-blue-500/10 transition-all duration-300`}
                 >
                   <div className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-200/80 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-300">
                     <Mail className="w-5 h-5 text-blue-600 group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <div className="min-w-0 space-y-0.5">
+                  <div className={`${styles.cardContent} min-w-0 space-y-0.5`}>
                     <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Email Us</div>
-                    <div className="break-all text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors duration-300">
+                    <div className={`${styles.value} break-all text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors duration-300`}>
                       {settings.businessEmail}
                     </div>
                     <div className="text-xs text-slate-500">Response within {settings.responseExpectation}</div>
@@ -131,14 +132,14 @@ export default async function ContactPage() {
                   href={`https://wa.me/${settings.whatsappNumber.replace(/[^0-9]/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-start gap-4 p-4.5 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md hover:shadow-emerald-500/10 transition-all duration-300"
+                  className={`${styles.card} group flex items-start gap-4 p-4.5 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-emerald-300 hover:shadow-md hover:shadow-emerald-500/10 transition-all duration-300`}
                 >
                   <div className="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-200/80 flex items-center justify-center flex-shrink-0 group-hover:bg-emerald-600 group-hover:border-emerald-600 transition-all duration-300">
                     <MessageSquare className="w-5 h-5 text-emerald-600 group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <div className="min-w-0 space-y-0.5">
+                  <div className={`${styles.cardContent} min-w-0 space-y-0.5`}>
                     <div className="text-xs font-bold uppercase tracking-wider text-slate-400">WhatsApp</div>
-                    <div className="text-base font-bold text-slate-900 group-hover:text-emerald-600 transition-colors duration-300">
+                    <div className={`${styles.value} text-base font-bold text-slate-900 group-hover:text-emerald-600 transition-colors duration-300`}>
                       {settings.phone}
                     </div>
                     <div className="text-xs text-slate-500">Tap to start a conversation</div>
@@ -146,29 +147,29 @@ export default async function ContactPage() {
                 </a>
 
                 {/* Office Location - Nawala, Sri Lanka */}
-                <div className="group flex items-start gap-4 p-4.5 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-orange-300 hover:shadow-md hover:shadow-orange-500/10 transition-all duration-300">
+                <div className={`${styles.card} group flex items-start gap-4 p-4.5 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-orange-300 hover:shadow-md hover:shadow-orange-500/10 transition-all duration-300`}>
                   <div className="w-11 h-11 rounded-xl bg-orange-50 border border-orange-200/80 flex items-center justify-center flex-shrink-0 group-hover:bg-[#4b26df] group-hover:border-[#4b26df] transition-all duration-300">
                     <MapPin className="w-5 h-5 text-[#FF5722] group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <div className="space-y-0.5">
+                  <div className={`${styles.cardContent} min-w-0 space-y-0.5`}>
                     <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Headquarters</div>
-                    <div className="text-base font-bold text-slate-900">Nawala, Sri Lanka</div>
+                    <div className={`${styles.value} text-base font-bold text-slate-900`}>Nawala, Sri Lanka</div>
                     <div className="text-xs text-slate-500">Colombo District, Western Province</div>
                   </div>
                 </div>
               </div>
 
               {/* Proof Strip */}
-              <div className="flex flex-wrap items-center gap-2.5 pt-1">
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700">
+              <div className={`${styles.proofStrip} flex flex-wrap items-center gap-2.5 pt-1`}>
+                <div className={`${styles.proofItem} flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700`}>
                   <span className="w-2 h-2 rounded-full bg-emerald-500" />
                   <span>Available Mon–Sat</span>
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700">
+                <div className={`${styles.proofItem} flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700`}>
                   <span className="w-2 h-2 rounded-full bg-blue-500" />
                   <span>GMT+5:30 (SLST)</span>
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700">
+                <div className={`${styles.proofItem} flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700`}>
                   <span className="w-2 h-2 rounded-full bg-[#FF5722]" />
                   <span>Remote Friendly</span>
                 </div>

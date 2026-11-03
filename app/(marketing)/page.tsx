@@ -23,7 +23,7 @@ export default async function HomePage() {
   return (
     <>
       <HeroSection />
-      <HeroTicker />
+      <HeroTicker showOnMobile />
       <HomeStory />
       <SelectedWork projects={projects} />
       <ServicesPreview />

@@ -6,10 +6,10 @@ import styles from './HeroTicker.module.css';
 
 const messages = ['No hidden fees', 'Fast delivery', '24/7 customer service', 'Clear milestones', 'Full asset ownership', 'One connected team'];
 
-export default function HeroTicker({ fullBleed = false }: { fullBleed?: boolean }) {
+export default function HeroTicker({ fullBleed = false, showOnMobile = false }: { fullBleed?: boolean; showOnMobile?: boolean }) {
   const [paused, setPaused] = useState(false);
   return (
-    <aside className={`${styles.ticker} ${fullBleed ? styles.fullBleed : ''}`} aria-label="Our service commitments" data-paused={paused}>
+    <aside className={`${styles.ticker} ${fullBleed ? styles.fullBleed : ''} ${showOnMobile ? '' : styles.mobileHidden}`} aria-label="Our service commitments" data-paused={paused}>
       <p className="sr-only">{messages.join('. ')}.</p>
       <div className={styles.viewport}>
         <div className={styles.track} aria-hidden="true">
