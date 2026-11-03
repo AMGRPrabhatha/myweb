@@ -5,7 +5,7 @@ import { db } from '@/lib/db';
 import { saveProjectAction } from '@/lib/actions';
 import { ArrowLeft, Save, ExternalLink } from 'lucide-react';
 import { Project, ProjectServiceTag } from '@/lib/types';
-import { saveProjectCover } from '@/lib/project-cover';
+import ProjectCoverField from './ProjectCoverField';
 
 export const revalidate = 0;
 
@@ -47,7 +47,8 @@ export default async function AdminProjectEditPage({ params, searchParams }: Pro
         </Link>}
       </div>
 
-      {searchParams?.error === 'image' && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700">Could not upload the cover. Choose a PNG, JPEG, WebP, GIF, or AVIF image under 10 MB and try again.</p>}
+      {searchParams?.error === 'image' && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700">The cover upload is incomplete or its URL is invalid. Please try again.</p>}
+      {searchParams?.error === 'save' && <p role="alert" className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-700">The project could not be saved. Check your permissions and try again.</p>}
 
       <form
         action={async (formData: FormData) => {
@@ -66,10 +67,8 @@ export default async function AdminProjectEditPage({ params, searchParams }: Pro
             .split('\n')
             .map(s => s.trim())
             .filter(Boolean);
-          let coverImage = formData.get('coverImage')?.toString().trim() || project.coverImage;
-          try {
-            coverImage = (await saveProjectCover(formData.get('coverFile'))) || coverImage;
-          } catch {
+          const coverImage = formData.get('coverImage')?.toString().trim() || project.coverImage;
+          if (formData.get('coverUploadError') || !/^(https:\/\/|\/(?!\/))/.test(coverImage)) {
             redirect(`/admin/projects/${project.id}?error=image`);
           }
 
@@ -88,7 +87,8 @@ export default async function AdminProjectEditPage({ params, searchParams }: Pro
             deliveredScope: deliveredScope.length > 0 ? deliveredScope : project.deliveredScope,
           };
 
-          await saveProjectAction(updated);
+          const result = await saveProjectAction(updated);
+          if (!result.success) redirect(`/admin/projects/${project.id}?error=save`);
           redirect('/admin/projects');
         }}
         className="bg-white p-8 rounded-2xl border border-warm-300 shadow-sm space-y-6 text-xs text-ink-700"
@@ -190,16 +190,7 @@ export default async function AdminProjectEditPage({ params, searchParams }: Pro
           />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div>
-            <label className="block font-bold text-ink mb-1.5">Upload Replacement Cover Image</label>
-            <input name="coverFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/avif" className="w-full p-2.5 rounded-xl border border-warm-300 bg-warm-50 text-ink text-xs" />
-          </div>
-          <div>
-            <label className="block font-bold text-ink mb-1.5">Or use Image URL / public path</label>
-            <input name="coverImage" type="text" defaultValue={project.coverImage} required className="w-full p-2.5 rounded-xl border border-warm-300 bg-warm-50 text-ink text-xs" />
-          </div>
-        </div>
+        <ProjectCoverField initialUrl={project.coverImage} />
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-2 border-t border-warm-200">
           <div>

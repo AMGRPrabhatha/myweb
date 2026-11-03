@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, Save, Sparkles, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { saveProjectAction } from '@/lib/actions';
 import { Project, ProjectServiceTag } from '@/lib/types';
+import { cleanupProjectCover, uploadProjectCover } from '@/lib/project-cover-upload-client';
 
 const categories: ProjectServiceTag[] = [
   'Websites',
@@ -31,6 +32,8 @@ export default function NewProjectPage() {
   const [deliveredScope, setDeliveredScope] = useState('');
   const [coverImage, setCoverImage] = useState('/images/hero-work-showcase.png');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const projectId = useRef<string>();
+  const uploadedCover = useRef<{ file: File; path: string; url: string }>();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -69,13 +72,15 @@ export default function NewProjectPage() {
       // 2. Handle cover file upload if user picked a file
       let finalCover = coverImage.trim() || '/images/hero-work-showcase.png';
       if (selectedFile) {
-        const formData = new FormData();
-        formData.append('coverFile', selectedFile);
-        const res = await fetch('/api/upload-cover', { method: 'POST', body: formData });
-        const data = await res.json();
-        if (!res.ok || !data.url) throw new Error(data.error || 'Could not upload the cover image.');
-        finalCover = data.url;
+        if (uploadedCover.current?.file !== selectedFile) {
+          const previous = uploadedCover.current;
+          const uploaded = await uploadProjectCover(selectedFile);
+          uploadedCover.current = { file: selectedFile, ...uploaded };
+          if (previous) void cleanupProjectCover(previous.path);
+        }
+        finalCover = uploadedCover.current.url;
       }
+      if (finalCover.startsWith('blob:') || finalCover.startsWith('data:')) throw new Error('Choose a permanent cover image URL or upload an image.');
 
       // 3. Format scope items
       const scopeItems = deliveredScope
@@ -90,7 +95,7 @@ export default function NewProjectPage() {
       ];
 
       const newProject: Project = {
-        id: `proj-${Date.now()}`,
+        id: (projectId.current ??= `proj-${crypto.randomUUID()}`),
         title: title.trim(),
         slug: finalSlug,
         clientName: clientName.trim() || title.trim(),
@@ -111,7 +116,11 @@ export default function NewProjectPage() {
         router.push('/admin/projects');
         router.refresh();
       } else {
-        setErrorMsg('Could not save project. Please check fields and try again.');
+        setErrorMsg(result.error || 'Could not save project. Please check fields and try again.');
+        if (uploadedCover.current && (result.error?.includes('already exists') || result.error?.includes('not allowed') || result.error?.includes('permanent HTTPS'))) {
+          void cleanupProjectCover(uploadedCover.current.path);
+          uploadedCover.current = undefined;
+        }
       }
     } catch (err: any) {
       setErrorMsg(err.message || 'An unexpected error occurred.');
@@ -306,7 +315,7 @@ export default function NewProjectPage() {
                 const file = e.target.files?.[0];
                 if (file) {
                   setSelectedFile(file);
-                  setCoverImage(URL.createObjectURL(file));
+                  setErrorMsg('');
                 }
               }}
               className="w-full text-xs text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-slate-100 file:text-ink hover:file:bg-slate-200 cursor-pointer pt-1"

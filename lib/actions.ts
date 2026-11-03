@@ -305,11 +305,22 @@ export async function retryNotificationJobAction(jobId: string) {
 // Admin Action: Save project
 export async function saveProjectAction(project: Project) {
   await requireAdmin();
-  await db.saveProject(project);
-  revalidatePath('/work');
-  revalidatePath(`/work/${project.slug}`);
-  revalidatePath('/admin/projects');
-  return { success: true };
+  if (!project.coverImage || !(/^(https:\/\/|\/(?!\/))/.test(project.coverImage))) {
+    return { success: false, error: 'Use a permanent HTTPS image URL or a public image path.' };
+  }
+  try {
+    await db.saveProject(project);
+    revalidatePath('/work');
+    revalidatePath(`/work/${project.slug}`);
+    revalidatePath('/admin/projects');
+    return { success: true };
+  } catch (error) {
+    const code = error && typeof error === 'object' && 'code' in error ? String(error.code) : '';
+    console.error('Project save failed', { projectId: project.id, code });
+    if (code === '23505') return { success: false, error: 'A project with this URL slug already exists. Choose another slug.' };
+    if (code === '42501') return { success: false, error: 'Your account is not allowed to save projects.' };
+    return { success: false, error: 'The project could not be saved to the database. Please try again.' };
+  }
 }
 
 export async function deleteProjectAction(projectId: string) {
