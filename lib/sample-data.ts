@@ -988,6 +988,7 @@ export const initialBlogPosts: BlogPost[] = [
   },
 ];
 
+// Bundled examples only; real admin and public testimonial lists read public.testimonials.
 export const initialTestimonials: Testimonial[] = [
   {
     id: "test-nio",

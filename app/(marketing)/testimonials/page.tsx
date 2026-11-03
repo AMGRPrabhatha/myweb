@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function TestimonialsPage() {
-  const testimonials = await db.getAllTestimonials();
+  const testimonials = await db.getPublishedTestimonials();
 
   return (
     <div className="bg-white min-h-screen text-ink">

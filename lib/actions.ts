@@ -390,17 +390,33 @@ export async function deleteBlogPostAction(id: string) {
 // Admin Action: Save testimonial
 export async function saveTestimonialAction(testimonial: Testimonial) {
   await requireAdmin();
-  const saved = await db.saveTestimonial(testimonial);
-  revalidatePath('/testimonials');
-  revalidatePath('/admin/testimonials');
-  return { success: true, testimonial: saved };
+  if (!(/^(https:\/\/[^/\s]+|\/[^/\s])/.test(testimonial.videoThumbnail) && !/\s/.test(testimonial.videoThumbnail))) {
+    return { success: false, error: 'Use a permanent HTTPS image URL or a public image path.' };
+  }
+  try {
+    const saved = await db.saveTestimonial(testimonial);
+    revalidatePath('/');
+    revalidatePath('/testimonials');
+    revalidatePath('/admin/testimonials');
+    return { success: true, testimonial: saved };
+  } catch (error) {
+    const code = error && typeof error === 'object' && 'code' in error ? String(error.code) : '';
+    console.error('Testimonial save failed', { id: testimonial.id, code });
+    return { success: false, error: 'Could not save testimonial to the database. Check the production migration and admin access.' };
+  }
 }
 
 // Admin Action: Delete testimonial
 export async function deleteTestimonialAction(id: string) {
   await requireAdmin();
-  const success = await db.deleteTestimonial(id);
-  revalidatePath('/testimonials');
-  revalidatePath('/admin/testimonials');
-  return { success };
+  try {
+    const success = await db.deleteTestimonial(id);
+    revalidatePath('/');
+    revalidatePath('/testimonials');
+    revalidatePath('/admin/testimonials');
+    return { success };
+  } catch (error) {
+    console.error('Testimonial delete failed', error && typeof error === 'object' && 'code' in error ? String(error.code) : 'unknown');
+    return { success: false, error: 'Could not delete testimonial from the database.' };
+  }
 }

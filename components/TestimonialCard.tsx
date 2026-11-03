@@ -15,6 +15,7 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
       <div className={styles.image}>
         <Image
           src={testimonial.videoThumbnail}
+          unoptimized={testimonial.videoThumbnail.startsWith('blob:')}
           alt={`${testimonial.companyName} showcase`}
           fill
           sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"

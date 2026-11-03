@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useEffect, useRef, useState, useTransition } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Testimonial } from '@/lib/types';
 import { saveTestimonialAction, deleteTestimonialAction } from '@/lib/actions';
 import TestimonialCard from '@/components/TestimonialCard';
+import { cleanupTestimonialImage, testimonialImagePath, uploadTestimonialImage } from '@/lib/testimonial-image-upload-client';
 import {
   ArrowLeft,
   Save,
@@ -67,6 +68,15 @@ export default function TestimonialEditor({
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+  const [saveError, setSaveError] = useState('');
+  const [previewUrl, setPreviewUrl] = useState('');
+  const stagedUpload = useRef<{ path: string; url: string }>();
+  const testimonialId = useRef(initialTestimonial?.id || `test-${crypto.randomUUID()}`);
+
+  useEffect(() => () => { if (previewUrl) URL.revokeObjectURL(previewUrl); }, [previewUrl]);
+  useEffect(() => () => { if (stagedUpload.current) void cleanupTestimonialImage(stagedUpload.current.path); }, []);
 
   // Form State
   const [companyName, setCompanyName] = useState(initialTestimonial?.companyName || '');
@@ -91,9 +101,7 @@ export default function TestimonialEditor({
   );
 
   const currentTestimonial: Testimonial = {
-    id:
-      initialTestimonial?.id ||
-      `test-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+    id: testimonialId.current,
     companyName: companyName || 'Company Name',
     companySubtitle: companySubtitle || 'Industry, Market & Location',
     clientName: clientName || 'Client Name',
@@ -104,11 +112,51 @@ export default function TestimonialEditor({
       quote ||
       'Design1X delivered outstanding engineering and creative strategy for our platform.',
     fullReview: fullReview || quote,
+    videoDuration: initialTestimonial?.videoDuration,
+    companyLogo: initialTestimonial?.companyLogo,
     rating: rating,
-    videoThumbnail: imageUrl,
+    videoThumbnail: previewUrl || imageUrl,
+    publicationStatus: initialTestimonial?.publicationStatus ?? 'published',
+  };
+
+  const chooseImageUrl = (url: string) => {
+    if (stagedUpload.current && stagedUpload.current.url !== url) {
+      void cleanupTestimonialImage(stagedUpload.current.path);
+      stagedUpload.current = undefined;
+    }
+    setImageUrl(url);
+    setUploadError('');
+    setPreviewUrl('');
+  };
+
+  const handleImageFile = async (file?: File) => {
+    if (!file) return;
+    setUploadError('');
+    setSaveError('');
+    setUploading(true);
+    setPreviewUrl(URL.createObjectURL(file));
+    try {
+      const uploaded = await uploadTestimonialImage(file);
+      const previous = stagedUpload.current;
+      stagedUpload.current = uploaded;
+      setImageUrl(uploaded.url);
+      setPreviewUrl('');
+      if (previous) void cleanupTestimonialImage(previous.path);
+    } catch (error) {
+      setPreviewUrl('');
+      setUploadError(error instanceof Error ? error.message : 'Image upload failed. Please try again.');
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleSave = () => {
+    if (uploading) return;
+    setSaveError('');
+    if (uploadError) {
+      setSaveError('The image upload failed. Choose another file or select an image URL before saving.');
+      return;
+    }
     if (!companyName.trim()) {
       alert('Please enter a Company Name.');
       return;
@@ -123,13 +171,25 @@ export default function TestimonialEditor({
     }
 
     startTransition(async () => {
-      const res = await saveTestimonialAction(currentTestimonial);
-      if (res.success) {
-        setSaveSuccess(true);
-        setTimeout(() => {
-          setSaveSuccess(false);
-          router.push('/admin/testimonials');
-        }, 1200);
+      try {
+        const res = await saveTestimonialAction({ ...currentTestimonial, videoThumbnail: imageUrl });
+        if (res.success) {
+          const oldPath = initialTestimonial && initialTestimonial.videoThumbnail !== imageUrl
+            ? testimonialImagePath(initialTestimonial.videoThumbnail)
+            : null;
+          if (oldPath) void cleanupTestimonialImage(oldPath);
+          stagedUpload.current = undefined;
+          setSaveSuccess(true);
+          setTimeout(() => {
+            setSaveSuccess(false);
+            router.push('/admin/testimonials');
+            router.refresh();
+          }, 1200);
+        } else {
+          setSaveError(res.error || 'Could not save testimonial. Please try again.');
+        }
+      } catch {
+        setSaveError('Could not save testimonial. Please check your connection and try again.');
       }
     });
   };
@@ -138,8 +198,19 @@ export default function TestimonialEditor({
     if (!initialTestimonial?.id) return;
     if (confirm(`Are you sure you want to delete the testimonial from "${initialTestimonial.companyName}"?`)) {
       startTransition(async () => {
-        await deleteTestimonialAction(initialTestimonial.id);
-        router.push('/admin/testimonials');
+        try {
+          const result = await deleteTestimonialAction(initialTestimonial.id);
+          if (!result.success) {
+            setSaveError(result.error || 'Could not delete testimonial.');
+            return;
+          }
+          const path = testimonialImagePath(initialTestimonial.videoThumbnail);
+          if (path) void cleanupTestimonialImage(path);
+          router.push('/admin/testimonials');
+          router.refresh();
+        } catch {
+          setSaveError('Could not delete testimonial. Please try again.');
+        }
       });
     }
   };
@@ -170,7 +241,7 @@ export default function TestimonialEditor({
             <button
               type="button"
               onClick={handleDelete}
-              disabled={isPending}
+              disabled={isPending || uploading}
               className="p-2 rounded-xl text-rose-600 hover:bg-rose-50 border border-rose-200 transition-colors"
               title="Delete Testimonial"
             >
@@ -181,13 +252,13 @@ export default function TestimonialEditor({
           <button
             type="button"
             onClick={handleSave}
-            disabled={isPending}
+            disabled={isPending || uploading}
             className="inline-flex items-center gap-2 px-5 py-2 rounded-xl brand-solid-button font-bold text-xs tracking-tight shadow-sm transition-all active:scale-[0.98] cursor-pointer disabled:opacity-50"
           >
-            {isPending ? (
+            {isPending || uploading ? (
               <>
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                <span>Saving...</span>
+                <span>{uploading ? 'Uploading...' : 'Saving...'}</span>
               </>
             ) : saveSuccess ? (
               <>
@@ -203,6 +274,8 @@ export default function TestimonialEditor({
           </button>
         </div>
       </div>
+
+      {saveError && <p role="alert" className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">{saveError}</p>}
 
       {/* Main 2-Column Split: Left Editor, Right Live Card Preview */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -359,10 +432,28 @@ export default function TestimonialEditor({
                 type="text"
                 id="imageUrl"
                 value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
+                disabled={uploading}
+                onChange={(e) => chooseImageUrl(e.target.value)}
                 placeholder="/images/projects/dribbble-devion.png"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-warm-300 text-xs sm:text-sm text-ink font-mono focus:outline-none focus:border-[#FF5722]"
               />
+            </div>
+
+            <div>
+              <label htmlFor="testimonialImageFile" className="block text-xs font-bold text-ink-600 mb-1">
+                Upload Image / Choose File
+              </label>
+              <input
+                id="testimonialImageFile"
+                type="file"
+                disabled={uploading}
+                accept="image/png,image/jpeg,image/webp"
+                onChange={(e) => void handleImageFile(e.target.files?.[0])}
+                className="w-full px-3.5 py-2.5 rounded-xl border border-warm-300 text-xs sm:text-sm text-ink bg-warm-50 file:mr-3 file:border-0 file:rounded-lg file:bg-white file:px-3 file:py-1.5 file:font-bold file:text-cobalt"
+              />
+              <p className="mt-1 text-[11px] text-ink-500">PNG, JPEG or WebP · 10 MB maximum</p>
+              {uploadError && <p role="alert" className="mt-1 text-xs text-rose-700">{uploadError}</p>}
+              {uploading && <p role="status" className="mt-1 text-xs text-cobalt">Uploading image...</p>}
             </div>
 
             {/* Presets */}
@@ -373,7 +464,8 @@ export default function TestimonialEditor({
                   <button
                     key={preset.label}
                     type="button"
-                    onClick={() => setImageUrl(preset.url)}
+                    disabled={uploading}
+                    onClick={() => chooseImageUrl(preset.url)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
                       imageUrl === preset.url
                         ? 'brand-solid-button border-[#6556ed]'

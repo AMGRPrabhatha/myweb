@@ -14,6 +14,9 @@ export const revalidate = 0;
 
 export default async function AdminTestimonialsPage() {
   const testimonials = await db.getAllTestimonials();
+  const averageRating = testimonials.length
+    ? (testimonials.reduce((sum, testimonial) => sum + testimonial.rating, 0) / testimonials.length).toFixed(1)
+    : '—';
 
   return (
     <div className="space-y-6 animate-fadeIn pb-12">
@@ -55,7 +58,7 @@ export default async function AdminTestimonialsPage() {
           <div className="space-y-1">
             <span className="text-[11px] font-bold uppercase tracking-wider text-ink-400">Total Reviews</span>
             <div className="text-3xl font-extrabold text-cobalt">{testimonials.length}</div>
-            <span className="text-[11px] text-ink-500">Active client endorsements</span>
+            <span className="text-[11px] text-ink-500">Saved client endorsements</span>
           </div>
           <div className="w-11 h-11 rounded-xl bg-cobalt-50 text-cobalt flex items-center justify-center font-bold">
             <MessageSquareQuote className="w-5 h-5" />
@@ -66,9 +69,9 @@ export default async function AdminTestimonialsPage() {
           <div className="space-y-1">
             <span className="text-[11px] font-bold uppercase tracking-wider text-ink-400">Average Rating</span>
             <div className="text-3xl font-extrabold text-amber-500 flex items-center gap-1">
-              5.0 <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
+              {averageRating} <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
             </div>
-            <span className="text-[11px] text-ink-500">100% verified 5-star rating</span>
+            <span className="text-[11px] text-ink-500">Based on saved testimonials</span>
           </div>
           <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
             <Star className="w-5 h-5 fill-amber-400 text-amber-400" />
@@ -94,7 +97,7 @@ export default async function AdminTestimonialsPage() {
       <div className="bg-white rounded-2xl border border-warm-300 shadow-sm overflow-hidden">
         <div className="p-5 border-b border-warm-200 flex items-center justify-between">
           <div>
-            <h2 className="text-base font-bold text-ink">Published Testimonials</h2>
+            <h2 className="text-base font-bold text-ink">Testimonials</h2>
             <p className="text-xs text-ink-500">Click &apos;Edit Card&apos; to change copy, client quotes, images, or KPI badges.</p>
           </div>
           <span className="text-xs font-semibold text-ink-400">
@@ -164,6 +167,9 @@ export default async function AdminTestimonialsPage() {
                   </td>
                 </tr>
               ))}
+              {testimonials.length === 0 && (
+                <tr><td colSpan={5} className="px-6 py-10 text-center text-ink-500">No testimonials yet. Add your first client review.</td></tr>
+              )}
             </tbody>
           </table>
         </div>

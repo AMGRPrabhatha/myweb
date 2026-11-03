@@ -9,8 +9,7 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props) {
-  const testimonials = await db.getAllTestimonials();
-  const testimonial = testimonials.find((t) => t.id === params.id);
+  const testimonial = await db.getTestimonialById(params.id);
   return {
     title: testimonial
       ? `Edit: ${testimonial.companyName} | Staff Admin`
@@ -19,8 +18,7 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function EditTestimonialPage({ params }: Props) {
-  const testimonials = await db.getAllTestimonials();
-  const testimonial = testimonials.find((t) => t.id === params.id);
+  const testimonial = await db.getTestimonialById(params.id);
 
   if (!testimonial) {
     notFound();

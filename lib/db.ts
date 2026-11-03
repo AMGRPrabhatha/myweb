@@ -1,19 +1,19 @@
 import * as leadDb from './lead-db';
 import * as projectDb from './project-db';
-import { initialPlans, initialSiteSettings, initialBlogPosts, initialTestimonials } from './sample-data';
+import * as testimonialDb from './testimonial-db';
+import { initialPlans, initialSiteSettings, initialBlogPosts } from './sample-data';
 import { Lead, LeadNote, NotificationJob, Plan, Project, SiteSettings, BlogPost, Testimonial } from './types';
 
 /**
  * Existing local store for non-project public content.
- * Projects, enquiries, and notification jobs use Supabase below.
+ * Projects, testimonials, enquiries, and notification jobs use Supabase below.
  */
 class LocalDatabaseStore {
   private plans: Plan[] = [...initialPlans];
   private blogPosts: BlogPost[] = [...initialBlogPosts];
-  private testimonials: Testimonial[] = [...initialTestimonials];
   private settings: SiteSettings = { ...initialSiteSettings };
 
-  // Blog Posts & Testimonials
+  // Blog Posts
   async getAllBlogPosts(): Promise<BlogPost[]> {
     return this.blogPosts;
   }
@@ -40,30 +40,6 @@ class LocalDatabaseStore {
     const initialLen = this.blogPosts.length;
     this.blogPosts = this.blogPosts.filter(b => b.id !== id);
     return this.blogPosts.length < initialLen;
-  }
-
-  async getAllTestimonials(): Promise<Testimonial[]> {
-    return this.testimonials;
-  }
-
-  async getTestimonialById(id: string): Promise<Testimonial | null> {
-    return this.testimonials.find(t => t.id === id) || null;
-  }
-
-  async saveTestimonial(testimonial: Testimonial): Promise<Testimonial> {
-    const idx = this.testimonials.findIndex(t => t.id === testimonial.id);
-    if (idx >= 0) {
-      this.testimonials[idx] = { ...testimonial };
-    } else {
-      this.testimonials.unshift({ ...testimonial });
-    }
-    return testimonial;
-  }
-
-  async deleteTestimonial(id: string): Promise<boolean> {
-    const initialLen = this.testimonials.length;
-    this.testimonials = this.testimonials.filter(t => t.id !== id);
-    return this.testimonials.length < initialLen;
   }
 
   // Plans
@@ -110,8 +86,7 @@ class LocalDatabaseStore {
 const globalForDb = globalThis as unknown as { localStore?: LocalDatabaseStore };
 if (
   globalForDb.localStore &&
-  (typeof globalForDb.localStore.getAllTestimonials !== 'function' ||
-    typeof (globalForDb.localStore as any).saveBlogPost !== 'function' ||
+  (typeof (globalForDb.localStore as any).saveBlogPost !== 'function' ||
     typeof (globalForDb.localStore as any).saveTestimonial !== 'function')
 ) {
   delete globalForDb.localStore;
@@ -205,23 +180,18 @@ export const db = {
       : true;
   },
   getAllTestimonials: async () => {
-    return (localDb && typeof localDb.getAllTestimonials === 'function') 
-      ? localDb.getAllTestimonials() 
-      : initialTestimonials;
+    return testimonialDb.getAllTestimonials();
+  },
+  getPublishedTestimonials: async () => {
+    return testimonialDb.getPublishedTestimonials();
   },
   getTestimonialById: async (id: string) => {
-    return (localDb && typeof (localDb as any).getTestimonialById === 'function')
-      ? (localDb as any).getTestimonialById(id)
-      : (initialTestimonials.find(t => t.id === id) || null);
+    return testimonialDb.getTestimonialById(id);
   },
   saveTestimonial: async (testimonial: Testimonial) => {
-    return (localDb && typeof (localDb as any).saveTestimonial === 'function')
-      ? (localDb as any).saveTestimonial(testimonial)
-      : testimonial;
+    return testimonialDb.saveTestimonial(testimonial);
   },
   deleteTestimonial: async (id: string) => {
-    return (localDb && typeof (localDb as any).deleteTestimonial === 'function')
-      ? (localDb as any).deleteTestimonial(id)
-      : true;
+    return testimonialDb.deleteTestimonial(id);
   }
 };

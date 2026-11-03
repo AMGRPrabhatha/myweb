@@ -177,4 +177,5 @@ export interface Testimonial {
   rating: number;
   highlightKpi: string;
   serviceCategory: 'Website Development' | 'Social Media' | 'Combined Delivery';
+  publicationStatus?: 'draft' | 'published';
 }
