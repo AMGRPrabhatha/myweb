@@ -11,7 +11,7 @@ import ProofAndFaq from '@/components/ProofAndFaq';
 import BlogFeatureCarousel from '@/components/BlogFeatureCarousel';
 import { db } from '@/lib/db';
 
-export const revalidate = 60; // ISR cache revalidation
+export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
   const [projects, plans, posts] = await Promise.all([

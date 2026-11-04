@@ -1,4 +1,5 @@
 import { Plan, Project, SiteSettings, BlogPost, Testimonial } from './types';
+import { socialLinks } from './social-links';
 
 export const initialSiteSettings: SiteSettings = {
   agencyName: "Design1X",
@@ -8,10 +9,10 @@ export const initialSiteSettings: SiteSettings = {
   whatsappNumber: "+94758429898",
   responseExpectation: "Within 1 business day",
   officeLocation: "Nawala, Sri Lanka",
-  facebookUrl: "https://facebook.com/example",
-  instagramUrl: "https://instagram.com/example",
+  facebookUrl: socialLinks.facebook,
+  instagramUrl: socialLinks.instagram,
   tiktokUrl: "https://tiktok.com/@example",
-  linkedinUrl: "https://linkedin.com/company/example",
+  linkedinUrl: undefined,
   githubUrl: "https://github.com/example",
 };
 

@@ -5,8 +5,10 @@ import Image from 'next/image';
 import {
   ArrowRight,
   ArrowUp,
+  AtSign,
 } from 'lucide-react';
 import { initialSiteSettings } from '@/lib/sample-data';
+import { socialLinks } from '@/lib/social-links';
 
 export default function Footer({ settings = initialSiteSettings }: { settings?: typeof initialSiteSettings }) {
   const currentYear = new Date().getFullYear();
@@ -207,7 +209,7 @@ export default function Footer({ settings = initialSiteSettings }: { settings?: 
           <div className="flex items-center gap-3">
             {/* Facebook */}
             <a
-              href={settings.facebookUrl || 'https://facebook.com'}
+              href={settings.facebookUrl || socialLinks.facebook}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -220,7 +222,7 @@ export default function Footer({ settings = initialSiteSettings }: { settings?: 
 
             {/* X / Twitter */}
             <a
-              href="https://x.com"
+              href={socialLinks.x}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="X Twitter"
@@ -231,35 +233,31 @@ export default function Footer({ settings = initialSiteSettings }: { settings?: 
               </svg>
             </a>
 
-            {/* YouTube */}
+            {/* Threads */}
             <a
-              href="https://youtube.com"
+              href={socialLinks.threads}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="YouTube"
+              aria-label="Threads"
               className="w-10 h-10 rounded-full bg-slate-100 hover:bg-[#4b26df] text-slate-700 hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs hover:scale-105"
             >
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-              </svg>
+              <AtSign className="w-4 h-4" strokeWidth={2.4} aria-hidden="true" />
             </a>
 
             {/* LinkedIn */}
-            <a
-              href={settings.linkedinUrl || 'https://linkedin.com'}
-              target="_blank"
-              rel="noopener noreferrer"
+            <span
+              role="img"
               aria-label="LinkedIn"
-              className="w-10 h-10 rounded-full bg-slate-100 hover:bg-[#4b26df] text-slate-700 hover:text-white flex items-center justify-center transition-all duration-300 shadow-xs hover:scale-105"
+              className="w-10 h-10 rounded-full bg-slate-100 text-slate-700 flex items-center justify-center shadow-xs"
             >
               <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
               </svg>
-            </a>
+            </span>
 
             {/* Instagram */}
             <a
-              href={settings.instagramUrl || 'https://instagram.com'}
+              href={settings.instagramUrl || socialLinks.instagram}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"

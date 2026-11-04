@@ -1,7 +1,8 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { db } from './db';
+import { PUBLIC_PROJECTS_CACHE_TAG } from './project-db';
 import { requireAdmin } from './admin-auth';
 import { BlogPost, LeadStatus, Plan, Project, ServiceInterest, SiteSettings, Testimonial } from './types';
 
@@ -310,6 +311,8 @@ export async function saveProjectAction(project: Project) {
   }
   try {
     await db.saveProject(project);
+    revalidateTag(PUBLIC_PROJECTS_CACHE_TAG);
+    revalidatePath('/');
     revalidatePath('/work');
     revalidatePath(`/work/${project.slug}`);
     revalidatePath('/admin/projects');
@@ -331,6 +334,7 @@ export async function deleteProjectAction(projectId: string) {
 
     const deleted = await db.deleteProject(projectId);
     if (!deleted) return { success: false, error: 'The database did not delete this project. Refresh and try again.' };
+    revalidateTag(PUBLIC_PROJECTS_CACHE_TAG);
     revalidatePath('/');
     revalidatePath('/work');
     revalidatePath(`/work/${project.slug}`);

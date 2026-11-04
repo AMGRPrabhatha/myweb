@@ -1,12 +1,22 @@
 import 'server-only';
-import { unstable_noStore as noStore } from 'next/cache';
+import { unstable_cache, unstable_noStore as noStore } from 'next/cache';
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { createAdminSessionClient } from './admin-auth';
 import type { Project, ProjectMedia } from './types';
+
+export const PUBLIC_PROJECTS_CACHE_TAG = 'published-projects';
 
 function client() {
   const supabase = createAdminSessionClient();
   if (!supabase) throw new Error('Project database is not configured.');
   return supabase;
+}
+
+function publicClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) throw new Error('Project database is not configured.');
+  return createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
 }
 
 function mapMedia(row: any): ProjectMedia {
@@ -40,10 +50,10 @@ function mapProject(row: any, media: ProjectMedia[]): Project {
   };
 }
 
-async function mediaFor(ids: string[]): Promise<Map<string, ProjectMedia[]>> {
+async function mediaFor(ids: string[], supabase: SupabaseClient): Promise<Map<string, ProjectMedia[]>> {
   const byProject = new Map<string, ProjectMedia[]>();
   if (!ids.length) return byProject;
-  const { data, error } = await client().from('project_media').select('*').in('project_id', ids).order('display_order');
+  const { data, error } = await supabase.from('project_media').select('*').in('project_id', ids).order('display_order');
   if (error) throw error;
   for (const row of data ?? []) {
     const media = mapMedia(row);
@@ -52,24 +62,37 @@ async function mediaFor(ids: string[]): Promise<Map<string, ProjectMedia[]>> {
   return byProject;
 }
 
+const getPublishedProjects = unstable_cache(async (): Promise<Project[]> => {
+  const supabase = publicClient();
+  const { data, error } = await supabase.from('projects').select('*')
+    .eq('status', 'published').order('display_order').order('published_at', { ascending: false });
+  if (error) throw error;
+  const media = await mediaFor((data ?? []).map(row => row.id), supabase);
+  return (data ?? []).map(row => mapProject(row, media.get(row.id) ?? []));
+}, [PUBLIC_PROJECTS_CACHE_TAG], { revalidate: 60, tags: [PUBLIC_PROJECTS_CACHE_TAG] });
+
 export async function getProjects(filter?: { category?: string; status?: 'draft' | 'published' }): Promise<Project[]> {
+  if (filter?.status === 'published') {
+    const projects = await getPublishedProjects();
+    return filter.category && filter.category !== 'All'
+      ? projects.filter(project => project.category === filter.category)
+      : projects;
+  }
+
   noStore();
-  let query = client().from('projects').select('*').order('display_order').order('published_at', { ascending: false });
+  const supabase = client();
+  let query = supabase.from('projects').select('*').order('display_order').order('published_at', { ascending: false });
   if (filter?.status) query = query.eq('status', filter.status);
   if (filter?.category && filter.category !== 'All') query = query.eq('category', filter.category);
   const { data, error } = await query;
   if (error) throw error;
-  const media = await mediaFor((data ?? []).map(row => row.id));
+  const media = await mediaFor((data ?? []).map(row => row.id), supabase);
   return (data ?? []).map(row => mapProject(row, media.get(row.id) ?? []));
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
-  noStore();
-  const { data, error } = await client().from('projects').select('*').eq('slug', slug).eq('status', 'published').maybeSingle();
-  if (error) throw error;
-  if (!data) return null;
-  const media = await mediaFor([data.id]);
-  return mapProject(data, media.get(data.id) ?? []);
+  const projects = await getPublishedProjects();
+  return projects.find(project => project.slug === slug) ?? null;
 }
 
 export async function saveProject(project: Project): Promise<Project> {

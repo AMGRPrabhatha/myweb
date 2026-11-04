@@ -471,7 +471,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
         {/* ========================================================= */}
         {/* 2. 4-COLUMN CARDS GRID (NinjaPromo High-Impact Layout)    */}
         {/* ========================================================= */}
-        <div className="mobile-card-rail grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch pt-2">
+        <div className="mobile-card-rail plans-pricing-rail grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch pt-2">
           {currentTiers.map((tier, idx) => {
             const isPopular = tier.isPopular;
             const lkrAmount = Number(tier.price.replace(/,/g, ''));

@@ -5,7 +5,24 @@ import { Suspense } from 'react';
 import ContactForm from '@/components/ContactForm';
 import styles from './ContactFindUs.module.css';
 import { db } from '@/lib/db';
+import { socialLinks } from '@/lib/social-links';
 import { Plus, Globe2, Mail, MapPin, MessageSquare, ArrowUpRight } from 'lucide-react';
+
+function SocialChannelRow({ name, url }: { name: string; url?: string }) {
+  const content = <>
+    <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-ink group-hover:text-[#FF5722] transition-colors tracking-tight">{name}</span>
+    <span className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-ink group-hover:text-[#FF5722] group-hover:bg-orange-50 transition-all duration-300">
+      <Plus className="w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110" strokeWidth={1.5} aria-hidden="true" />
+    </span>
+  </>;
+  const className = 'group flex items-center justify-between py-6 sm:py-8 border-b border-warm-200 transition-colors';
+
+  return url ? (
+    <a href={url} target="_blank" rel="noopener noreferrer" aria-label={`Follow us on ${name}`} className={`${className} hover:border-ink cursor-pointer`}>{content}</a>
+  ) : (
+    <div className={className}>{content}</div>
+  );
+}
 
 export const metadata: Metadata = {
   title: 'Start a Project | Design1X',
@@ -19,34 +36,34 @@ export default async function ContactPage() {
     db.getSettings(),
   ]);
 
-  // Social Channels for the Follow Us section (Matching Ninja Promo UI - KEEP EXACTLY UNCHANGED)
+  // Official profiles shown in the Follow Us section.
   const socialLeft = [
     {
       name: 'Facebook',
-      url: settings.facebookUrl || 'https://facebook.com',
+      url: settings.facebookUrl || socialLinks.facebook,
     },
     {
-      name: 'YouTube',
-      url: 'https://youtube.com',
+      name: 'Threads',
+      url: socialLinks.threads,
     },
     {
       name: 'Instagram',
-      url: settings.instagramUrl || 'https://instagram.com',
+      url: settings.instagramUrl || socialLinks.instagram,
     },
   ];
 
   const socialRight = [
     {
       name: 'Twitter (now known as X)',
-      url: 'https://x.com',
+      url: socialLinks.x,
     },
     {
       name: 'LinkedIn',
-      url: settings.linkedinUrl || 'https://linkedin.com',
+      url: undefined,
     },
     {
       name: 'Behance',
-      url: 'https://behance.net',
+      url: undefined,
     },
   ];
 
@@ -238,7 +255,7 @@ export default async function ContactPage() {
       </section>
 
       {/* ========================================================= */}
-      {/* 3. FOLLOW US SECTION (Matching Ninja Promo UI - UNCHANGED) */}
+      {/* 3. FOLLOW US SECTION */}
       {/* ========================================================= */}
       <section className="py-20 sm:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -254,52 +271,14 @@ export default async function ContactPage() {
             {/* Two-Column Social Rows Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 lg:gap-x-24">
               
-              {/* Left Column (Facebook, YouTube, Instagram) */}
+              {/* Left Column (Facebook, Threads, Instagram) */}
               <div className="flex flex-col">
-                {socialLeft.map((channel) => (
-                  <a
-                    key={channel.name}
-                    href={channel.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Follow us on ${channel.name}`}
-                    className="group flex items-center justify-between py-6 sm:py-8 border-b border-warm-200 hover:border-ink transition-colors cursor-pointer"
-                  >
-                    <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-ink group-hover:text-[#FF5722] transition-colors tracking-tight">
-                      {channel.name}
-                    </span>
-                    <span className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-ink group-hover:text-[#FF5722] group-hover:bg-orange-50 transition-all duration-300">
-                      <Plus
-                        className="w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110"
-                        strokeWidth={1.5}
-                      />
-                    </span>
-                  </a>
-                ))}
+                {socialLeft.map((channel) => <SocialChannelRow key={channel.name} {...channel} />)}
               </div>
 
               {/* Right Column (Twitter / X, LinkedIn, Behance) */}
               <div className="flex flex-col">
-                {socialRight.map((channel) => (
-                  <a
-                    key={channel.name}
-                    href={channel.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Follow us on ${channel.name}`}
-                    className="group flex items-center justify-between py-6 sm:py-8 border-b border-warm-200 hover:border-ink transition-colors cursor-pointer"
-                  >
-                    <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-ink group-hover:text-[#FF5722] transition-colors tracking-tight">
-                      {channel.name}
-                    </span>
-                    <span className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-ink group-hover:text-[#FF5722] group-hover:bg-orange-50 transition-all duration-300">
-                      <Plus
-                        className="w-6 h-6 sm:w-7 sm:h-7 transition-transform duration-300 group-hover:rotate-90 group-hover:scale-110"
-                        strokeWidth={1.5}
-                      />
-                    </span>
-                  </a>
-                ))}
+                {socialRight.map((channel) => <SocialChannelRow key={channel.name} {...channel} />)}
               </div>
 
             </div>

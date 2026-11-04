@@ -37,6 +37,8 @@
     padding: 4px 1px 16px;
   }
 
+  .mobile-card-rail.plans-pricing-rail { padding-top: 24px; }
+
   .mobile-card-rail::-webkit-scrollbar { height: 4px; }
   .mobile-card-rail::-webkit-scrollbar-track { background: #e9edfa; border-radius: 999px; }
   .mobile-card-rail::-webkit-scrollbar-thumb { background: #7b6cf0; border-radius: 999px; }
