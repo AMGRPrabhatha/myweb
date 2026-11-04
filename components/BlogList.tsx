@@ -14,17 +14,15 @@ export default function BlogList({ initialPosts }: BlogListProps) {
 
   const categories = [
     { id: 'ALL', label: 'All articles' },
-    { id: 'WEB DEVELOPMENT', label: 'Web development' },
-    { id: 'SOCIAL STRATEGY', label: 'Social strategy' },
-    { id: 'ARCHITECTURE', label: 'Architecture' },
-    { id: 'CONTENT & VIDEO', label: 'Content & video' },
-    { id: 'MARKET TRENDS', label: 'Market trends' },
-    { id: 'SEO & GROWTH', label: 'SEO & growth' },
+    ...Array.from(new Set(initialPosts.map(post => post.category))).map(category => ({
+      id: category,
+      label: category,
+    })),
   ];
 
   const filteredPosts = selectedCategory === 'ALL'
     ? initialPosts
-    : initialPosts.filter(p => p.category.toUpperCase() === selectedCategory.toUpperCase());
+    : initialPosts.filter(p => p.category === selectedCategory);
 
   return (
     <div className="space-y-8 sm:space-y-10">

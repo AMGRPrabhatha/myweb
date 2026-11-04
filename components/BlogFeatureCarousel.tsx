@@ -22,7 +22,7 @@ export default function BlogFeatureCarousel({ posts }: { posts: BlogPost[] }) {
     <section className={styles.section} aria-labelledby="featured-articles-heading" aria-roledescription="carousel">
       <div className={styles.header}>
         <div>
-          <h2 id="featured-articles-heading">Ideas worth exploring.<span> The latest from our team.</span></h2>
+          <h2 id="featured-articles-heading">Ideas worth exploring.<span> The latest in tech and digital.</span></h2>
         </div>
         {posts.length > 1 && <div className={styles.controls}>
           <button type="button" onClick={() => move(-1)} aria-label="Previous article"><ArrowLeft size={20} aria-hidden="true" /></button>

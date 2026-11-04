@@ -15,8 +15,8 @@ const content = {
   },
   blog: {
     heading: ['Ideas to build on.', 'Insights to move forward.'],
-    lead: 'Web development. Social strategy. Growth.',
-    description: 'Practical guides and perspectives on building websites, creating content and connecting your digital presence. Explore the thinking behind our work.',
+    lead: 'Technology. Digital strategy. Growth.',
+    description: 'Explore technology news, practical guides and perspectives on web development, content and digital growth.',
     primary: 'Explore the articles',
     target: '#journal-articles',
     secondary: 'Get to know us',

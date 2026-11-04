@@ -35,6 +35,7 @@ export default async function ContactPage() {
     db.getAllPlans(),
     db.getSettings(),
   ]);
+  const mapQuery = encodeURIComponent(settings.officeLocation);
 
   // Official profiles shown in the Follow Us section.
   const socialLeft = [
@@ -108,7 +109,7 @@ export default async function ContactPage() {
       <HeroTicker />
 
       {/* ========================================================= */}
-      {/* 2. FIND US — Contact Details + Nawala, Sri Lanka Map       */}
+      {/* 2. FIND US — Contact Details + Location Map                 */}
       {/* ========================================================= */}
       <section className={`${styles.section} py-20 sm:py-28 bg-white`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -121,7 +122,7 @@ export default async function ContactPage() {
                   Find Us
                 </h2>
                 <p className="text-base text-slate-600 leading-relaxed font-normal">
-                  We operate as a distributed digital pod with headquarters in Nawala, Sri Lanka — serving startups and growing businesses globally.
+                  We operate as a distributed digital pod with headquarters in {settings.officeLocation} — serving startups and growing businesses globally.
                 </p>
               </div>
 
@@ -163,22 +164,22 @@ export default async function ContactPage() {
                   </div>
                 </a>
 
-                {/* Office Location - Nawala, Sri Lanka */}
+                {/* Office Location */}
                 <div className={`${styles.card} group flex items-start gap-4 p-4.5 sm:p-5 rounded-2xl border border-slate-200 bg-white hover:border-orange-300 hover:shadow-md hover:shadow-orange-500/10 transition-all duration-300`}>
                   <div className="w-11 h-11 rounded-xl bg-orange-50 border border-orange-200/80 flex items-center justify-center flex-shrink-0 group-hover:bg-[#4b26df] group-hover:border-[#4b26df] transition-all duration-300">
                     <MapPin className="w-5 h-5 text-[#FF5722] group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div className={`${styles.cardContent} min-w-0 space-y-0.5`}>
                     <div className="text-xs font-bold uppercase tracking-wider text-slate-400">Headquarters</div>
-                    <div className={`${styles.value} text-base font-bold text-slate-900`}>Nawala, Sri Lanka</div>
-                    <div className="text-xs text-slate-500">Colombo District, Western Province</div>
+                    <div className={`${styles.value} text-base font-bold text-slate-900`}>{settings.officeLocation}</div>
+                    <div className="text-xs text-slate-500">Western Province, Sri Lanka</div>
                   </div>
                 </div>
               </div>
 
             </div>
 
-            {/* RIGHT: Real Street Map Highlighting Nawala, Sri Lanka (7 cols) */}
+            {/* RIGHT: Map of the listed city (7 cols) */}
             <div className="lg:col-span-7 relative">
               {/* Soft ambient blur backdrop */}
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-100/40 via-purple-100/30 to-orange-100/40 rounded-[32px] blur-2xl pointer-events-none" />
@@ -191,7 +192,7 @@ export default async function ContactPage() {
                       Live Map Location
                     </div>
                     <div className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                      Nawala, Sri Lanka
+                      {settings.officeLocation}
                     </div>
                   </div>
                   <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-700 flex-shrink-0">
@@ -203,8 +204,8 @@ export default async function ContactPage() {
                 {/* Google Maps Street View Frame */}
                 <div className="relative w-full h-[360px] sm:h-[420px] rounded-2xl overflow-hidden border border-slate-200 shadow-inner bg-slate-100">
                   <iframe
-                    title="Design1X Headquarters - Nawala, Sri Lanka"
-                    src="https://maps.google.com/maps?q=Nawala%2C%20Sri%20Lanka&t=m&z=15&output=embed&iwloc=near"
+                    title={`Design1X location - ${settings.officeLocation}`}
+                    src={`https://maps.google.com/maps?q=${mapQuery}&t=m&z=12&output=embed&iwloc=near`}
                     className="w-full h-full border-0 filter contrast-[1.02] saturate-[1.1]"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
@@ -219,7 +220,7 @@ export default async function ContactPage() {
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-[#FF5722]" />
                       </span>
                       <div>
-                        <div className="text-xs font-black text-slate-900 leading-tight">Nawala HQ</div>
+                        <div className="text-xs font-black text-slate-900 leading-tight">Colombo</div>
                         <div className="text-[10px] text-slate-500 font-medium leading-tight">Western Province, Sri Lanka</div>
                       </div>
                     </div>
@@ -227,7 +228,7 @@ export default async function ContactPage() {
 
                   {/* Bottom-Right Floating "Open in Google Maps" Button */}
                   <a
-                    href="https://www.google.com/maps/search/?api=1&query=Nawala,+Sri+Lanka"
+                    href={`https://www.google.com/maps/search/?api=1&query=${mapQuery}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="absolute bottom-3.5 right-3.5 z-10 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/95 hover:bg-white text-xs font-bold text-slate-800 hover:text-blue-600 border border-slate-200 shadow-md hover:shadow-lg transition-all active:scale-95"
@@ -243,9 +244,7 @@ export default async function ContactPage() {
                     <Globe2 className="w-3.5 h-3.5 text-blue-500 flex-shrink-0" />
                     <span>Serving clients in Sri Lanka, Japan, Europe &amp; USA</span>
                   </div>
-                  <div className="font-mono text-[11px] text-slate-400">
-                    6.8868° N, 79.8893° E
-                  </div>
+                  <div className="text-[11px] text-slate-400">{settings.officeLocation}</div>
                 </div>
               </div>
             </div>

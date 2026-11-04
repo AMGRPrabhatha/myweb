@@ -7,7 +7,7 @@ import { ArrowRight, PanelsTopLeft, MessagesSquare, Layers3 } from 'lucide-react
 import styles from './HomeStory.module.css';
 
 const stories = [
-  { type: 'people', label: 'Our people', title: 'Different skills. One shared direction.', description: 'Based in Nawala, Sri Lanka, we bring website development and social strategy together.', href: '/about', action: 'Get to know us' },
+  { type: 'people', label: 'Our people', title: 'Different skills. One shared direction.', description: 'Based in Colombo, Sri Lanka, we bring website development and social strategy together.', href: '/about', action: 'Get to know us' },
   { type: 'build', label: 'Our craft', title: 'Thoughtful design, built to work.', description: 'We turn business ideas into websites and interfaces that are clear, responsive and easy to use.', href: '/services/website-development', action: 'Explore our approach' },
   { type: 'connect', label: 'Our perspective', title: 'A brand is more than a website.', description: 'Social content and creative campaigns carry your story into the places your customers spend time.', href: '/services/social-media-management', action: 'See how we connect' },
   { type: 'together', label: 'Our process', title: 'Good work starts with a conversation.', description: 'Clear scopes, direct communication and transparent milestones keep us moving in the same direction.', href: '/about#about-company', action: 'Read our story' },

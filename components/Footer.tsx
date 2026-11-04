@@ -103,7 +103,7 @@ export default function Footer({ settings = initialSiteSettings }: { settings?: 
               <p><span className="font-semibold text-ink">Phone:</span>{' '}
                 <a href="tel:+94758429898" className="hover:text-cobalt transition-colors">075 8429898</a>
               </p>
-              <p><span className="font-semibold text-ink">Location:</span> Nawala, Sri Lanka</p>
+              <p><span className="font-semibold text-ink">Location:</span> {settings.officeLocation}</p>
             </address>
           </div>
 

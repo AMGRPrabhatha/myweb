@@ -73,7 +73,13 @@ const PRESET_AUTHORS = [
 ];
 
 const CATEGORIES = [
+  'Technology News',
   'Web Development',
+  'Social Strategy',
+  'Architecture',
+  'Content & Video',
+  'Market Trends',
+  'Growth & SEO',
   'Social Media Strategy',
   'Growth Case Study',
   'Design Systems',

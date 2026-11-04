@@ -8,7 +8,7 @@ export const initialSiteSettings: SiteSettings = {
   phone: "075 8429898",
   whatsappNumber: "+94758429898",
   responseExpectation: "Within 1 business day",
-  officeLocation: "Nawala, Sri Lanka",
+  officeLocation: "Colombo, Sri Lanka",
   facebookUrl: socialLinks.facebook,
   instagramUrl: socialLinks.instagram,
   tiktokUrl: "https://tiktok.com/@example",
