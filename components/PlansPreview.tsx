@@ -5,7 +5,6 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { Check, ArrowRight, Sparkles, Gift, Globe, Smartphone, Share2, Layers } from 'lucide-react';
 import { Plan } from '@/lib/types';
-import { approximateUsd } from '@/lib/pricing';
 
 interface PlansPreviewProps {
   plans?: Plan[];
@@ -20,10 +19,6 @@ interface PreviewTier {
   scopeBadge: string;
   pageCount: string;
   tagline: string;
-  price: string;
-  originalPrice?: string;
-  discountBadge?: string;
-  priceSub: string;
   isPopular?: boolean;
   bullets: string[];
   ctaPlanSlug: string;
@@ -36,12 +31,12 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
   const categories = [
     { id: 'website' as PlatformCategory, label: 'Website Development', icon: Globe },
     { id: 'mobile' as PlatformCategory, label: 'Mobile App (APK)', icon: Smartphone },
-    { id: 'combined' as PlatformCategory, label: 'Combined (Save 10k LKR)', icon: Gift },
+    { id: 'combined' as PlatformCategory, label: 'Combined (Offer)', icon: Gift },
     { id: 'social' as PlatformCategory, label: 'Social Media Only', icon: Share2 },
   ];
 
   // =========================================================
-  // DYNAMIC TIER DATA TAILORED TO USER'S EXACT LKR PRICING
+  // DYNAMIC TIER DATA FOR EACH SERVICE CATEGORY
   // =========================================================
   const getTiers = (): PreviewTier[] => {
     // 1. COMBINED BUNDLES VIEW (Or when includeSocial is toggled)
@@ -59,10 +54,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           scopeBadge: 'Front-End',
           pageCount: `2–5 ${pageLabel}`,
           tagline: `${typeLabel} + 1 Mo Social Media Handling`,
-          originalPrice: '45,000 LKR',
-          discountBadge: 'Save 10,000 LKR',
-          price: '30,000',
-          priceSub: 'LKR (1st Month) · then 35k/mo',
           bullets: [
             `2 to 5 custom-designed ${pageLabel.toLowerCase()}`,
             '1 Full Month Social Media Management included',
@@ -79,10 +70,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           scopeBadge: 'Front-End',
           pageCount: `8+ ${pageLabel}`,
           tagline: `Expansive ${typeLabel} + Social Growth`,
-          originalPrice: '50,000 LKR',
-          discountBadge: 'Save 10,000 LKR',
-          price: '40,000',
-          priceSub: 'LKR (1st Month) · then 35k/mo',
           bullets: [
             `More than 8 interactive ${pageLabel.toLowerCase()}`,
             '1 Full Month Social Media Management included',
@@ -100,10 +87,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           pageCount: `2–5 ${pageLabel}`,
           tagline: `Backend database + Social Media Growth`,
           isPopular: true,
-          originalPrice: '65,000 LKR',
-          discountBadge: 'Save 10,000 LKR',
-          price: '55,000',
-          priceSub: 'LKR (1st Month) · then 35k/mo',
           bullets: [
             `2 to 5 ${pageLabel.toLowerCase()} with PostgreSQL database`,
             'Admin dashboard & lead management system',
@@ -120,10 +103,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           scopeBadge: 'Enterprise',
           pageCount: `8+ ${pageLabel}`,
           tagline: `Complete dynamic platform + Social Media`,
-          originalPrice: '75,000 LKR',
-          discountBadge: 'Save 10,000 LKR',
-          price: '65,000',
-          priceSub: 'LKR (1st Month) · then 35k/mo',
           bullets: [
             `8+ interactive ${pageLabel.toLowerCase()} with database & auth`,
             'Admin panel, server actions & automated alerts',
@@ -146,8 +125,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           scopeBadge: 'Front-End Only',
           pageCount: '2–5 Pages',
           tagline: 'Clean, fast & modern responsive website',
-          price: '15,000',
-          priceSub: 'LKR · One-Time Fixed',
           bullets: [
             '2 to 5 custom-designed responsive pages',
             'Next.js App Router & Tailwind CSS speed',
@@ -164,8 +141,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           scopeBadge: 'Front-End Only',
           pageCount: '8+ Pages',
           tagline: 'Expansive front-end for complete catalogs',
-          price: '20,000',
-          priceSub: 'LKR + · One-Time Fixed',
           bullets: [
             'More than 8 custom responsive layouts',
             'Design system with reusable UI components',
@@ -183,8 +158,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           pageCount: '2–5 Pages',
           tagline: 'Dynamic site with database & admin panel',
           isPopular: true,
-          price: '35,000',
-          priceSub: 'LKR · One-Time Fixed',
           bullets: [
             '2 to 5 dynamic responsive web pages',
             'PostgreSQL database & secure backend setup',
@@ -201,8 +174,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           scopeBadge: 'Full-Stack',
           pageCount: '8+ Pages',
           tagline: 'Enterprise web app with complex backend logic',
-          price: '45,000',
-          priceSub: 'LKR + · One-Time Milestone',
           bullets: [
             '8+ dynamic pages with user workflows',
             'PostgreSQL schema, database migrations & APIs',
@@ -225,8 +196,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           scopeBadge: 'Front-End Only',
           pageCount: '2–5 Screens',
           tagline: 'Cross-platform Android APK UI design',
-          price: '15,000',
-          priceSub: 'LKR · One-Time Fixed',
           bullets: [
             '2 to 5 custom-designed mobile app screens',
             'Smooth micro-interactions & touch components',
@@ -243,8 +212,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           scopeBadge: 'Front-End Only',
           pageCount: '8+ Screens',
           tagline: 'Multi-screen mobile workflows & layout',
-          price: '20,000',
-          priceSub: 'LKR + · One-Time Fixed',
           bullets: [
             'More than 8 interactive mobile screens',
             'Tab navigation, drawers & modal flows',
@@ -262,8 +229,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           pageCount: '2–5 Screens',
           tagline: 'Mobile APK connected to cloud database',
           isPopular: true,
-          price: '35,000',
-          priceSub: 'LKR · One-Time Fixed',
           bullets: [
             '2 to 5 screens with live database integration',
             'PostgreSQL/Supabase cloud database setup',
@@ -280,8 +245,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           scopeBadge: 'Full-Stack',
           pageCount: '8+ Screens',
           tagline: 'Production mobile app with database & auth',
-          price: '45,000',
-          priceSub: 'LKR + · One-Time Milestone',
           bullets: [
             '8+ screens with complete backend workflows',
             'Cloud database schema, migrations & REST APIs',
@@ -303,8 +266,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
         scopeBadge: 'Starter',
         pageCount: '2 Channels',
         tagline: 'Consistent professional brand presence',
-        price: '20,000',
-        priceSub: 'LKR / month · No Lock-In',
         bullets: [
           '8 custom-designed graphic posts per month',
           'Active on 2 channels (Instagram & Facebook)',
@@ -322,8 +283,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
         pageCount: '3 Channels',
         tagline: 'Complete social management + short video reels',
         isPopular: true,
-        price: '35,000',
-        priceSub: 'LKR / month · Standard Rate',
         bullets: [
           '12 to 16 custom branded graphic posts per month',
           '4 edited short-form video Reels / TikToks per month',
@@ -340,8 +299,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
         scopeBadge: 'Scale',
         pageCount: 'Multi-Channel',
         tagline: 'High-production content & ad variations',
-        price: '50,000',
-        priceSub: 'LKR / month · High Volume',
         bullets: [
           '24 high-production posts + 8 short-form Reels',
           'Paid social ad creative designs & testing',
@@ -358,8 +315,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
         scopeBadge: 'Enterprise',
         pageCount: 'All Channels',
         tagline: 'Complete outsourced creative department',
-        price: 'Custom',
-        priceSub: 'Tailored Monthly Scope',
         bullets: [
           'Daily multi-channel content, motion graphics & video',
           'Executive LinkedIn branding & article ghostwriting',
@@ -400,9 +355,8 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
           </h2>
 
           <p className="max-w-3xl mx-auto text-base sm:text-lg text-ink-600 leading-relaxed font-normal">
-            Your dedicated team works on transparent milestone pricing with zero hidden costs. Choose standalone development or combine with 1-month social media to save 10,000 LKR.
+            Your dedicated team works with clear milestones and zero hidden costs. Choose standalone development or combine it with 1-month social media management.
           </p>
-          <p className="text-xs text-slate-500">USD estimates rounded to $10 at 330 LKR/USD. LKR prices are shown on each package.</p>
 
           {/* Capsule Switcher 1: Platform Categories */}
           <div className="pt-2 flex items-center justify-center">
@@ -461,7 +415,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                   }`}
                 >
                   <Gift className="w-3.5 h-3.5" />
-                  <span>+ Social Media (10,000 LKR OFF)</span>
+                  <span>+ Social Media (Offer)</span>
                 </button>
               </div>
             </div>
@@ -474,10 +428,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
         <div className="mobile-card-rail plans-pricing-rail grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch pt-2">
           {currentTiers.map((tier, idx) => {
             const isPopular = tier.isPopular;
-            const lkrAmount = Number(tier.price.replace(/,/g, ''));
-            const hasLkrPrice = Number.isFinite(lkrAmount);
-            const startingAt = tier.priceSub.includes('LKR +') ? '+' : '';
-            const billingNote = tier.priceSub.replace(/^LKR\s*\+?\s*(?:·\s*)?/, '').replace('then 35k/mo', `then ≈ ${approximateUsd(35000)} USD/mo (35,000 LKR/mo)`);
 
             // Background liquid glass glow accents
             const cornerGlows = [
@@ -536,33 +486,6 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                       <span className="text-[10px] font-bold text-slate-500">
                         {tier.badge}
                       </span>
-                    </div>
-                  </div>
-
-                  {/* ========================================================= */}
-                  {/* GIANT PROMINENT PRICING (Exactly Like NinjaPromo $3200/mo) */}
-                  {/* ========================================================= */}
-                  <div className="pt-2 pb-1 space-y-1">
-                    {/* If discount applied */}
-                    {tier.originalPrice && (
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs text-slate-400 line-through font-semibold">
-                          {tier.originalPrice}
-                        </span>
-                        {tier.discountBadge && (
-                          <span className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${isPopular ? 'bg-violet-100 text-[#5635e9]' : 'bg-orange-100 text-[#FF5722]'}`}>
-                            {tier.discountBadge}
-                          </span>
-                        )}
-                      </div>
-                    )}
-
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-3xl sm:text-4xl font-black text-ink tracking-tight">
-                        {hasLkrPrice ? `≈ ${approximateUsd(lkrAmount)}${startingAt} USD` : tier.price}
-                      </span>
-                      {hasLkrPrice && <span className="text-sm font-bold text-slate-600">{tier.price} LKR{startingAt}</span>}
-                      <span className="text-xs font-semibold text-slate-500">{billingNote}</span>
                     </div>
                   </div>
 

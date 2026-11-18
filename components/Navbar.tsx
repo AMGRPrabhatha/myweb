@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -77,7 +78,7 @@ export default function Navbar() {
     <header className={`fixed inset-x-0 top-3 sm:top-5 ${mobileMenuOpen ? 'z-[60]' : 'z-50'} px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pointer-events-none`}>
 
       <div className="flex pointer-events-auto items-center justify-between gap-2 xl:hidden">
-        <Link href="/" className="inline-flex min-w-0 items-center gap-2 rounded-full border border-white/90 bg-white/90 py-1.5 pl-2 pr-3.5 shadow-[0_8px_30px_rgba(15,23,42,0.12)] ring-1 ring-black/[0.05] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]">
+        <Link href="/" className={`${styles.mobileGlass} inline-flex min-w-0 items-center gap-2 rounded-full py-1.5 pl-2 pr-3.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]`}>
           <div className="relative w-7 h-7 flex items-center justify-center shrink-0">
             <Image
               src="/images/logo.webp"
@@ -88,28 +89,24 @@ export default function Navbar() {
               className="w-auto h-6 object-contain"
             />
           </div>
-          <span className="design1x-wordmark truncate text-[13px] sm:text-sm">Design<span className="design1x-wordmark-accent">1X</span></span>
+          <span className="design1x-wordmark truncate text-[13px] sm:text-sm"><span className={styles.adaptiveInk}>Design</span><span className="design1x-wordmark-accent">1X</span></span>
         </Link>
         <button
           ref={menuButtonRef}
           type="button"
           onClick={() => setMobileMenuOpen(true)}
-          className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-white/90 bg-white/90 text-ink shadow-[0_8px_30px_rgba(15,23,42,0.12)] ring-1 ring-black/[0.05] backdrop-blur-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]"
+          className={`${styles.mobileGlass} grid h-11 w-11 shrink-0 place-items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]`}
           aria-expanded={mobileMenuOpen}
           aria-controls="mobile-navigation"
           aria-label="Open navigation menu"
         >
-          <Menu className="h-5 w-5" strokeWidth={2} />
+          <Menu className={`${styles.adaptiveInk} h-5 w-5`} strokeWidth={2} />
         </button>
       </div>
       
-      {/* Floating Centered Liquid Glass Pill */}
+      {/* Floating liquid glass navigation */}
       <div
-        className={`pointer-events-auto mx-auto hidden w-full transition-all duration-300 rounded-full px-3.5 sm:px-5 py-1.5 xl:flex items-center justify-between border ${
-          isScrolled
-            ? 'bg-white/85 backdrop-blur-2xl border-white/80 shadow-[0_12px_40px_-8px_rgba(0,0,0,0.12),0_1px_2px_0_rgba(0,0,0,0.05)] ring-1 ring-black/[0.04]'
-            : 'bg-white/75 backdrop-blur-xl border-white/70 shadow-[0_8px_30px_-6px_rgba(0,0,0,0.08),0_1px_2px_0_rgba(0,0,0,0.03)] ring-1 ring-black/[0.03]'
-        }`}
+        className={`${styles.glassShell} ${isScrolled ? styles.scrolled : ''} pointer-events-auto hidden xl:flex`}
       >
         
         {/* ========================================================= */}
@@ -117,7 +114,7 @@ export default function Navbar() {
         {/* ========================================================= */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] rounded-full p-1 pl-1.5"
+          className="group relative z-10 flex shrink-0 items-center gap-2.5 rounded-full p-1 pl-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]"
         >
           {/* Logo Mark */}
           <div className="relative w-8 h-8 flex items-center justify-center transition-transform group-hover:scale-105 shrink-0">
@@ -132,28 +129,26 @@ export default function Navbar() {
           </div>
 
           <span className="design1x-wordmark text-base sm:text-[17px] leading-tight">
-            Design<span className="design1x-wordmark-accent">1X</span>
+            <span className={styles.adaptiveInk}>Design</span><span className="design1x-wordmark-accent">1X</span>
           </span>
         </Link>
+
+        <span aria-hidden="true" className={styles.divider} />
 
         {/* ========================================================= */}
         {/* 2. CENTER: Clean Centered Navigation Links                */}
         {/* ========================================================= */}
-        <nav className="hidden xl:flex items-center gap-1 lg:gap-1.5" aria-label="Main Navigation">
+        <nav className="relative z-10 hidden items-center xl:flex" aria-label="Main Navigation">
           {navLinks.map((link) => {
             const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3.5 lg:px-4 py-1 rounded-full text-xs lg:text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] ${
-                  isActive
-                    ? 'bg-ink text-white shadow-xs font-bold'
-                    : 'text-ink-700 hover:text-ink hover:bg-black/[0.04]'
-                }`}
+                className={`${styles.navLink} ${isActive ? styles.navLinkActive : ''} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]`}
                 aria-current={isActive ? 'page' : undefined}
               >
-                {link.label}
+                <span className={styles.adaptiveInk}>{link.label}</span>
               </Link>
             );
           })}
@@ -162,18 +157,18 @@ export default function Navbar() {
         {/* ========================================================= */}
         {/* 3. RIGHT: Quick Status / Contact + Orange CTA Button      */}
         {/* ========================================================= */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="relative z-10 flex items-center gap-2 sm:gap-3">
           
-          {/* Quick Online Status Badge (Clean indicator without phone number) */}
-          <div className="hidden 2xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50/80 border border-emerald-200/60 text-xs font-semibold text-emerald-700">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-bold">Online</span>
+          {/* Quick online status */}
+          <div className="hidden 2xl:flex items-center gap-2 px-2 text-xs font-semibold">
+            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className={`${styles.adaptiveInk} font-bold`}>Online</span>
           </div>
 
-          {/* Orange Pill CTA Button */}
+          {/* Design1X gradient CTA */}
           <Link
             href="/contact"
-            className="brand-solid-button hidden sm:inline-flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2 rounded-full font-bold text-xs sm:text-sm tracking-tight transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#6556ed] focus-visible:ring-offset-2"
+            className="brand-solid-button hidden shrink-0 items-center gap-1.5 rounded-full px-4 py-2.5 text-xs font-bold tracking-tight transition-all active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] sm:inline-flex sm:gap-2 sm:px-5 sm:text-sm"
           >
             <span>Start a Project</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -247,7 +242,7 @@ export default function Navbar() {
             </nav>
 
             <div className="shrink-0 border-t border-slate-200 pt-5">
-              <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="inline-flex min-h-11 items-center gap-2 font-bold text-[#FF5722] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]">
+              <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="brand-solid-button inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722]">
                 Start a Project <ArrowRight className="h-4 w-4" />
               </Link>
               <p className="design1x-wordmark mt-3 text-base">Design<span className="design1x-wordmark-accent">1X</span></p>

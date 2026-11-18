@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title description">
+  <title id="title">Wedding and engagement digital invitation concept</title>
+  <desc id="description">A cream invitation card with elegant lettering and floral details, presented on a soft lavender background.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#e9e7ff"/>
+      <stop offset=".53" stop-color="#f8f3f2"/>
+      <stop offset="1" stop-color="#dff4fa"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#6836e8"/>
+      <stop offset="1" stop-color="#15a9d7"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="26" stdDeviation="28" flood-color="#322769" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#background)"/>
+  <circle cx="128" cy="142" r="250" fill="#c8bfff" opacity=".24"/>
+  <circle cx="1510" cy="860" r="280" fill="#91dff1" opacity=".25"/>
+  <path d="M0 820C360 685 625 974 980 807s510-108 620-197" fill="none" stroke="#9a8bea" stroke-opacity=".24" stroke-width="2"/>
+  <g transform="translate(125 300)">
+    <text x="0" y="0" font-family="Arial,sans-serif" font-size="26" font-weight="700" letter-spacing="6" fill="#6354a8">DESIGN1X CONCEPT</text>
+    <text x="0" y="112" font-family="Georgia,serif" font-size="80" fill="#172037">Your story,</text>
+    <text x="0" y="202" font-family="Georgia,serif" font-style="italic" font-size="80" fill="#7257c9">beautifully</text>
+    <text x="0" y="292" font-family="Georgia,serif" font-size="80" fill="#172037">shared.</text>
+    <rect x="0" y="345" width="152" height="5" rx="2" fill="url(#accent)"/>
+    <text x="0" y="410" font-family="Arial,sans-serif" font-size="28" fill="#52617a">Wedding &amp; engagement</text>
+    <text x="0" y="451" font-family="Arial,sans-serif" font-size="28" fill="#52617a">digital invitations</text>
+  </g>
+  <g filter="url(#shadow)" transform="translate(820 80)">
+    <rect width="590" height="840" rx="22" fill="#fffdf9"/>
+    <rect x="24" y="24" width="542" height="792" rx="11" fill="none" stroke="#d5c8e9" stroke-width="2"/>
+    <path d="M102 207c-19-53 3-105 35-129m-6 135c45-41 62-89 61-145m-47 137c74-22 101-64 119-112" fill="none" stroke="#a58dbb" stroke-width="3" stroke-linecap="round"/>
+    <path d="M490 650c19 53-3 105-35 129m6-135c-45 41-62 89-61 145m47-137c-74 22-101 64-119 112" fill="none" stroke="#a58dbb" stroke-width="3" stroke-linecap="round"/>
+    <g fill="#d6bfd3">
+      <ellipse cx="135" cy="112" rx="22" ry="11" transform="rotate(-38 135 112)"/>
+      <ellipse cx="181" cy="103" rx="22" ry="11" transform="rotate(32 181 103)"/>
+      <ellipse cx="465" cy="726" rx="22" ry="11" transform="rotate(-38 465 726)"/>
+      <ellipse cx="410" cy="744" rx="22" ry="11" transform="rotate(32 410 744)"/>
+    </g>
+    <text x="295" y="238" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="5" fill="#756493">YOU ARE INVITED</text>
+    <path d="M230 276h130" stroke="#c2a0b5" stroke-width="2"/>
+    <text x="295" y="373" text-anchor="middle" font-family="Georgia,serif" font-size="65" font-style="italic" fill="#282341">A day to</text>
+    <text x="295" y="449" text-anchor="middle" font-family="Georgia,serif" font-size="65" font-style="italic" fill="#282341">remember</text>
+    <text x="295" y="522" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" letter-spacing="3" fill="#85718d">WEDDING · ENGAGEMENT</text>
+    <path d="M229 562h132" stroke="#c2a0b5" stroke-width="2"/>
+    <text x="295" y="627" text-anchor="middle" font-family="Arial,sans-serif" font-size="21" fill="#665e76">A personal invitation for your guests</text>
+    <text x="295" y="667" text-anchor="middle" font-family="Arial,sans-serif" font-size="21" fill="#665e76">to share your special moment.</text>
+  </g>
+</svg>

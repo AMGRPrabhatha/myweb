@@ -105,6 +105,7 @@ export interface Plan {
   hasSocialBundle?: boolean;
   socialMonthlyAfter?: number | null;
   priceDisplay?: string;
+  usdEstimate?: number;
 }
 
 export interface SiteSettings {

@@ -148,6 +148,36 @@ export const initialPlans: Plan[] = [
     status: "published",
     displayOrder: 4,
   },
+  {
+    id: "plan-wedding-engagement-invitation",
+    slug: "wedding-engagement-invitation",
+    category: "website",
+    platform: "website",
+    title: "Wedding & Engagement Digital Invitation",
+    subtitle: "A personalized, mobile-friendly invitation you can share with guests for your wedding or engagement.",
+    pricingMode: "fixed",
+    currency: "LKR",
+    oneTimeAmount: 8000,
+    priceDisplay: "8,000 LKR+",
+    usdEstimate: 25,
+    isEnquiryBased: false,
+    turnaroundTime: "Timeline agreed after your brief",
+    revisions: "1 review round",
+    inclusions: [
+      "Personalized digital invitation design",
+      "Wedding or engagement event details and schedule",
+      "Mobile-friendly layout and shareable invitation link",
+      "Venue location and directions link",
+      "One review round before delivery"
+    ],
+    exclusions: [
+      "Custom domain and hosting fees",
+      "Guest management or RSVP database",
+      "Printed invitations"
+    ],
+    status: "published",
+    displayOrder: 18,
+  },
 
   // ==========================================
   // 2. WEBSITE + SOCIAL MEDIA BUNDLES (OFFER)

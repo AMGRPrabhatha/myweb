@@ -29,7 +29,7 @@ const deliveryRegions: DeliveryRegion[] = [
     dotColor: 'bg-rose-500',
     headline: 'Enterprise Web Platforms & E-Commerce',
     scopeSummary: 'High-speed Next.js web applications, bilingual UI/UX architectures, and precision performance engineering for Tokyo and Kansai clients.',
-    stats: '15+ Projects Delivered · Tokyo & Osaka',
+    stats: '2+ Deliverables · Tokyo & Osaka',
     tag: 'Asia-Pacific Tech',
     image: '/images/cities/japan.png',
     workUrl: '/work',
@@ -43,7 +43,7 @@ const deliveryRegions: DeliveryRegion[] = [
     dotColor: 'bg-blue-500',
     headline: 'SaaS Platforms & Brand Campaigns',
     scopeSummary: 'Modern cloud web applications, conversion-driven landing experiences, and coordinated multi-channel creative sets across the UK & Europe.',
-    stats: '25+ Deliverables · UK & EU Markets',
+    stats: '1 Deliverable · UK & EU Markets',
     tag: 'European Standards',
     image: '/images/cities/london.png',
     workUrl: '/work',
@@ -57,7 +57,7 @@ const deliveryRegions: DeliveryRegion[] = [
     dotColor: 'bg-emerald-500',
     headline: 'End-to-End Websites & Social Media',
     scopeSummary: 'High-impact corporate web systems, custom enquiry portals, and ongoing 30-day social media management for local enterprises & startups.',
-    stats: '60+ Local Deployments · Islandwide',
+    stats: '10+ Deliverables · Islandwide',
     tag: 'Colombo HQ & Islandwide',
     image: '/images/cities/sri-lanka.png',
     workUrl: '/work',
@@ -178,7 +178,7 @@ export default function GlobalHubsSection() {
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-6 text-xs font-semibold text-slate-600">
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              100+ Successful Projects Delivered
+              15+ Successful Projects Delivered
             </span>
             <span className="hidden sm:inline text-slate-300">•</span>
             <span className="flex items-center gap-2">

@@ -19,8 +19,8 @@ interface MilestoneCard {
 
 const milestones: MilestoneCard[] = [
   {
-    stat: '40+',
-    label: 'Award-Winning Campaigns',
+    stat: 'Web + Social',
+    label: 'Integrated Digital Solutions',
     labelColor: 'text-[#8B5CF6]',
     glowGradient: 'from-purple-500/[0.10] via-purple-300/[0.03] to-transparent',
     borderColorHover: 'hover:border-purple-300/80',
@@ -28,7 +28,7 @@ const milestones: MilestoneCard[] = [
     iconColor: 'text-[#8B5CF6]',
     iconBg: 'bg-purple-50 text-[#8B5CF6] border-purple-100',
     description:
-      'Our creativity and strategic excellence have been recognized with over 40 prestigious industry awards for our impactful campaigns.',
+      'We combine modern website development and social media management to help businesses establish and strengthen their digital presence.',
     colSpan: 'lg:col-span-5',
   },
   {
@@ -45,7 +45,7 @@ const milestones: MilestoneCard[] = [
     colSpan: 'lg:col-span-7',
   },
   {
-    stat: '500+',
+    stat: '15+',
     label: 'Successful Projects',
     labelColor: 'text-[#FF5722]',
     glowGradient: 'from-orange-500/[0.10] via-orange-300/[0.03] to-transparent',
@@ -54,11 +54,11 @@ const milestones: MilestoneCard[] = [
     iconColor: 'text-[#FF5722]',
     iconBg: 'bg-orange-50 text-[#FF5722] border-orange-100',
     description:
-      'We have successfully delivered over 500 diverse projects, consistently meeting and exceeding our clients\' goals and expectations.',
+      'We have successfully delivered 15+ projects, consistently meeting and exceeding our clients\' goals and expectations.',
     colSpan: 'lg:col-span-7',
   },
   {
-    stat: '30+',
+    stat: '5+',
     label: 'Countries',
     labelColor: 'text-[#2F5BFF]',
     glowGradient: 'from-blue-500/[0.10] via-blue-300/[0.03] to-transparent',
@@ -67,7 +67,7 @@ const milestones: MilestoneCard[] = [
     iconColor: 'text-[#2F5BFF]',
     iconBg: 'bg-blue-50 text-[#2F5BFF] border-blue-100',
     description:
-      'Our global reach extends across more than 30 countries, delivering innovative solutions and strategies to an international clientele.',
+      'Our global reach extends across 5+ countries, delivering innovative solutions and strategies to an international clientele.',
     colSpan: 'lg:col-span-5',
   },
 ];

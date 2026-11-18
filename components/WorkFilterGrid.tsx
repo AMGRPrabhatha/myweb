@@ -76,7 +76,7 @@ export default function WorkFilterGrid({ initialProjects, initialCategory = 'All
 
     return {
       date,
-      metaTag: tagMap[project.slug] || 'Verified Case Study',
+      metaTag: project.isConcept ? 'Concept Project' : tagMap[project.slug] || 'Case Study',
     };
   };
 
