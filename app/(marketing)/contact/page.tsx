@@ -220,7 +220,7 @@ export default async function ContactPage() {
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-[#FF5722]" />
                       </span>
                       <div>
-                        <div className="text-xs font-black text-slate-900 leading-tight">Colombo</div>
+                        <div className="text-xs font-black text-slate-900 leading-tight">Kotte</div>
                         <div className="text-[10px] text-slate-500 font-medium leading-tight">Western Province, Sri Lanka</div>
                       </div>
                     </div>
