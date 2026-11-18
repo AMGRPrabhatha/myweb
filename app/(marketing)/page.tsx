@@ -10,8 +10,33 @@ import ProcessSection from '@/components/ProcessSection';
 import ProofAndFaq from '@/components/ProofAndFaq';
 import BlogFeatureCarousel from '@/components/BlogFeatureCarousel';
 import { db } from '@/lib/db';
+import type { Metadata } from 'next';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  alternates: { canonical: 'https://www.design1x.com/' },
+};
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://www.design1x.com/#organization',
+      name: 'Design1X',
+      url: 'https://www.design1x.com/',
+      logo: 'https://www.design1x.com/images/logo.png',
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://www.design1x.com/#website',
+      name: 'Design1X',
+      url: 'https://www.design1x.com/',
+      publisher: { '@id': 'https://www.design1x.com/#organization' },
+    },
+  ],
+};
 
 export default async function HomePage() {
   const [projects, plans, posts] = await Promise.all([
@@ -22,6 +47,10 @@ export default async function HomePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
+      />
       <HeroSection />
       <HeroTicker showOnMobile />
       <HomeStory />

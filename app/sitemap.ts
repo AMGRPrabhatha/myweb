@@ -4,7 +4,7 @@ import { db } from '@/lib/db';
 export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://design1x.com';
+  const baseUrl = 'https://www.design1x.com';
   const now = new Date();
 
   // Static marketing routes

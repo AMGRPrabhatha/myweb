@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://cobaltkinetic.example.com'),
+  metadataBase: new URL('https://www.design1x.com'),
   title: {
     default: 'Design1X | Website Development & Social Media Management',
     template: '%s | Design1X',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://cobaltkinetic.example.com',
+    url: 'https://www.design1x.com',
     title: 'Design1X | Web & Social Media Agency',
     description:
       'Your website and social media, working together. Responsive web applications and coordinated monthly content management for startups.',
@@ -43,11 +43,6 @@ export const metadata: Metadata = {
     description:
       'Responsive web applications and coordinated monthly content management for startups.',
     images: ['/images/projects/aura-cover.svg'],
-  },
-  icons: {
-    icon: '/icon.png',
-    shortcut: '/icon.png',
-    apple: '/icon.png',
   },
   robots: {
     index: true,
