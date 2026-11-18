@@ -1,15 +1,15 @@
 import HeroTicker from '@/components/HeroTicker';
-import { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import ServicesHero from '@/components/ServicesHero';
 import ServicesSlider from '@/components/ServicesSlider';
 import MilestonesSection from '@/components/MilestonesSection';
 import GlobalHubsSection from '@/components/GlobalHubsSection';
 
-export const metadata: Metadata = {
-  title: 'Services | Website Development & Social Media Management',
-  description:
-    'Explore our coordinated digital services: high-performance Next.js web application development and ongoing social media management built for modern startups.',
-};
+export const metadata = pageMetadata({
+  title: 'Website Development & Social Media Services',
+  description: 'Explore Design1X website development, UI/UX design and social media management services for businesses in Sri Lanka and beyond.',
+  path: '/services',
+});
 
 export default async function ServicesPage() {
   return (

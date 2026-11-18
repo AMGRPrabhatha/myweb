@@ -1,6 +1,7 @@
 import ServiceDetailContent from '@/components/ServiceDetailContent';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 
 interface Props {
   params: { slug: string };
@@ -109,10 +110,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const data = serviceData[params.slug];
   if (!data) return { title: 'Service Details' };
 
-  return {
-    title: `${data.title} | Services`,
+  return pageMetadata({
+    title: data.title,
     description: data.tagline,
-  };
+    path: `/services/${params.slug}`,
+  });
 }
 
 export default async function ServiceDetailPage({ params }: Props) {

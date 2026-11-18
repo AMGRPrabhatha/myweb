@@ -1,35 +1,41 @@
 import { MetadataRoute } from 'next';
 import { db } from '@/lib/db';
+import { siteUrl } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://www.design1x.com';
-  const now = new Date();
-
   // Static marketing routes
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${baseUrl}`, lastModified: now, changeFrequency: 'weekly', priority: 1.0 },
-    { url: `${baseUrl}/services`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${baseUrl}/services/website-development`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/services/social-media-management`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/work`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
-    { url: `${baseUrl}/plans`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${baseUrl}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
-    { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${siteUrl}/`, changeFrequency: 'weekly', priority: 1.0 },
+    { url: `${siteUrl}/about`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${siteUrl}/services`, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${siteUrl}/services/website-development`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${siteUrl}/services/social-media-management`, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${siteUrl}/work`, changeFrequency: 'weekly', priority: 0.9 },
+    { url: `${siteUrl}/plans`, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${siteUrl}/testimonials`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${siteUrl}/blog`, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${siteUrl}/contact`, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${siteUrl}/privacy`, changeFrequency: 'yearly', priority: 0.3 },
+    { url: `${siteUrl}/terms`, changeFrequency: 'yearly', priority: 0.3 },
   ];
 
-  // Dynamic project routes
-  const projects = await db.getProjects({ status: 'published' });
+  const [projects, posts] = await Promise.all([
+    db.getProjects({ status: 'published' }),
+    db.getAllBlogPosts(),
+  ]);
   const projectRoutes: MetadataRoute.Sitemap = projects.map((p) => ({
-    url: `${baseUrl}/work/${p.slug}`,
+    url: `${siteUrl}/work/${p.slug}`,
     lastModified: new Date(p.publishedAt),
     changeFrequency: 'monthly',
     priority: 0.7,
   }));
+  const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${siteUrl}/blog/${post.slug}`,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }));
 
-  // Note: /admin routes are strictly excluded from the sitemap
-  return [...staticRoutes, ...projectRoutes];
+  return [...staticRoutes, ...projectRoutes, ...blogRoutes];
 }

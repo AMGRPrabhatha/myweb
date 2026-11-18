@@ -1,5 +1,5 @@
 import HeroTicker from '@/components/HeroTicker';
-import { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import PlansHero from '@/components/PlansHero';
 import PlanTabs from '@/components/PlanTabs';
@@ -21,11 +21,11 @@ import {
   Rocket,
 } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'Plans & Packages | Transparent Digital Agency Pricing',
-  description:
-    'Compare our transparent package options: Launch Website, Custom Website, Social Essentials, Social Growth, and Launch & Grow (Combined).',
-};
+export const metadata = pageMetadata({
+  title: 'Website, App & Social Media Plans',
+  description: 'Explore Design1X website development, mobile app and social media packages, including combined service options.',
+  path: '/plans',
+});
 
 export const revalidate = 60;
 

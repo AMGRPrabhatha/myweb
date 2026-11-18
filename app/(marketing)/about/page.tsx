@@ -1,5 +1,5 @@
 import HeroTicker from '@/components/HeroTicker';
-import { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import AboutHero from '@/components/AboutHero';
 import AboutServicesCarousel from '@/components/AboutServicesCarousel';
 import WhyCoordinateSection from '@/components/WhyCoordinateSection';
@@ -8,11 +8,11 @@ import DedicatedTeamAccordion from '@/components/DedicatedTeamAccordion';
 import orbitStyles from '@/components/AboutOrbit.module.css';
 import { db } from '@/lib/db';
 
-export const metadata: Metadata = {
-  title: 'About Us | Coordinated Digital Agency & Core Team',
-  description:
-    'Learn about Design1X, our coordinated website and social media delivery model, and our commitment to truthful startup partnerships.',
-};
+export const metadata = pageMetadata({
+  title: 'About Our Digital Team',
+  description: 'Meet Design1X and learn how our team coordinates website development, UI/UX and social media work for businesses.',
+  path: '/about',
+});
 
 export const revalidate = 60;
 

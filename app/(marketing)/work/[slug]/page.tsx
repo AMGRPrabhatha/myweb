@@ -7,6 +7,7 @@ import { ArrowLeft, ArrowRight, ArrowUpRight, CalendarDays, Tag } from 'lucide-r
 import styles from './ProjectDetail.module.css';
 import { db } from '@/lib/db';
 import { formatDate } from '@/lib/utils';
+import { pageMetadata } from '@/lib/seo';
 
 interface Props {
   params: { slug: string };
@@ -16,15 +17,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = await db.getProjectBySlug(params.slug);
   if (!project) return { title: 'Project Not Found' };
 
-  return {
+  return pageMetadata({
     title: `${project.title} | Case Study`,
     description: project.summary,
-    openGraph: {
-      title: project.title,
-      description: project.summary,
-      images: [project.coverImage],
-    },
-  };
+    path: `/work/${params.slug}`,
+    image: project.coverImage,
+    type: 'article',
+  });
 }
 
 export default async function ProjectDetailPage({ params }: Props) {

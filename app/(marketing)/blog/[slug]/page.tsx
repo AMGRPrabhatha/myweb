@@ -4,6 +4,7 @@ import Image from 'next/image';
 import TypewriterText from '@/components/TypewriterText';
 import { notFound } from 'next/navigation';
 import { db } from '@/lib/db';
+import { pageMetadata } from '@/lib/seo';
 import {
   ArrowLeft,
   Calendar,
@@ -26,14 +27,17 @@ export async function generateMetadata({ params }: BlogDetailProps): Promise<Met
   const post = await db.getBlogPostBySlug(params.slug);
   if (!post) {
     return {
-      title: 'Article Not Found | Design1X',
+      title: 'Article Not Found',
     };
   }
 
-  return {
-    title: `${post.title} | Design1X`,
+  return pageMetadata({
+    title: post.title,
     description: post.excerpt,
-  };
+    path: `/blog/${params.slug}`,
+    image: post.coverImage,
+    type: 'article',
+  });
 }
 
 export const revalidate = 60;

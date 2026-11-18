@@ -1,15 +1,15 @@
 import HeroTicker from '@/components/HeroTicker';
-import { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import WorkHero from '@/components/WorkHero';
 import WorkFilterGrid from '@/components/WorkFilterGrid';
 import WorkPrinciples from '@/components/WorkPrinciples';
 import { db } from '@/lib/db';
 
-export const metadata: Metadata = {
-  title: 'Work | Portfolio of Websites, Social Content & Combined Projects',
-  description:
-    'Explore our portfolio of responsive web applications, social media content campaigns, and coordinated startup launch projects.',
-};
+export const metadata = pageMetadata({
+  title: 'Website & Digital Project Portfolio',
+  description: 'Browse published Design1X website, web application and social media projects and read about the work behind them.',
+  path: '/work',
+});
 
 export const revalidate = 60;
 

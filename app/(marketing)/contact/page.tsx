@@ -1,6 +1,6 @@
 import HeroTicker from '@/components/HeroTicker';
 import TypewriterText from '@/components/TypewriterText';
-import { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { Suspense } from 'react';
 import ContactForm from '@/components/ContactForm';
 import styles from './ContactFindUs.module.css';
@@ -24,11 +24,11 @@ function SocialChannelRow({ name, url }: { name: string; url?: string }) {
   );
 }
 
-export const metadata: Metadata = {
-  title: 'Start a Project | Design1X',
-  description:
-    'Book a discovery call with Design1X to discuss your website and marketing goals.',
-};
+export const metadata = pageMetadata({
+  title: 'Start a Project',
+  description: 'Contact Design1X to discuss a website, web app, UI/UX or social media project.',
+  path: '/contact',
+});
 
 export default async function ContactPage() {
   const [plans, settings] = await Promise.all([

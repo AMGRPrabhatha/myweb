@@ -1,11 +1,12 @@
-import { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import TypewriterText from '@/components/TypewriterText';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Privacy Notice',
   description: 'Understand how Design1X collects, stores, and protects your information.',
-};
+  path: '/privacy',
+});
 
 export default function PrivacyPage() {
   return (

@@ -1,11 +1,12 @@
-import { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import TypewriterText from '@/components/TypewriterText';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Terms of Service',
   description: 'Operating terms, commercial milestones, deliverables, and service boundaries.',
-};
+  path: '/terms',
+});
 
 export default function TermsPage() {
   return (

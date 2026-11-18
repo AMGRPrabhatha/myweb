@@ -24,7 +24,7 @@ export default function PlansHero() {
         <article className={styles.packageCard} aria-labelledby="package-options-heading">
           <div className={styles.cardIntro}>
             <h2 id="package-options-heading">Structured packages</h2>
-            <p>Find the right starting point for your website, mobile app or social presence. Clear deliverables, with build fees and monthly retainers listed separately.</p>
+            <p>Find the right starting point for your website, mobile app or social presence. Explore clear deliverables across each package.</p>
           </div>
           <nav className={styles.packageLinks} aria-label="Browse packages by service">
             {packageLinks.map(option => <Link key={option.category} href={`/plans?category=${option.category}#packages`}>

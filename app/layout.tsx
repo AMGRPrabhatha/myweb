@@ -4,45 +4,34 @@ import './globals.css';
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.design1x.com'),
   title: {
-    default: 'Design1X | Website Development & Social Media Management',
+    default: 'Design1X | Website Development, UI/UX & Social Media in Sri Lanka',
     template: '%s | Design1X',
   },
   description:
-    'We build responsive, functional websites with Next.js and Supabase, and manage the ongoing social media content that keeps startups active across Instagram, Facebook, TikTok, and LinkedIn.',
-  keywords: [
-    'digital agency',
-    'website development',
-    'social media management',
-    'Next.js development',
-    'startup website',
-    'short-form video editing',
-    'Supabase web application',
-  ],
+    'Design1X builds websites, web apps and UI/UX experiences and manages social media for businesses in Sri Lanka and beyond.',
   authors: [{ name: 'Design1X Team' }],
   creator: 'Design1X',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://www.design1x.com',
-    title: 'Design1X | Web & Social Media Agency',
-    description:
-      'Your website and social media, working together. Responsive web applications and coordinated monthly content management for startups.',
+    url: 'https://www.design1x.com/',
+    title: 'Design1X | Website Development, UI/UX & Social Media in Sri Lanka',
+    description: 'Design1X builds websites, web apps and UI/UX experiences and manages social media for businesses in Sri Lanka and beyond.',
     siteName: 'Design1X',
     images: [
       {
-        url: '/images/projects/aura-cover.svg',
-        width: 1200,
-        height: 630,
-        alt: 'Design1X Agency Preview',
+        url: '/images/logo.png',
+        width: 454,
+        height: 406,
+        alt: 'Design1X logo',
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Design1X | Web & Social Media Agency',
-    description:
-      'Responsive web applications and coordinated monthly content management for startups.',
-    images: ['/images/projects/aura-cover.svg'],
+    card: 'summary',
+    title: 'Design1X | Website Development, UI/UX & Social Media in Sri Lanka',
+    description: 'Design1X builds websites, web apps and UI/UX experiences and manages social media for businesses in Sri Lanka and beyond.',
+    images: ['/images/logo.png'],
   },
   robots: {
     index: true,

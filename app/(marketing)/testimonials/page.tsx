@@ -1,15 +1,15 @@
 import ContentHero from '@/components/ContentHero';
 import HeroTicker from '@/components/HeroTicker';
-import { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { db } from '@/lib/db';
 import TestimonialsList from '@/components/TestimonialsList';
 import ResultsMetrics from '@/components/ResultsMetrics';
 
-export const metadata: Metadata = {
-  title: 'Client Testimonials & Video Stories | Design1X',
-  description:
-    'Read real client stories and watch verified testimonials from founders and executives across Japan, Europe, and Sri Lanka.',
-};
+export const metadata = pageMetadata({
+  title: 'Client Reviews & Testimonials',
+  description: 'Read client feedback about Design1X website development and social media work.',
+  path: '/testimonials',
+});
 
 export const revalidate = 60;
 

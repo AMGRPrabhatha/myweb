@@ -83,7 +83,7 @@ export default function ServicesPreview() {
       title: 'Custom Portals & Lead Capture',
       description:
         'Tailored PostgreSQL databases, server-validated customer inquiries, and protected staff administrative interfaces for easy lead triage.',
-      href: '/admin',
+      href: '/services/website-development',
       icon: Database,
       iconColor: 'text-cyan-600',
       iconBg: 'bg-cyan-50 border-cyan-200/60',

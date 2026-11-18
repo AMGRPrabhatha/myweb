@@ -1,15 +1,15 @@
 import ContentHero from '@/components/ContentHero';
 import HeroTicker from '@/components/HeroTicker';
-import { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import { db } from '@/lib/db';
 import BlogList from '@/components/BlogList';
 import BlogFeatureCarousel from '@/components/BlogFeatureCarousel';
 
-export const metadata: Metadata = {
-  title: 'Blog, Tech News & Digital Insights | Design1X',
-  description:
-    'Explore technology news, web development guides, social media strategy, and digital growth insights from Design1X.',
-};
+export const metadata = pageMetadata({
+  title: 'Web Development & Social Media Blog',
+  description: 'Read Design1X articles about web development, UI/UX, social media strategy and digital projects.',
+  path: '/blog',
+});
 
 export const revalidate = 60;
 
