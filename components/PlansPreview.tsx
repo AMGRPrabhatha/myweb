@@ -2,6 +2,7 @@
 
 
 import { useState } from 'react';
+import liquidTab from './LiquidTab.module.css';
 import Link from 'next/link';
 import { Check, ArrowRight, Sparkles, Gift, Globe, Smartphone, Share2, Layers } from 'lucide-react';
 import { Plan } from '@/lib/types';
@@ -376,7 +377,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                     }}
                     className={`inline-flex min-h-11 items-center justify-center gap-1.5 px-2 sm:px-4 py-2 rounded-xl sm:rounded-full text-xs sm:text-sm text-center font-bold tracking-tight transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5722] cursor-pointer ${
                       isActive
-                        ? 'bg-ink text-white shadow-sm'
+                        ? `${liquidTab.active} ${isOffer ? 'text-[#FF5722]' : 'text-ink'}`
                         : isOffer
                         ? 'text-[#FF5722] hover:bg-orange-50 font-extrabold'
                         : 'text-slate-600 hover:text-ink hover:bg-white/80'
@@ -399,7 +400,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                   onClick={() => setIncludeSocial(false)}
                   className={`min-h-11 py-1.5 px-2 sm:px-4 rounded-xl sm:rounded-full text-xs font-bold transition-all cursor-pointer ${
                     !includeSocial
-                      ? 'bg-slate-900 text-white shadow-xs'
+                      ? `${liquidTab.active} text-ink`
                       : 'text-slate-600 hover:text-ink'
                   }`}
                 >
@@ -410,7 +411,7 @@ export default function PlansPreview({ plans = [] }: PlansPreviewProps) {
                   onClick={() => setIncludeSocial(true)}
                   className={`inline-flex items-center justify-center gap-1.5 min-h-11 py-1.5 px-2 sm:px-4 rounded-xl sm:rounded-full text-xs text-center font-bold transition-all cursor-pointer ${
                     includeSocial
-                      ? 'bg-ink text-white shadow-xs'
+                      ? `${liquidTab.active} text-[#FF5722]`
                       : 'text-[#FF5722] hover:bg-orange-50'
                   }`}
                 >

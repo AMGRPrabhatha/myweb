@@ -1,0 +1,23 @@
+.active {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .96), rgba(229, 235, 255, .84) 58%, rgba(220, 239, 255, .76));
+  -webkit-backdrop-filter: blur(16px) saturate(145%);
+  backdrop-filter: blur(16px) saturate(145%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .96),
+    inset 0 -1px 0 rgba(105, 114, 194, .3),
+    inset 0 0 16px rgba(148, 155, 244, .12),
+    0 0 0 1px rgba(91, 95, 187, .38),
+    0 4px 12px rgba(48, 57, 121, .18);
+}
+
+.active::before {
+  content: '';
+  position: absolute;
+  inset: 1px 12px auto;
+  height: 45%;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, .58), transparent);
+  pointer-events: none;
+}

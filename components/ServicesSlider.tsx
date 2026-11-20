@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import liquidTab from './LiquidTab.module.css';
 import {
   Globe,
   Share2,
@@ -105,7 +106,7 @@ export default function ServicesSlider() {
               onClick={() => setActiveTab('website')}
               className={`flex items-center gap-2 px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-tight transition-all duration-300 ${
                 isWeb
-                  ? 'bg-ink text-white shadow-md scale-[1.02]'
+                  ? `${liquidTab.active} text-ink scale-[1.02]`
                   : 'text-slate-600 hover:text-ink hover:bg-white/60'
               }`}
             >
@@ -118,7 +119,7 @@ export default function ServicesSlider() {
               onClick={() => setActiveTab('social')}
               className={`flex items-center gap-2 px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold tracking-tight transition-all duration-300 ${
                 !isWeb
-                  ? 'bg-ink text-white shadow-md scale-[1.02]'
+                  ? `${liquidTab.active} text-ink scale-[1.02]`
                   : 'text-slate-600 hover:text-ink hover:bg-white/60'
               }`}
             >

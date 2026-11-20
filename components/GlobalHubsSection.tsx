@@ -4,7 +4,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Globe2, ArrowUpRight, CheckCircle2, ArrowRight, Layers, Sparkles } from 'lucide-react';
+import { ArrowUpRight, CheckCircle2, Layers } from 'lucide-react';
 
 interface DeliveryRegion {
   region: string;
@@ -173,35 +173,6 @@ export default function GlobalHubsSection() {
           ))}
         </div>
 
-        {/* Bottom Trust & Action Strip */}
-        <div className="mt-12 sm:mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-3 sm:gap-6 text-xs font-semibold text-slate-600">
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              15+ Successful Projects Delivered
-            </span>
-            <span className="hidden sm:inline text-slate-300">•</span>
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-cobalt" />
-              Bilingual & Cross-Timezone Execution
-            </span>
-            <span className="hidden sm:inline text-slate-300">•</span>
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#FF5722]" />
-              Dedicated Lead & Transparent Pricing
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink hover:bg-ink-800 text-white font-bold text-xs tracking-wide transition-all shadow-sm hover:shadow-md hover:scale-[1.02]"
-            >
-              <span>Discuss Your Project With Us</span>
-              <ArrowRight className="w-3.5 h-3.5 text-[#FF5722]" />
-            </Link>
-          </div>
-        </div>
       </div>
     </section>
   );

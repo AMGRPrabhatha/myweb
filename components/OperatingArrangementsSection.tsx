@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import {
   Code2,
   Video,
@@ -30,12 +29,6 @@ export default function OperatingArrangementsSection({
       metricColor: 'text-slate-900',
       description:
         'Led by experienced Next.js and TypeScript developers specializing in responsive UI, sub-second LCP, PostgreSQL schema design, and Supabase Row-Level Security policies.',
-      avatars: [
-        '/images/services/avatar-1.png',
-        '/images/services/avatar-2.png',
-        '/images/services/avatar-3.png',
-        '/images/services/avatar-4.png',
-      ],
       extraTag: '+100% Handover',
       accentColor: 'bg-blue-600',
       barWidth: 'w-full',
@@ -49,12 +42,6 @@ export default function OperatingArrangementsSection({
       metricColor: 'text-blue-600',
       description:
         'Dedicated content strategists, visual graphic designers, and short-form video editors skilled in Reels, TikToks, high-converting ad visuals, and brand consistency across platforms.',
-      avatars: [
-        '/images/services/avatar-2.png',
-        '/images/services/avatar-4.png',
-        '/images/services/avatar-1.png',
-        '/images/services/avatar-3.png',
-      ],
       extraTag: '+High-CTR Hooks',
       accentColor: 'bg-purple-600',
       barWidth: 'w-[68%]',
@@ -67,12 +54,6 @@ export default function OperatingArrangementsSection({
       metricLabel: `${settings.officeLocation} & Remote`,
       metricColor: 'text-purple-600',
       description: `Operating with headquarters in ${settings.officeLocation}. Serving both local startups and international remote clients with direct Slack/WhatsApp triage and flexible scheduling.`,
-      avatars: [
-        '/images/services/avatar-3.png',
-        '/images/services/avatar-1.png',
-        '/images/services/avatar-2.png',
-        '/images/services/avatar-4.png',
-      ],
       extraTag: '+Direct Lead Access',
       accentColor: 'bg-[#FF5722]',
       barWidth: 'w-[42%]',
@@ -107,7 +88,7 @@ export default function OperatingArrangementsSection({
           {arrangements.map((item, idx) => (
             <div key={idx} className="flex flex-col justify-between space-y-4 rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50/70 p-5 shadow-sm md:block md:space-y-6 md:rounded-none md:border-0 md:bg-none md:p-0 md:shadow-none">
               
-              {/* Row Grid: Left (Step & Title), Middle (Metric & Description), Right (Avatar Stack) */}
+              {/* Row Grid: Left (Step & Title), Middle (Metric & Description), Right (Status Pill) */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6 lg:gap-8 items-center">
                 
                 {/* Left Column: Step Pill + Role Title */}
@@ -135,27 +116,10 @@ export default function OperatingArrangementsSection({
                   </p>
                 </div>
 
-                {/* Right Column: Overlapping Avatar Cluster + Status Pill */}
+                {/* Right Column: Status Pill */}
                 <div className="lg:col-span-3 flex lg:justify-end items-center">
-                  <div className="flex items-center -space-x-3">
-                    {item.avatars.map((av, avIdx) => (
-                      <div
-                        key={avIdx}
-                        className={`relative w-8 h-8 md:w-11 md:h-11 rounded-full border-2 border-white shadow-sm overflow-hidden bg-slate-100 flex-shrink-0 ${avIdx === 3 ? 'hidden md:block' : ''}`}
-                      >
-                        <Image
-                          src={av}
-                          alt="Team pod member"
-                          fill
-                          sizes="44px"
-                          className="object-cover"
-                        />
-                      </div>
-                    ))}
-                    {/* Extra badge pill like +95 in NinjaPromo */}
-                    <div className="relative h-8 md:h-11 px-2 md:px-3 rounded-full border-2 border-white bg-slate-900 text-white font-mono font-bold text-[10px] md:text-xs flex items-center justify-center shadow-sm flex-shrink-0 z-10">
-                      <span>{item.extraTag}</span>
-                    </div>
+                  <div className="relative h-8 md:h-9 lg:h-8 w-[140px] px-2 rounded-full border-2 border-white bg-slate-900 text-white font-mono font-bold text-[10px] flex items-center justify-center shadow-sm flex-shrink-0 whitespace-nowrap">
+                    <span>{item.extraTag}</span>
                   </div>
                 </div>
 
