@@ -882,8 +882,8 @@ export const initialBlogPosts: BlogPost[] = [
   {
     id: "blog-1",
     slug: "nextjs-app-router-conversion-architecture",
-    title: "How Next.js App Router & Server Components Double Web Conversions in 2026",
-    excerpt: "Why modern startups are migrating away from bloated WordPress setups to high-performance Next.js architectures with sub-second page loads.",
+    title: "How Next.js App Router & Server Components Support Faster Websites",
+    excerpt: "How server-rendered content, careful image loading and smaller client bundles can improve the experience of a Next.js website.",
     category: "Web Development",
     categorySlug: "web-development",
     readTime: "5 min read",
@@ -896,17 +896,17 @@ export const initialBlogPosts: BlogPost[] = [
     },
     tags: ["Next.js", "Performance", "Web Engineering", "App Router"],
     content: [
-      "Speed is no longer just a technical metric — it is the single most critical factor in startup bounce rates and conversion performance. In 2026, visitors abandon mobile web pages that take more than 1.8 seconds to render.",
-      "Traditional monolithic setups load hundreds of kilobytes of unoptimized JavaScript and outdated plugins before the user can even see the primary hero headline. By leveraging React Server Components in Next.js, all data queries, HTML templating, and layout composition happen instantaneously on the edge.",
-      "At Design1X, our Next.js architectures consistently score 98+ on Google Lighthouse. For our e-commerce and SaaS clients, transitioning to static edge generation and streaming server rendering reduced checkout abandonment by 42% in the first quarter of deployment.",
-      "Furthermore, semantic HTML markup, automatic sitemap generation, and dynamic Open Graph image previews ensure your pages rank higher on search engines and stand out across LinkedIn and Twitter shares."
+      "Website speed affects how easily visitors can explore a page, especially on mobile connections. It is useful to measure loading and interaction with real-user Core Web Vitals data rather than relying on a single score.",
+      "Next.js Server Components can render content on the server and reduce the JavaScript sent to the browser. The result still depends on the page's images, fonts, data requests and client-side components.",
+      "The App Router supports caching, streaming and route-level rendering choices. We select these techniques according to each site's content and measure their effect during development.",
+      "Semantic HTML, descriptive page titles, a sitemap and Open Graph previews help people and search engines understand and share a website. They do not guarantee a particular search ranking or conversion rate."
     ],
   },
   {
     id: "blog-2",
     slug: "coordinated-social-media-bridging-reach-to-conversions",
     title: "Coordinated Social Media: Bridging the Gap Between Viral Reach and Conversions",
-    excerpt: "How running social creatives and landing page development under one synchronized team reduces customer acquisition costs by up to 40%.",
+    excerpt: "How coordinated social content and landing pages can give visitors a more consistent journey from discovery to enquiry.",
     category: "Social Strategy",
     categorySlug: "social-strategy",
     readTime: "6 min read",
@@ -920,16 +920,16 @@ export const initialBlogPosts: BlogPost[] = [
     tags: ["Social Strategy", "Paid Ads", "Conversion Rate", "Attribution"],
     content: [
       "Most digital agencies operate in silos: a social media team creates attractive Instagram carousels and TikTok reels, while an entirely separate web agency builds the company website. The result? A disjointed customer experience.",
-      "When a potential buyer clicks through from a high-energy short-form video only to land on a generic homepage with mismatched copy, the conversion funnel breaks immediately.",
+      "When a potential buyer clicks through from a short-form video to a page with mismatched copy, the experience can feel disconnected.",
       "Our combined delivery model synchronizes weekly creative batches with matching landing pages. Every promotion, lead magnet, or product drop has an optimized destination with pre-populated offer tags.",
-      "Attribution tracking connects social engagement directly to qualified database inquiries, allowing clients to see exactly which video hooks and campaign angles produce real revenue."
+      "Campaign links and enquiry tracking can help teams understand which social posts lead visitors to the website and which enquiries follow. Revenue attribution requires additional data and careful interpretation."
     ],
   },
   {
     id: "blog-3",
     slug: "postgresql-and-supabase-architecture-for-modern-portals",
     title: "Why We Use PostgreSQL & Supabase for Fast Client Portals and Lead Capture",
-    excerpt: "A deep dive into server-validated enquiry forms, Row-Level Security, and automated notification pipelines that never drop a customer lead.",
+    excerpt: "A look at server-validated enquiry forms, Row-Level Security and notification workflows for more reliable lead capture.",
     category: "Architecture",
     categorySlug: "architecture",
     readTime: "7 min read",
@@ -942,17 +942,17 @@ export const initialBlogPosts: BlogPost[] = [
     },
     tags: ["PostgreSQL", "Supabase", "Databases", "Security"],
     content: [
-      "Simple email contact forms fail at an alarming rate due to provider timeouts, spam filters, and unhandled server exceptions. A startup partner cannot afford to lose high-value enterprise leads.",
-      "We build our web applications with server-side validation connected directly to PostgreSQL databases. Every brief submission is recorded as an immutable database row with atomic state tracking before any external email dispatch is attempted.",
-      "With Supabase Row-Level Security (RLS) policies, administrative staff access is cryptographically restricted, and client data remains strictly confidential and GDPR-ready.",
-      "Automated background notification workers retry failed dispatches transparently, providing complete diagnostic visibility from our protected staff dashboard."
+      "Email delivery, spam filtering and unhandled errors can interrupt a contact workflow. Storing a validated enquiry separately from its notification makes it easier to inspect and recover from delivery problems.",
+      "For web applications that need lead capture, PostgreSQL can store enquiry records while server-side validation checks submitted fields before processing.",
+      "Supabase Row-Level Security (RLS) policies can restrict database access according to the role and permissions configured for an application. These rules should be tested alongside application authentication.",
+      "Notification retries and a protected staff dashboard can help teams track follow-up when an email provider is temporarily unavailable."
     ],
   },
   {
     id: "blog-4",
     slug: "short-form-video-reels-and-tiktok-for-b2b-brands",
     title: "Short-Form Video for High-Ticket Brands: The 30-Day Content Playbook",
-    excerpt: "From 9:16 hook selection to conversion captions, how we produce weekly batches of short-form reels that actually generate qualified inquiries.",
+    excerpt: "From 9:16 framing to clear captions, a practical approach to planning and editing short-form video for business audiences.",
     category: "Content & Video",
     categorySlug: "content-video",
     readTime: "4 min read",
@@ -965,17 +965,17 @@ export const initialBlogPosts: BlogPost[] = [
     },
     tags: ["Short-form Video", "Reels", "TikTok", "B2B Marketing"],
     content: [
-      "Short-form video is often dismissed by B2B founders as trivial dance trends. However, in 2026, 9:16 vertical video on Instagram Reels, TikTok, and LinkedIn is the fastest channel to establish thought leadership and executive trust.",
-      "The secret lies in the first 2.5 seconds: strong pattern-interrupt hooks, crisp visual framing, and high-retention subtitles ensure viewers stop scrolling immediately.",
+      "Short-form video can help business audiences understand a product, service or point of view. The right platform and format depend on the audience and the message.",
+      "An opening that states the topic clearly, readable subtitles and steady visual framing make a video easier to follow on mobile feeds.",
       "We produce 30-day batches from structured remote recording sessions or client footage, editing for pacing, sound design, and contextual on-screen diagrams.",
-      "By closing each video with a clear problem-solving call to action, short-form video transforms into a predictable top-of-funnel engine for premium business services."
+      "A clear call to action can guide interested viewers to a relevant page or conversation. Teams should measure actual enquiries before drawing conclusions about campaign performance."
     ],
   },
   {
     id: "blog-5",
     slug: "delivering-digital-platforms-across-japan-europe-sri-lanka",
     title: "Delivering Digital Platforms Across Borders: Lessons from Japan, Europe & Sri Lanka",
-    excerpt: "How distributed agency pods manage cross-timezone delivery, bilingual UI/UX considerations, and consistent KPI benchmarks worldwide.",
+    excerpt: "Practical considerations for cross-timezone collaboration, multilingual interfaces and project delivery across markets.",
     category: "Market Trends",
     categorySlug: "market-trends",
     readTime: "8 min read",
@@ -989,16 +989,16 @@ export const initialBlogPosts: BlogPost[] = [
     tags: ["Global Delivery", "Japan", "Europe", "Sri Lanka", "UI/UX"],
     content: [
       "Operating across global markets requires much more than translating copy into local languages. Cultural UX expectations vary drastically between Asian, European, and local markets.",
-      "In Japan, users expect dense information architecture, detailed technical specifications, and explicit verification credentials before making a purchasing decision.",
-      "In Europe and the UK, minimalist typography, WCAG accessibility standards, and clean whitespace dominate user preferences.",
-      "By coordinating cross-cultural delivery from our engineering headquarters, Design1X provides global scale while maintaining responsive direct communication and local precision."
+      "For a project serving users in Japan, teams may need to consider language support, local content conventions and clear technical information during user research.",
+      "For a project serving users in Europe or the UK, accessibility, privacy requirements and local language choices should be reviewed for the specific audience.",
+      "Cross-border delivery works best when teams agree on communication windows, decision owners and review milestones before work begins."
     ],
   },
   {
     id: "blog-6",
     slug: "the-2026-core-web-vitals-domination-checklist",
-    title: "The 2026 Core Web Vitals Checklist: Hitting 100 on Google Lighthouse",
-    excerpt: "Practical techniques to optimize Largest Contentful Paint, eliminate Cumulative Layout Shift, and structure semantic JSON-LD for rich snippets.",
+    title: "The 2026 Core Web Vitals Checklist for Website Teams",
+    excerpt: "Practical ways to review Largest Contentful Paint, Cumulative Layout Shift and structured data on a website.",
     category: "Growth & SEO",
     categorySlug: "seo-growth",
     readTime: "5 min read",
@@ -1011,10 +1011,10 @@ export const initialBlogPosts: BlogPost[] = [
     },
     tags: ["SEO", "Core Web Vitals", "Lighthouse", "Performance"],
     content: [
-      "Google's ranking algorithms now penalize websites with unstable layouts and slow response times more aggressively than ever before.",
-      "To achieve green Core Web Vitals, start by eliminating layout shifts by assigning explicit aspect ratios to images and video containers before resources finish downloading.",
-      "Optimize font delivery by self-hosting Next.js fonts with zero-layout-shift fallback font definitions.",
-      "Finally, implement structured JSON-LD schema markup so Google and AI search engines can ingest your business services, pricing tiers, and client reviews as verified rich cards."
+      "Core Web Vitals describe loading, visual stability and responsiveness. Review field data where available and use page-level diagnostics to identify specific causes of slow or unstable experiences.",
+      "Assigning explicit dimensions or aspect ratios to images and video containers can reduce layout shifts while those resources load.",
+      "Font loading choices can also affect layout stability. Test fallback fonts and loading behaviour on the devices your visitors use.",
+      "Use accurate structured data only when it matches the visible page content. Valid JSON-LD helps search engines interpret a page, but does not guarantee a rich result or a ranking improvement."
     ],
   },
 ];

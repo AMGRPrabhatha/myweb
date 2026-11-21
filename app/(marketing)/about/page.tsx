@@ -1,4 +1,5 @@
 import HeroTicker from '@/components/HeroTicker';
+import Link from 'next/link';
 import { pageMetadata } from '@/lib/seo';
 import AboutHero from '@/components/AboutHero';
 import AboutServicesCarousel from '@/components/AboutServicesCarousel';
@@ -76,7 +77,7 @@ export default async function AboutPage() {
             <div className="max-w-xl">
               <h3 className="text-2xl font-black tracking-tight text-ink sm:text-3xl">Our mission and values</h3>
               <p className="mt-5 text-base leading-relaxed text-ink-600 sm:text-lg">
-                Design1X is a coordinated digital agency based in Colombo, Sri Lanka. We bring website development and social strategy together for startups and growing businesses.
+                Design1X is a coordinated digital agency based in Kotte, Sri Lanka. We bring <Link href="/services/website-development" className="hover:underline">website development</Link> and <Link href="/services/social-media-management" className="hover:underline">social strategy</Link> together for startups and growing businesses.
               </p>
               <p className="mt-5 text-base leading-relaxed text-ink-600 sm:text-lg">
                 Our team works with you through clear scopes, direct communication, and transparent milestones, connecting your website and content to the goals that matter to your business.

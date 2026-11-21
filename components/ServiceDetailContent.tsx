@@ -35,6 +35,7 @@ export default function ServiceDetailContent({ data }: { data: ServiceDetailData
   const ecosystem = social ? ['Instagram', 'Facebook', 'TikTok', 'LinkedIn'] : ['Next.js', 'TypeScript', 'Supabase', 'Responsive UI'];
   const enquiry = `/contact?service=${data.preselectedService}`;
   const plans = `/plans?category=${social ? 'social' : 'website'}#packages`;
+  const relatedWork = `/work?category=${social ? 'social' : 'websites'}#projects`;
   const steps = social ? ['Audit', 'Plan', 'Create', 'Review', 'Publish'] : ['Discover', 'Design', 'Build', 'Review', 'Launch'];
 
   return <div className={`${styles.page} ${social ? styles.social : styles.website}`}>
@@ -59,7 +60,7 @@ export default function ServiceDetailContent({ data }: { data: ServiceDetailData
 
     <section id="overview" className={`${styles.section} ${styles.container}`} aria-labelledby="overview-heading">
       <div className={styles.overviewGrid}>
-        <div><h2 id="overview-heading">{social ? 'Your story, across the places that matter.' : 'Built around the way your business works.'}</h2><p className={styles.body}>{data.description}</p><Link href={enquiry} className={styles.textLink}>Talk through your requirements <ArrowRight size={16} aria-hidden="true" /></Link></div>
+        <div><h2 id="overview-heading">{social ? 'Your story, across the places that matter.' : 'Built around the way your business works.'}</h2><p className={styles.body}>{data.description} <Link href={relatedWork} className="text-cobalt underline underline-offset-2 hover:text-ink">View related projects</Link>.</p><Link href={enquiry} className={styles.textLink}>Talk through your requirements <ArrowRight size={16} aria-hidden="true" /></Link></div>
         <div className={styles.ecosystem}><p>{social ? 'The platforms we work across' : 'The foundations we build with'}</p><ul>{ecosystem.map((name,i) => <li key={name} className={styles[`orb${i}`]}>{name}</li>)}</ul><span>{social ? 'Channels are agreed as part of your scope.' : 'A connected toolkit for your website and portal.'}</span></div>
       </div>
     </section>

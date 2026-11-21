@@ -46,7 +46,7 @@ export default function ServicesPreview() {
       id: 'web-dev',
       title: 'Complete Website Development',
       description:
-        'Fast, search-ready Next.js marketing websites built to showcase your brand, rank high on Google, and convert visitors into qualified leads.',
+        'Fast, search-ready Next.js marketing websites built to showcase your brand, help search engines understand your content, and guide visitors to enquire.',
       href: '/services/website-development',
       icon: Globe,
       iconColor: 'text-blue-600',
@@ -70,7 +70,7 @@ export default function ServicesPreview() {
       id: 'combined-pkg',
       title: 'Combined Web & Social Delivery',
       description:
-        'Single team accountability. Your website and promotional social media launch in tandem with 100% matched aesthetic identity.',
+        'Single team accountability. Your website and promotional social media launch together with a consistent visual identity.',
       href: '/plans',
       icon: Layers,
       iconColor: 'text-purple-600',
@@ -106,8 +106,8 @@ export default function ServicesPreview() {
       id: 'seo-speed',
       title: 'Technical SEO & Speed Optimization',
       description:
-        'Engineered for top Google Lighthouse performance, accessible navigation, Open Graph previews, and zero platform lock-in.',
-      href: '/about',
+        'Built with Core Web Vitals, accessible navigation, Open Graph previews, and platform ownership in mind.',
+      href: '/services/website-development',
       icon: Zap,
       iconColor: 'text-emerald-600',
       iconBg: 'bg-emerald-50 border-emerald-200/60',

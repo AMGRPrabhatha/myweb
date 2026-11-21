@@ -10,30 +10,32 @@ import ProcessSection from '@/components/ProcessSection';
 import ProofAndFaq from '@/components/ProofAndFaq';
 import BlogFeatureCarousel from '@/components/BlogFeatureCarousel';
 import { db } from '@/lib/db';
-import type { Metadata } from 'next';
+import { pageMetadata, siteUrl } from '@/lib/seo';
 
 export const dynamic = 'force-dynamic';
 
-export const metadata: Metadata = {
-  alternates: { canonical: 'https://www.design1x.com/' },
-};
+export const metadata = pageMetadata({
+  title: 'Software Development & Web Design Company in Sri Lanka',
+  description: 'Design1X builds websites, custom web applications and UI/UX experiences, and manages social media for businesses in Sri Lanka and beyond.',
+  path: '/',
+});
 
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'Organization',
-      '@id': 'https://www.design1x.com/#organization',
+      '@id': `${siteUrl}/#organization`,
       name: 'Design1X',
-      url: 'https://www.design1x.com/',
-      logo: 'https://www.design1x.com/images/logo.png',
+      url: `${siteUrl}/`,
+      logo: `${siteUrl}/images/logo.png`,
     },
     {
       '@type': 'WebSite',
-      '@id': 'https://www.design1x.com/#website',
+      '@id': `${siteUrl}/#website`,
       name: 'Design1X',
-      url: 'https://www.design1x.com/',
-      publisher: { '@id': 'https://www.design1x.com/#organization' },
+      url: `${siteUrl}/`,
+      publisher: { '@id': `${siteUrl}/#organization` },
     },
   ],
 };

@@ -34,6 +34,13 @@ export default async function ProjectDetailPage({ params }: Props) {
     ['Websites', 'Web Design'].includes(project.category) ? 'website' :
     project.category === 'Social Content' ? 'social' : 'help_me_decide';
   const enquiryHref = `/contact?service=${serviceParam}&source=${encodeURIComponent(`Project Case Study: ${project.title}`)}`;
+  const relatedService = project.category === 'Social Content'
+    ? { href: '/services/social-media-management', label: 'Social media management' }
+    : ['Websites', 'Web Design', 'UI/UX Design'].includes(project.category)
+      ? { href: '/services/website-development', label: 'Website development and design' }
+      : project.category === 'Combined Projects'
+        ? { href: '/services', label: 'Website and social media services' }
+        : null;
 
   const gallery = [...project.galleryImages]
     .filter(media => media.url !== project.coverImage)
@@ -90,6 +97,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               <dl className={styles.facts}>
                 <div><dt>{project.isConcept ? 'Project for' : 'Client'}</dt><dd>{project.clientName}</dd></div>
                 <div><dt>Discipline</dt><dd>{project.category}</dd></div>
+                {relatedService && <div><dt>Related service</dt><dd><Link href={relatedService.href} className="text-cobalt hover:underline">{relatedService.label}</Link></dd></div>}
                 <div><dt><CalendarDays size={14} aria-hidden="true" /> Published</dt><dd><time dateTime={project.publishedAt}>{formatDate(project.publishedAt)}</time></dd></div>
               </dl>
               <nav className={styles.contents} aria-label="Project sections">

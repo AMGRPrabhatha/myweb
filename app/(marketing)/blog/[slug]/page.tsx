@@ -88,6 +88,7 @@ export default async function BlogDetailPage({ params }: BlogDetailProps) {
                 src={post.author.avatar}
                 alt={post.author.name}
                 fill
+                sizes="44px"
                 className="object-cover"
               />
             </div>

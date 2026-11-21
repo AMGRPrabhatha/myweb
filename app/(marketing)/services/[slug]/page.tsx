@@ -1,7 +1,7 @@
 import ServiceDetailContent from '@/components/ServiceDetailContent';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { pageMetadata } from '@/lib/seo';
+import { pageMetadata, siteUrl } from '@/lib/seo';
 
 interface Props {
   params: { slug: string };
@@ -9,6 +9,8 @@ interface Props {
 
 const serviceData: Record<string, {
   title: string;
+  seoTitle: string;
+  seoDescription: string;
   categoryPill: string;
   tagline: string;
   description: string;
@@ -21,9 +23,11 @@ const serviceData: Record<string, {
 }> = {
   'website-development': {
     title: 'Website Development & Web Portals',
+    seoTitle: 'Web Development & Web Design in Sri Lanka',
+    seoDescription: 'Design1X designs and develops responsive websites, custom web applications and secure web portals in Sri Lanka using Next.js, TypeScript and Supabase.',
     categoryPill: 'Engineering & Interface Architecture',
-    tagline: 'Modern, accessible, search-ready websites built with Next.js App Router and Supabase.',
-    description: 'We design and develop high-performance marketing websites and administrative portals tailored specifically for early-stage startups and established small businesses. Every site includes semantic markup, mobile-first design, database lead capture, and a clean administrative interface.',
+    tagline: 'Modern, accessible, search-ready websites for businesses in Sri Lanka and beyond.',
+    description: 'We design and develop responsive marketing websites, custom web applications and administrative portals for startups and small businesses in Sri Lanka and beyond. Our work combines UI/UX design, semantic markup, mobile-first interfaces and secure lead capture using Next.js and Supabase.',
     deliverables: [
       'Responsive multi-page layout built on Next.js 14 App Router and TypeScript',
       'Supabase PostgreSQL database configuration with Row Level Security (RLS)',
@@ -39,7 +43,7 @@ const serviceData: Record<string, {
         'Full UI engineering, component styling, and database schema migrations',
         'Mobile, tablet, and desktop cross-browser visual verification',
         'Setting up secure Server Actions and privileged credential boundaries',
-        'Performance optimization achieving sub-second mobile Core Web Vitals'
+        'Performance optimization focused on fast mobile loading and Core Web Vitals'
       ],
       client: [
         'Supply approved business logo, branding guidelines, and photography assets',
@@ -64,8 +68,10 @@ const serviceData: Record<string, {
   },
   'social-media-management': {
     title: 'Social Media Management & Video Production',
+    seoTitle: 'Social Media Management in Sri Lanka',
+    seoDescription: 'Design1X plans and manages social media content in Sri Lanka, including content calendars, graphics, short-form video editing and monthly reporting.',
     categoryPill: 'Content Strategy & Platform Management',
-    tagline: 'Consistent, dependable social content creation, short-form video editing, and account triage.',
+    tagline: 'Social media content planning, short-form video editing and account management for businesses in Sri Lanka.',
     description: 'We manage your brand’s active social presence across Instagram, Facebook, TikTok, and LinkedIn. From 30-day content calendars and static carousel graphics to high-engagement 9:16 short-form video edits, we keep your business in front of your target audience.',
     deliverables: [
       'Monthly content calendar prepared and delivered 7 days prior to each month for approval',
@@ -111,8 +117,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!data) return { title: 'Service Details' };
 
   return pageMetadata({
-    title: data.title,
-    description: data.tagline,
+    title: data.seoTitle,
+    description: data.seoDescription,
     path: `/services/${params.slug}`,
   });
 }
@@ -120,5 +126,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ServiceDetailPage({ params }: Props) {
   const data = serviceData[params.slug];
   if (!data) notFound();
-  return <ServiceDetailContent data={data} />;
+  const url = `${siteUrl}/services/${params.slug}`;
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    name: data.title,
+    serviceType: data.preselectedService === 'social' ? 'Social media management' : 'Website development and web design',
+    description: data.seoDescription,
+    url,
+    provider: { '@id': `${siteUrl}/#organization` },
+    areaServed: { '@type': 'Country', name: 'Sri Lanka' },
+  };
+
+  return <>
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
+    <ServiceDetailContent data={data} />
+  </>;
 }
